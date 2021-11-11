@@ -1,0 +1,585 @@
+﻿namespace Mega_Mix_Mod_Manager
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TP_Mods = new System.Windows.Forms.TabPage();
+            this.GB_ModDetails = new System.Windows.Forms.GroupBox();
+            this.B_ModDown = new System.Windows.Forms.Button();
+            this.B_ExportMods = new System.Windows.Forms.Button();
+            this.B_ModUp = new System.Windows.Forms.Button();
+            this.RTB_ModDetails = new System.Windows.Forms.RichTextBox();
+            this.B_RemoveMod = new System.Windows.Forms.Button();
+            this.PB_ModPreview = new System.Windows.Forms.PictureBox();
+            this.B_InstallMod = new System.Windows.Forms.Button();
+            this.GB_ModList = new System.Windows.Forms.GroupBox();
+            this.TV_ModList = new System.Windows.Forms.TreeView();
+            this.TP_ModCreator = new System.Windows.Forms.TabPage();
+            this.PB_ModCreateImg = new System.Windows.Forms.PictureBox();
+            this.B_CreateMod = new System.Windows.Forms.Button();
+            this.B_ImgPreview = new System.Windows.Forms.Button();
+            this.TB_ImgPreview = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TB_ModAuthor = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.RTB_ModDescription = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TB_ModName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.B_ModPath = new System.Windows.Forms.Button();
+            this.TB_ModPath = new System.Windows.Forms.TextBox();
+            this.L_ModPath = new System.Windows.Forms.Label();
+            this.TP_Advanced = new System.Windows.Forms.TabPage();
+            this.TP_Settings = new System.Windows.Forms.TabPage();
+            this.B_SaveSettings = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TB_Default_Author = new System.Windows.Forms.TextBox();
+            this.L_Default_Author = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.B_ExportPath = new System.Windows.Forms.Button();
+            this.TB_Export = new System.Windows.Forms.TextBox();
+            this.L_Export = new System.Windows.Forms.Label();
+            this.CB_PathVarify = new System.Windows.Forms.CheckBox();
+            this.B_GamePath = new System.Windows.Forms.Button();
+            this.TB_DumpPath = new System.Windows.Forms.TextBox();
+            this.L_DumpPath = new System.Windows.Forms.Label();
+            this.B_ClearMods = new System.Windows.Forms.Button();
+            this.tabControl1.SuspendLayout();
+            this.TP_Mods.SuspendLayout();
+            this.GB_ModDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).BeginInit();
+            this.GB_ModList.SuspendLayout();
+            this.TP_ModCreator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).BeginInit();
+            this.TP_Settings.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.TP_Mods);
+            this.tabControl1.Controls.Add(this.TP_ModCreator);
+            this.tabControl1.Controls.Add(this.TP_Advanced);
+            this.tabControl1.Controls.Add(this.TP_Settings);
+            this.tabControl1.Location = new System.Drawing.Point(12, 8);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(581, 430);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // TP_Mods
+            // 
+            this.TP_Mods.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_Mods.Controls.Add(this.GB_ModDetails);
+            this.TP_Mods.Controls.Add(this.GB_ModList);
+            this.TP_Mods.Location = new System.Drawing.Point(4, 22);
+            this.TP_Mods.Name = "TP_Mods";
+            this.TP_Mods.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_Mods.Size = new System.Drawing.Size(573, 404);
+            this.TP_Mods.TabIndex = 0;
+            this.TP_Mods.Text = "Mods";
+            // 
+            // GB_ModDetails
+            // 
+            this.GB_ModDetails.Controls.Add(this.B_ClearMods);
+            this.GB_ModDetails.Controls.Add(this.B_ModDown);
+            this.GB_ModDetails.Controls.Add(this.B_ExportMods);
+            this.GB_ModDetails.Controls.Add(this.B_ModUp);
+            this.GB_ModDetails.Controls.Add(this.RTB_ModDetails);
+            this.GB_ModDetails.Controls.Add(this.B_RemoveMod);
+            this.GB_ModDetails.Controls.Add(this.PB_ModPreview);
+            this.GB_ModDetails.Controls.Add(this.B_InstallMod);
+            this.GB_ModDetails.Location = new System.Drawing.Point(220, 6);
+            this.GB_ModDetails.Name = "GB_ModDetails";
+            this.GB_ModDetails.Size = new System.Drawing.Size(347, 392);
+            this.GB_ModDetails.TabIndex = 2;
+            this.GB_ModDetails.TabStop = false;
+            this.GB_ModDetails.Text = "Mod Details";
+            // 
+            // B_ModDown
+            // 
+            this.B_ModDown.Location = new System.Drawing.Point(37, 363);
+            this.B_ModDown.Name = "B_ModDown";
+            this.B_ModDown.Size = new System.Drawing.Size(28, 23);
+            this.B_ModDown.TabIndex = 3;
+            this.B_ModDown.Text = "v";
+            this.B_ModDown.UseVisualStyleBackColor = true;
+            this.B_ModDown.Click += new System.EventHandler(this.B_ModDown_Click);
+            // 
+            // B_ExportMods
+            // 
+            this.B_ExportMods.Location = new System.Drawing.Point(261, 363);
+            this.B_ExportMods.Name = "B_ExportMods";
+            this.B_ExportMods.Size = new System.Drawing.Size(80, 23);
+            this.B_ExportMods.TabIndex = 2;
+            this.B_ExportMods.Text = "Export Mods";
+            this.B_ExportMods.UseVisualStyleBackColor = true;
+            this.B_ExportMods.Click += new System.EventHandler(this.B_ExportMods_Click);
+            // 
+            // B_ModUp
+            // 
+            this.B_ModUp.Location = new System.Drawing.Point(6, 363);
+            this.B_ModUp.Name = "B_ModUp";
+            this.B_ModUp.Size = new System.Drawing.Size(28, 23);
+            this.B_ModUp.TabIndex = 2;
+            this.B_ModUp.Text = "^";
+            this.B_ModUp.UseVisualStyleBackColor = true;
+            this.B_ModUp.Click += new System.EventHandler(this.B_ModUp_Click);
+            // 
+            // RTB_ModDetails
+            // 
+            this.RTB_ModDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.RTB_ModDetails.Location = new System.Drawing.Point(6, 216);
+            this.RTB_ModDetails.Name = "RTB_ModDetails";
+            this.RTB_ModDetails.ReadOnly = true;
+            this.RTB_ModDetails.Size = new System.Drawing.Size(335, 141);
+            this.RTB_ModDetails.TabIndex = 1;
+            this.RTB_ModDetails.Text = "";
+            // 
+            // B_RemoveMod
+            // 
+            this.B_RemoveMod.Location = new System.Drawing.Point(127, 363);
+            this.B_RemoveMod.Name = "B_RemoveMod";
+            this.B_RemoveMod.Size = new System.Drawing.Size(59, 23);
+            this.B_RemoveMod.TabIndex = 2;
+            this.B_RemoveMod.Text = "Remove";
+            this.B_RemoveMod.UseVisualStyleBackColor = true;
+            this.B_RemoveMod.Click += new System.EventHandler(this.B_RemoveMod_Click);
+            // 
+            // PB_ModPreview
+            // 
+            this.PB_ModPreview.Location = new System.Drawing.Point(6, 19);
+            this.PB_ModPreview.Name = "PB_ModPreview";
+            this.PB_ModPreview.Size = new System.Drawing.Size(335, 191);
+            this.PB_ModPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PB_ModPreview.TabIndex = 0;
+            this.PB_ModPreview.TabStop = false;
+            // 
+            // B_InstallMod
+            // 
+            this.B_InstallMod.Location = new System.Drawing.Point(69, 363);
+            this.B_InstallMod.Name = "B_InstallMod";
+            this.B_InstallMod.Size = new System.Drawing.Size(56, 23);
+            this.B_InstallMod.TabIndex = 2;
+            this.B_InstallMod.Text = "Install";
+            this.B_InstallMod.UseVisualStyleBackColor = true;
+            this.B_InstallMod.Click += new System.EventHandler(this.B_InstallMod_Click);
+            // 
+            // GB_ModList
+            // 
+            this.GB_ModList.Controls.Add(this.TV_ModList);
+            this.GB_ModList.Location = new System.Drawing.Point(6, 6);
+            this.GB_ModList.Name = "GB_ModList";
+            this.GB_ModList.Size = new System.Drawing.Size(208, 392);
+            this.GB_ModList.TabIndex = 1;
+            this.GB_ModList.TabStop = false;
+            this.GB_ModList.Text = "Mod List";
+            // 
+            // TV_ModList
+            // 
+            this.TV_ModList.Location = new System.Drawing.Point(6, 19);
+            this.TV_ModList.Name = "TV_ModList";
+            this.TV_ModList.Size = new System.Drawing.Size(196, 367);
+            this.TV_ModList.TabIndex = 0;
+            this.TV_ModList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_ModList_AfterSelect);
+            // 
+            // TP_ModCreator
+            // 
+            this.TP_ModCreator.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_ModCreator.Controls.Add(this.PB_ModCreateImg);
+            this.TP_ModCreator.Controls.Add(this.B_CreateMod);
+            this.TP_ModCreator.Controls.Add(this.B_ImgPreview);
+            this.TP_ModCreator.Controls.Add(this.TB_ImgPreview);
+            this.TP_ModCreator.Controls.Add(this.label4);
+            this.TP_ModCreator.Controls.Add(this.TB_ModAuthor);
+            this.TP_ModCreator.Controls.Add(this.label3);
+            this.TP_ModCreator.Controls.Add(this.RTB_ModDescription);
+            this.TP_ModCreator.Controls.Add(this.label2);
+            this.TP_ModCreator.Controls.Add(this.TB_ModName);
+            this.TP_ModCreator.Controls.Add(this.label1);
+            this.TP_ModCreator.Controls.Add(this.B_ModPath);
+            this.TP_ModCreator.Controls.Add(this.TB_ModPath);
+            this.TP_ModCreator.Controls.Add(this.L_ModPath);
+            this.TP_ModCreator.Location = new System.Drawing.Point(4, 22);
+            this.TP_ModCreator.Name = "TP_ModCreator";
+            this.TP_ModCreator.Padding = new System.Windows.Forms.Padding(3);
+            this.TP_ModCreator.Size = new System.Drawing.Size(573, 404);
+            this.TP_ModCreator.TabIndex = 1;
+            this.TP_ModCreator.Text = "Mod Creator";
+            // 
+            // PB_ModCreateImg
+            // 
+            this.PB_ModCreateImg.Location = new System.Drawing.Point(406, 9);
+            this.PB_ModCreateImg.Name = "PB_ModCreateImg";
+            this.PB_ModCreateImg.Size = new System.Drawing.Size(161, 117);
+            this.PB_ModCreateImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PB_ModCreateImg.TabIndex = 13;
+            this.PB_ModCreateImg.TabStop = false;
+            // 
+            // B_CreateMod
+            // 
+            this.B_CreateMod.Location = new System.Drawing.Point(9, 348);
+            this.B_CreateMod.Name = "B_CreateMod";
+            this.B_CreateMod.Size = new System.Drawing.Size(113, 50);
+            this.B_CreateMod.TabIndex = 12;
+            this.B_CreateMod.Text = "Export";
+            this.B_CreateMod.UseVisualStyleBackColor = true;
+            this.B_CreateMod.Click += new System.EventHandler(this.B_CreateMod_Click);
+            // 
+            // B_ImgPreview
+            // 
+            this.B_ImgPreview.Location = new System.Drawing.Point(363, 72);
+            this.B_ImgPreview.Name = "B_ImgPreview";
+            this.B_ImgPreview.Size = new System.Drawing.Size(37, 20);
+            this.B_ImgPreview.TabIndex = 11;
+            this.B_ImgPreview.Text = "...";
+            this.B_ImgPreview.UseVisualStyleBackColor = true;
+            this.B_ImgPreview.Click += new System.EventHandler(this.B_ImgPreview_Click);
+            // 
+            // TB_ImgPreview
+            // 
+            this.TB_ImgPreview.Location = new System.Drawing.Point(9, 72);
+            this.TB_ImgPreview.Name = "TB_ImgPreview";
+            this.TB_ImgPreview.Size = new System.Drawing.Size(348, 20);
+            this.TB_ImgPreview.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Image Preview Path";
+            // 
+            // TB_ModAuthor
+            // 
+            this.TB_ModAuthor.Location = new System.Drawing.Point(9, 158);
+            this.TB_ModAuthor.Name = "TB_ModAuthor";
+            this.TB_ModAuthor.Size = new System.Drawing.Size(391, 20);
+            this.TB_ModAuthor.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 138);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Author";
+            // 
+            // RTB_ModDescription
+            // 
+            this.RTB_ModDescription.Location = new System.Drawing.Point(9, 201);
+            this.RTB_ModDescription.Name = "RTB_ModDescription";
+            this.RTB_ModDescription.Size = new System.Drawing.Size(391, 141);
+            this.RTB_ModDescription.TabIndex = 6;
+            this.RTB_ModDescription.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 181);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Description";
+            // 
+            // TB_ModName
+            // 
+            this.TB_ModName.Location = new System.Drawing.Point(9, 115);
+            this.TB_ModName.Name = "TB_ModName";
+            this.TB_ModName.Size = new System.Drawing.Size(391, 20);
+            this.TB_ModName.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 95);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Name";
+            // 
+            // B_ModPath
+            // 
+            this.B_ModPath.Location = new System.Drawing.Point(363, 29);
+            this.B_ModPath.Name = "B_ModPath";
+            this.B_ModPath.Size = new System.Drawing.Size(37, 20);
+            this.B_ModPath.TabIndex = 2;
+            this.B_ModPath.Text = "...";
+            this.B_ModPath.UseVisualStyleBackColor = true;
+            this.B_ModPath.Click += new System.EventHandler(this.B_ModPath_Click);
+            // 
+            // TB_ModPath
+            // 
+            this.TB_ModPath.Location = new System.Drawing.Point(9, 29);
+            this.TB_ModPath.Name = "TB_ModPath";
+            this.TB_ModPath.Size = new System.Drawing.Size(348, 20);
+            this.TB_ModPath.TabIndex = 1;
+            // 
+            // L_ModPath
+            // 
+            this.L_ModPath.AutoSize = true;
+            this.L_ModPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_ModPath.Location = new System.Drawing.Point(6, 9);
+            this.L_ModPath.Name = "L_ModPath";
+            this.L_ModPath.Size = new System.Drawing.Size(68, 17);
+            this.L_ModPath.TabIndex = 0;
+            this.L_ModPath.Text = "Mod Path";
+            // 
+            // TP_Advanced
+            // 
+            this.TP_Advanced.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_Advanced.Location = new System.Drawing.Point(4, 22);
+            this.TP_Advanced.Name = "TP_Advanced";
+            this.TP_Advanced.Size = new System.Drawing.Size(573, 404);
+            this.TP_Advanced.TabIndex = 2;
+            this.TP_Advanced.Text = "Advanced";
+            // 
+            // TP_Settings
+            // 
+            this.TP_Settings.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_Settings.Controls.Add(this.B_SaveSettings);
+            this.TP_Settings.Controls.Add(this.groupBox2);
+            this.TP_Settings.Controls.Add(this.groupBox1);
+            this.TP_Settings.Location = new System.Drawing.Point(4, 22);
+            this.TP_Settings.Name = "TP_Settings";
+            this.TP_Settings.Size = new System.Drawing.Size(573, 404);
+            this.TP_Settings.TabIndex = 3;
+            this.TP_Settings.Text = "Settings";
+            // 
+            // B_SaveSettings
+            // 
+            this.B_SaveSettings.Location = new System.Drawing.Point(463, 363);
+            this.B_SaveSettings.Name = "B_SaveSettings";
+            this.B_SaveSettings.Size = new System.Drawing.Size(105, 36);
+            this.B_SaveSettings.TabIndex = 2;
+            this.B_SaveSettings.Text = "Save";
+            this.B_SaveSettings.UseVisualStyleBackColor = true;
+            this.B_SaveSettings.Click += new System.EventHandler(this.B_SaveSettings_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.TB_Default_Author);
+            this.groupBox2.Controls.Add(this.L_Default_Author);
+            this.groupBox2.Location = new System.Drawing.Point(6, 115);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(562, 68);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Info";
+            // 
+            // TB_Default_Author
+            // 
+            this.TB_Default_Author.Location = new System.Drawing.Point(6, 32);
+            this.TB_Default_Author.Name = "TB_Default_Author";
+            this.TB_Default_Author.Size = new System.Drawing.Size(550, 20);
+            this.TB_Default_Author.TabIndex = 3;
+            // 
+            // L_Default_Author
+            // 
+            this.L_Default_Author.AutoSize = true;
+            this.L_Default_Author.Location = new System.Drawing.Point(6, 16);
+            this.L_Default_Author.Name = "L_Default_Author";
+            this.L_Default_Author.Size = new System.Drawing.Size(75, 13);
+            this.L_Default_Author.TabIndex = 2;
+            this.L_Default_Author.Text = "Default Author";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.B_ExportPath);
+            this.groupBox1.Controls.Add(this.TB_Export);
+            this.groupBox1.Controls.Add(this.L_Export);
+            this.groupBox1.Controls.Add(this.CB_PathVarify);
+            this.groupBox1.Controls.Add(this.B_GamePath);
+            this.groupBox1.Controls.Add(this.TB_DumpPath);
+            this.groupBox1.Controls.Add(this.L_DumpPath);
+            this.groupBox1.Location = new System.Drawing.Point(6, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(562, 102);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Paths";
+            // 
+            // B_ExportPath
+            // 
+            this.B_ExportPath.Location = new System.Drawing.Point(500, 70);
+            this.B_ExportPath.Name = "B_ExportPath";
+            this.B_ExportPath.Size = new System.Drawing.Size(36, 20);
+            this.B_ExportPath.TabIndex = 6;
+            this.B_ExportPath.Text = "...";
+            this.B_ExportPath.UseVisualStyleBackColor = true;
+            this.B_ExportPath.Click += new System.EventHandler(this.B_ExportPath_Click);
+            // 
+            // TB_Export
+            // 
+            this.TB_Export.Location = new System.Drawing.Point(6, 71);
+            this.TB_Export.Name = "TB_Export";
+            this.TB_Export.Size = new System.Drawing.Size(488, 20);
+            this.TB_Export.TabIndex = 5;
+            // 
+            // L_Export
+            // 
+            this.L_Export.AutoSize = true;
+            this.L_Export.Location = new System.Drawing.Point(6, 55);
+            this.L_Export.Name = "L_Export";
+            this.L_Export.Size = new System.Drawing.Size(62, 13);
+            this.L_Export.TabIndex = 4;
+            this.L_Export.Text = "Export Path";
+            // 
+            // CB_PathVarify
+            // 
+            this.CB_PathVarify.AutoCheck = false;
+            this.CB_PathVarify.AutoSize = true;
+            this.CB_PathVarify.Checked = true;
+            this.CB_PathVarify.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CB_PathVarify.Location = new System.Drawing.Point(542, 33);
+            this.CB_PathVarify.Name = "CB_PathVarify";
+            this.CB_PathVarify.Size = new System.Drawing.Size(15, 14);
+            this.CB_PathVarify.TabIndex = 3;
+            this.CB_PathVarify.UseVisualStyleBackColor = true;
+            // 
+            // B_GamePath
+            // 
+            this.B_GamePath.Enabled = false;
+            this.B_GamePath.Location = new System.Drawing.Point(500, 31);
+            this.B_GamePath.Name = "B_GamePath";
+            this.B_GamePath.Size = new System.Drawing.Size(36, 20);
+            this.B_GamePath.TabIndex = 2;
+            this.B_GamePath.Text = "...";
+            this.B_GamePath.UseVisualStyleBackColor = true;
+            this.B_GamePath.Click += new System.EventHandler(this.B_GamePath_Click);
+            // 
+            // TB_DumpPath
+            // 
+            this.TB_DumpPath.Location = new System.Drawing.Point(6, 32);
+            this.TB_DumpPath.Name = "TB_DumpPath";
+            this.TB_DumpPath.ReadOnly = true;
+            this.TB_DumpPath.Size = new System.Drawing.Size(488, 20);
+            this.TB_DumpPath.TabIndex = 1;
+            this.TB_DumpPath.TextChanged += new System.EventHandler(this.TB_DumpPath_TextChanged);
+            // 
+            // L_DumpPath
+            // 
+            this.L_DumpPath.AutoSize = true;
+            this.L_DumpPath.Location = new System.Drawing.Point(6, 16);
+            this.L_DumpPath.Name = "L_DumpPath";
+            this.L_DumpPath.Size = new System.Drawing.Size(66, 13);
+            this.L_DumpPath.TabIndex = 0;
+            this.L_DumpPath.Text = "Game Dump";
+            // 
+            // B_ClearMods
+            // 
+            this.B_ClearMods.Location = new System.Drawing.Point(188, 363);
+            this.B_ClearMods.Name = "B_ClearMods";
+            this.B_ClearMods.Size = new System.Drawing.Size(71, 23);
+            this.B_ClearMods.TabIndex = 4;
+            this.B_ClearMods.Text = "Clear Mods";
+            this.B_ClearMods.UseVisualStyleBackColor = true;
+            this.B_ClearMods.Click += new System.EventHandler(this.B_ClearMods_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(605, 450);
+            this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "Form1";
+            this.Text = "Mega Mix Mod Manager";
+            this.tabControl1.ResumeLayout(false);
+            this.TP_Mods.ResumeLayout(false);
+            this.GB_ModDetails.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).EndInit();
+            this.GB_ModList.ResumeLayout(false);
+            this.TP_ModCreator.ResumeLayout(false);
+            this.TP_ModCreator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).EndInit();
+            this.TP_Settings.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage TP_Mods;
+        private System.Windows.Forms.TabPage TP_ModCreator;
+        private System.Windows.Forms.TreeView TV_ModList;
+        private System.Windows.Forms.GroupBox GB_ModDetails;
+        private System.Windows.Forms.GroupBox GB_ModList;
+        private System.Windows.Forms.RichTextBox RTB_ModDetails;
+        private System.Windows.Forms.PictureBox PB_ModPreview;
+        private System.Windows.Forms.TabPage TP_Advanced;
+        private System.Windows.Forms.TabPage TP_Settings;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox CB_PathVarify;
+        private System.Windows.Forms.Button B_GamePath;
+        private System.Windows.Forms.TextBox TB_DumpPath;
+        private System.Windows.Forms.Label L_DumpPath;
+        private System.Windows.Forms.Label L_ModPath;
+        private System.Windows.Forms.Button B_ExportPath;
+        private System.Windows.Forms.TextBox TB_Export;
+        private System.Windows.Forms.Label L_Export;
+        private System.Windows.Forms.Button B_ModPath;
+        private System.Windows.Forms.TextBox TB_ModPath;
+        private System.Windows.Forms.Button B_ImgPreview;
+        private System.Windows.Forms.TextBox TB_ImgPreview;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TB_ModAuthor;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RichTextBox RTB_ModDescription;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox TB_ModName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button B_CreateMod;
+        private System.Windows.Forms.PictureBox PB_ModCreateImg;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox TB_Default_Author;
+        private System.Windows.Forms.Label L_Default_Author;
+        private System.Windows.Forms.Button B_SaveSettings;
+        private System.Windows.Forms.Button B_ModDown;
+        private System.Windows.Forms.Button B_ModUp;
+        private System.Windows.Forms.Button B_RemoveMod;
+        private System.Windows.Forms.Button B_InstallMod;
+        private System.Windows.Forms.Button B_ExportMods;
+        private System.Windows.Forms.Button B_ClearMods;
+    }
+}
+
