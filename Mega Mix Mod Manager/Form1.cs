@@ -8,13 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Compression;
+using System.Text.RegularExpressions;
+
 using Microsoft.VisualBasic;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Mega_Mix_Mod_Manager.DeepMerge;
 using Newtonsoft.Json;
-using System.IO.Compression;
+
+using Mega_Mix_Mod_Manager.DeepMerge;
 using Mega_Mix_Mod_Manager.IO;
-using System.Text.RegularExpressions;
+using Mega_Mix_Mod_Manager.Lite_Merge;
 
 namespace Mega_Mix_Mod_Manager
 {
@@ -49,17 +52,23 @@ namespace Mega_Mix_Mod_Manager
                 {
                     foreach (string file in ofd.FileNames)
                     {
-                        ZipArchive mod = ZipFile.Open(file, ZipArchiveMode.Read);
-
-                        string hash = Hash.HashFile(File.ReadAllBytes(file));
+                        byte[] data = File.ReadAllBytes(file);
+                        string hash = Hash.HashFile(data);
                         if (Directory.Exists($"Mods\\{hash}"))
                             Directory.Delete($"Mods\\{hash}", true);
-
                         Directory.CreateDirectory($"Mods\\{hash}");
-                        ZipFile.ExtractToDirectory(file, $"Mods\\{hash}");
+
+                        using (MemoryStream ms = new MemoryStream(data))
+                        {
+                            using (ZipArchive mod = new ZipArchive(ms, ZipArchiveMode.Read, false))
+                            {
+                                mod.ExtractToDirectory($"Mods\\{hash}");
+                                mod.Dispose();
+                            }
+                        }
                         ModInfo modinfo = new ModInfo();
 
-                        if (mod.GetEntry("modinfo.json") == null)
+                        if (!File.Exists($"Mods\\{hash}\\modinfo.json"))
                         {
                             modinfo.Name = Path.GetFileNameWithoutExtension(file);
                             modinfo.Description = "No info found";
@@ -89,6 +98,7 @@ namespace Mega_Mix_Mod_Manager
             if (TV_ModList.SelectedNode == null)
                 return;
             installedmodList.mods.Remove(installedmodList.mods.Where(x => x.hash == TV_ModList.SelectedNode.Name).First());
+            PB_ModPreview.Image.Dispose();
             PB_ModPreview.Image = null;
             RTB_ModDetails.Clear();
             Directory.Delete($"Mods\\{TV_ModList.SelectedNode.Name}", true);
@@ -103,6 +113,7 @@ namespace Mega_Mix_Mod_Manager
                 return;
             Directory.Delete(TB_Export.Text, true);
             Directory.CreateDirectory(TB_Export.Text);
+            SortedDictionary<string, List<string>> pvdb = new SortedDictionary<string, List<string>>();
 
             foreach (TreeNode node in TV_ModList.Nodes)
             {
@@ -112,6 +123,15 @@ namespace Mega_Mix_Mod_Manager
                     if (Path.GetFileName(file) == "modinfo.json" || Path.GetFileName(file) == "thumbnail.jpg")
                         continue;
 
+                    if (Path.GetFileName(file) == "pv_db.txt" && CB_PathVarify.Checked)
+                    {
+                        if (CB_pv_Merge.Text == "Lite Merge")
+                        {
+                            pvdb = pv_db.GetNewEntries(pv_db_Path, file, pvdb);
+                        }
+                        continue;
+                    }
+
                     string outfile = file.Replace($"Mods\\{node.Name}", TB_Export.Text);
                     outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");
                     if (!Directory.Exists(Path.GetDirectoryName(outfile)))
@@ -119,6 +139,15 @@ namespace Mega_Mix_Mod_Manager
                     File.Copy(file, outfile, true);
                 }
             }
+
+            SortedDictionary<string, List<string>> merged = pv_db.Read(pv_db_Path);
+            foreach (var entry in pvdb)
+            {
+                if (merged.ContainsKey(entry.Key))
+                    merged.Remove(entry.Key);
+                merged.Add(entry.Key, entry.Value);
+            }
+            pv_db.Write(merged, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
         }
 
         private void B_ModUp_Click(object sender, EventArgs e)
@@ -138,7 +167,11 @@ namespace Mega_Mix_Mod_Manager
         private void B_ClearMods_Click(object sender, EventArgs e)
         {
             installedmodList = new ModList();
-            PB_ModPreview.Image = null;
+            if (PB_ModPreview.Image != null)
+            {
+                PB_ModPreview.Image.Dispose();
+                PB_ModPreview.Image = null;
+            }
             RTB_ModDetails.Clear();
             TV_ModList.Nodes.Clear();
             Directory.Delete("Mods", true);
@@ -148,7 +181,12 @@ namespace Mega_Mix_Mod_Manager
         private void TV_ModList_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (File.Exists($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg"))
-                PB_ModPreview.Image = new Bitmap($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
+            {
+                Image img = new Bitmap($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
+                PB_ModPreview.Image = img;
+                //img.Dispose();
+            }
+                
 
             string json = File.ReadAllText($"Mods\\{TV_ModList.SelectedNode.Name}\\modinfo.json");
             ModInfo modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
@@ -199,12 +237,7 @@ namespace Mega_Mix_Mod_Manager
         private void B_CreateMod_Click(object sender, EventArgs e)
         {
             //verify check
-            if (!CB_PathVarify.Checked)
-            {
-                MessageBox.Show("No Game Dump Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (TB_ModPath.Text == null || TB_ModPath.Text.Length == 0)
+            if (TB_ModPath.Text == null || TB_ModPath.Text.Length == 0)
             {
                 MessageBox.Show("Mod Path Missing", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -220,11 +253,21 @@ namespace Mega_Mix_Mod_Manager
 
             foreach (string file in files)
             {
-                if (!Directory.Exists($"{TB_ModPath.Text}\\.temp\\{Path.GetDirectoryName(file.Replace(TB_ModPath.Text, ""))}"))
+                if (CB_pv_Merge.Text == "Deep Merge" && CB_PathVarify.Checked)
                 {
-                    Directory.CreateDirectory($"{TB_ModPath.Text}\\.temp\\{Path.GetDirectoryName(file.Replace(TB_ModPath.Text, ""))}");
+                    if (Path.GetFileName(file) == "pv_db.txt")
+                    {
+
+                    }
                 }
-                File.Copy(file, $"{TB_ModPath.Text}\\.temp\\{file.Replace(TB_ModPath.Text, "")}", true);
+                else
+                {
+                    if (!Directory.Exists($"{TB_ModPath.Text}\\.temp\\{Path.GetDirectoryName(file.Replace(TB_ModPath.Text, ""))}"))
+                    {
+                        Directory.CreateDirectory($"{TB_ModPath.Text}\\.temp\\{Path.GetDirectoryName(file.Replace(TB_ModPath.Text, ""))}");
+                    }
+                    File.Copy(file, $"{TB_ModPath.Text}\\.temp\\{file.Replace(TB_ModPath.Text, "")}", true);
+                }
             }
             
             if (PB_ModCreateImg.Image != null)
@@ -245,6 +288,16 @@ namespace Mega_Mix_Mod_Manager
                 }
             }
             Directory.Delete($"{TB_ModPath.Text}\\.temp", true);
+        }
+
+        private void B_ModCreatorClear_Click(object sender, EventArgs e)
+        {
+            TB_ModPath.Text = null;
+            TB_ImgPreview.Text = null;
+            TB_ModName.Text = null;
+            RTB_ModDescription.Text = null;
+            PB_ModCreateImg.Image.Dispose();
+            PB_ModCreateImg.Image = null;
         }
 
         #endregion
@@ -329,6 +382,11 @@ namespace Mega_Mix_Mod_Manager
             settings.Game_Dump = TB_DumpPath.Text;
             settings.Export_Path = TB_Export.Text;
             settings.Default_Author = TB_Default_Author.Text;
+            settings.pv_Merge = CB_pv_Merge.Text;
+            settings.obj_Merge = CB_obj_Merge.Text;
+            settings.spr_Merge = CB_spr_Merge.Text;
+            settings.tex_Merge = CB_tex_Merge.Text;
+            settings.farc_Merge = CB_farc_Merge.Text;
 
             string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText($"settings.json", json);
@@ -344,6 +402,11 @@ namespace Mega_Mix_Mod_Manager
                 TB_DumpPath.Text = setting.Game_Dump;
                 TB_Export.Text = setting.Export_Path;
                 TB_Default_Author.Text = setting.Default_Author;
+                CB_pv_Merge.Text = setting.pv_Merge;
+                CB_obj_Merge.Text = setting.obj_Merge;
+                CB_spr_Merge.Text = setting.spr_Merge;
+                CB_tex_Merge.Text = setting.tex_Merge;
+                CB_farc_Merge.Text = setting.farc_Merge;
             }
         }
 
@@ -387,6 +450,12 @@ namespace Mega_Mix_Mod_Manager
             public string Game_Dump { get; set; }
             public string Export_Path { get; set; }
             public string Default_Author { get; set; }
+            public string pv_Merge { get; set; }
+            public string obj_Merge { get; set; }
+            public string spr_Merge { get; set; }
+            public string tex_Merge { get; set; }
+            public string farc_Merge { get; set; }
+
         }
 
         public class ModList
