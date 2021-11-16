@@ -11,6 +11,11 @@ namespace MikuMikuLibrary.Databases
     {
         public string Name { get; set; }
         public uint Id { get; set; }
+
+        public bool Equals(ObjectInfo objectInfo)
+        {
+            return this.Name == objectInfo.Name && this.Id == objectInfo.Id;
+        }
     }
 
     public class ObjectSetInfo
@@ -31,6 +36,21 @@ namespace MikuMikuLibrary.Databases
         public ObjectSetInfo()
         {
             Objects = new List<ObjectInfo>();
+        }
+
+        public bool Equals(ObjectSetInfo objectSet)
+        {
+            bool objects = true;
+            for ( int i = 0; i < Objects.Count; i++)
+            {
+                if (!this.Objects[i].Equals(objectSet.Objects[i]))
+                    objects = false;
+            }
+            return this.Name == objectSet.Name &&
+                this.Id == objectSet.Id &&
+                this.FileName == objectSet.FileName &&
+                this.TextureFileName == objectSet.TextureFileName &&
+                this.ArchiveFileName == objectSet.ArchiveFileName && objects;
         }
     }
 
