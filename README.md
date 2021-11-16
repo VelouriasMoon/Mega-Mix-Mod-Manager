@@ -1,6 +1,6 @@
 # Mega Mix Mod Manager
  Basic mod creator and installer for Hatsune Miku Mega Mix
- ![UI](Preview Images/ImageMain.png)
+ ![UI](Preview%20Images/ImageMain.png)
 
 ## Features
 Install mods into a sortable list that determines load order, the higher the mod the earlier it will load. mods installed should be structured with either the romfs folder as the zip root, or the romfs folder in the zip root.<br/>
