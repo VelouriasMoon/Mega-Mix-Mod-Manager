@@ -435,48 +435,5 @@ namespace Mega_Mix_Mod_Manager
         }
 
         #endregion
-
-        #region Classes
-
-        public class ModInfo
-        {
-            public string Name { get; set; }
-            public string Author { get; set; }
-            public string Description { get; set; }
-        }
-
-        public class Settings
-        {
-            public string Game_Dump { get; set; }
-            public string Export_Path { get; set; }
-            public string Default_Author { get; set; }
-            public string pv_Merge { get; set; }
-            public string obj_Merge { get; set; }
-            public string spr_Merge { get; set; }
-            public string tex_Merge { get; set; }
-            public string farc_Merge { get; set; }
-
-        }
-
-        public class ModList
-        {
-            public Region region { get; set; } = Region.EN;
-            public List<ModList_Entry> mods { get; set; } = new List<ModList_Entry>();
-            public class ModList_Entry
-            {
-                public string Name { get; set; }
-                public string hash { get; set; }
-            }
-
-            public enum Region
-            {
-                JPN,
-                EN
-            }
-        }
-
-        #endregion
-
-        
     }
 }
