@@ -1,5 +1,5 @@
 # Mega Mix Mod Manager
- Basic mod creator and installer for Hatsune Miku Mega Mix
+ Basic mod creator and installer for Hatsune Miku Project Diva Mega Mix/M39
  ![UI](Preview%20Images/ImageMain.png)
 
 ## Features
@@ -18,7 +18,7 @@ or
 
 Create mod zip files with info and thumbnail viewable in the mod manager. the selected mod folder should have the same structure as displayed above.<br/>
 
-File Merging, certain database files can be merged(currently only supports pv_db lite merging) so that mods that edit the same database can be used together.<br/>
+File Merging, certain database files can be merged(currently only supports pv,obj,and tex db lite merging) so that mods that edit the same database can be used together.<br/>
 merging comes in different options, Lite merging is per entry based, so it will check the entry as a whole object. Deep merging will analyze each part of an entry and merge them all together.<br/>
 **Example:**<br/>
 Lite merging the pv_db is check if the pv_001 in the mod folder is different than then one in the game dump, if so it will use that entry instead of the final merged pv_db.<br/>
@@ -30,3 +30,6 @@ Game Dump Path should select the romfs folder of your game dump, a check box ind
 The Export Path should select the romfs folder of where you want the mods to be.
 Default Author will auto fill the author line in the mod creator.<br/>
 Merge Options let's you select what level of merging you want for different database files.
+
+## Credits
+[MikuMikuLibrary](https://github.com/blueskythlikesclouds/MikuMikuLibrary) File handling for most project diva files.
