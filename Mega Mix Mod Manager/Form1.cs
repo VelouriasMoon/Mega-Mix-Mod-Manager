@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Mega_Mix_Mod_Manager.DeepMerge;
 using Mega_Mix_Mod_Manager.IO;
 using Mega_Mix_Mod_Manager.Lite_Merge;
+using MikuMikuLibrary.Archives;
 
 namespace Mega_Mix_Mod_Manager
 {
@@ -113,14 +114,33 @@ namespace Mega_Mix_Mod_Manager
                 return;
             Directory.Delete(TB_Export.Text, true);
             Directory.CreateDirectory(TB_Export.Text);
-            SortedDictionary<string, List<string>> pvdb = new SortedDictionary<string, List<string>>();
+            PB_InstallProgress.Visible = true;
+            PB_InstallProgress.Value = 0;
+
             #region Merging
             if (CB_pv_Merge.Text == "Lite Merge")
             {
+                PB_InstallProgress.Value = 5;
                 pv_db.MergeMods(Directory.GetFiles("Mods", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
+                PB_InstallProgress.Value = 10;
+            }
+            if (CB_obj_Merge.Text == "Lite Merge")
+            {
+                PB_InstallProgress.Value = 15;
+                string[] files = Directory.GetFiles("Mods", "*obj_db.bin", SearchOption.AllDirectories);
+                obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\obj_db.bin");
+                PB_InstallProgress.Value = 20;
+            }
+            if (CB_tex_Merge.Text == "Lite Merge")
+            {
+                PB_InstallProgress.Value = 25;
+                string[] files = Directory.GetFiles("Mods", "*tex_db.bin", SearchOption.AllDirectories);
+                tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\tex_db.bin");
+                PB_InstallProgress.Value = 30;
             }
             #endregion
 
+            PB_InstallProgress.Value = 80;
             foreach (TreeNode node in TV_ModList.Nodes)
             {
                 string[] files = Directory.GetFiles($"Mods\\{node.Name}", "*", SearchOption.AllDirectories);
@@ -192,7 +212,12 @@ namespace Mega_Mix_Mod_Manager
             ModInfo modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
 
             RTB_ModDetails.Text = $"Name: {modinfo.Name}\nAuthor: {modinfo.Author}\n{modinfo.Description}";
+            PB_InstallProgress.Value = 100;
+            MessageBox.Show("Mods Exported Successfully", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            PB_InstallProgress.Value = 0;
+            PB_InstallProgress.Visible = false;
         }
+        
 
         #endregion
 
