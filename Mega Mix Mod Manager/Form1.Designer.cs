@@ -30,68 +30,69 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.TP_Settings = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.L_DumpPath = new System.Windows.Forms.Label();
-            this.TB_DumpPath = new System.Windows.Forms.TextBox();
-            this.B_GamePath = new System.Windows.Forms.Button();
-            this.CB_PathVarify = new System.Windows.Forms.CheckBox();
-            this.L_Export = new System.Windows.Forms.Label();
-            this.TB_Export = new System.Windows.Forms.TextBox();
-            this.B_ExportPath = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.L_Default_Author = new System.Windows.Forms.Label();
-            this.TB_Default_Author = new System.Windows.Forms.TextBox();
-            this.B_SaveSettings = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.CB_pv_Merge = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.CB_obj_Merge = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.CB_spr_Merge = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.CB_tex_Merge = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.CB_farc_Merge = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CB_tex_Merge = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.CB_spr_Merge = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.CB_obj_Merge = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.CB_pv_Merge = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.B_SaveSettings = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TB_Default_Author = new System.Windows.Forms.TextBox();
+            this.L_Default_Author = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.B_ExportPath = new System.Windows.Forms.Button();
+            this.TB_Export = new System.Windows.Forms.TextBox();
+            this.L_Export = new System.Windows.Forms.Label();
+            this.CB_PathVarify = new System.Windows.Forms.CheckBox();
+            this.B_GamePath = new System.Windows.Forms.Button();
+            this.TB_DumpPath = new System.Windows.Forms.TextBox();
+            this.L_DumpPath = new System.Windows.Forms.Label();
             this.TP_ModCreator = new System.Windows.Forms.TabPage();
-            this.L_ModPath = new System.Windows.Forms.Label();
-            this.TB_ModPath = new System.Windows.Forms.TextBox();
-            this.B_ModPath = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TB_ModName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.RTB_ModDescription = new System.Windows.Forms.RichTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TB_ModAuthor = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TB_ImgPreview = new System.Windows.Forms.TextBox();
-            this.B_ImgPreview = new System.Windows.Forms.Button();
-            this.B_CreateMod = new System.Windows.Forms.Button();
+            this.B_ModCreatorClear = new System.Windows.Forms.Button();
             this.PB_ModCreateImg = new System.Windows.Forms.PictureBox();
+            this.B_CreateMod = new System.Windows.Forms.Button();
+            this.B_ImgPreview = new System.Windows.Forms.Button();
+            this.TB_ImgPreview = new System.Windows.Forms.TextBox();
+            this.TB_ModAuthor = new System.Windows.Forms.TextBox();
+            this.RTB_ModDescription = new System.Windows.Forms.RichTextBox();
+            this.TB_ModName = new System.Windows.Forms.TextBox();
+            this.TB_ModPath = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.B_ModPath = new System.Windows.Forms.Button();
+            this.L_ModPath = new System.Windows.Forms.Label();
             this.TP_Mods = new System.Windows.Forms.TabPage();
+            this.GB_ModDetails = new System.Windows.Forms.GroupBox();
+            this.B_ClearMods = new System.Windows.Forms.Button();
+            this.B_ModDown = new System.Windows.Forms.Button();
+            this.B_ExportMods = new System.Windows.Forms.Button();
+            this.B_ModUp = new System.Windows.Forms.Button();
+            this.RTB_ModDetails = new System.Windows.Forms.RichTextBox();
+            this.B_RemoveMod = new System.Windows.Forms.Button();
+            this.PB_ModPreview = new System.Windows.Forms.PictureBox();
+            this.B_InstallMod = new System.Windows.Forms.Button();
             this.GB_ModList = new System.Windows.Forms.GroupBox();
             this.TV_ModList = new System.Windows.Forms.TreeView();
-            this.GB_ModDetails = new System.Windows.Forms.GroupBox();
-            this.B_InstallMod = new System.Windows.Forms.Button();
-            this.PB_ModPreview = new System.Windows.Forms.PictureBox();
-            this.B_RemoveMod = new System.Windows.Forms.Button();
-            this.RTB_ModDetails = new System.Windows.Forms.RichTextBox();
-            this.B_ModUp = new System.Windows.Forms.Button();
-            this.B_ExportMods = new System.Windows.Forms.Button();
-            this.B_ModDown = new System.Windows.Forms.Button();
-            this.B_ClearMods = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.B_ModCreatorClear = new System.Windows.Forms.Button();
+            this.PB_InstallProgress = new System.Windows.Forms.ProgressBar();
             this.TP_Settings.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.TP_ModCreator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).BeginInit();
             this.TP_Mods.SuspendLayout();
-            this.GB_ModList.SuspendLayout();
             this.GB_ModDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).BeginInit();
+            this.GB_ModList.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,122 +108,6 @@
             this.TP_Settings.Size = new System.Drawing.Size(573, 404);
             this.TP_Settings.TabIndex = 3;
             this.TP_Settings.Text = "Settings";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.B_ExportPath);
-            this.groupBox1.Controls.Add(this.TB_Export);
-            this.groupBox1.Controls.Add(this.L_Export);
-            this.groupBox1.Controls.Add(this.CB_PathVarify);
-            this.groupBox1.Controls.Add(this.B_GamePath);
-            this.groupBox1.Controls.Add(this.TB_DumpPath);
-            this.groupBox1.Controls.Add(this.L_DumpPath);
-            this.groupBox1.Location = new System.Drawing.Point(6, 7);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(562, 102);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Paths";
-            // 
-            // L_DumpPath
-            // 
-            this.L_DumpPath.AutoSize = true;
-            this.L_DumpPath.Location = new System.Drawing.Point(6, 16);
-            this.L_DumpPath.Name = "L_DumpPath";
-            this.L_DumpPath.Size = new System.Drawing.Size(66, 13);
-            this.L_DumpPath.TabIndex = 0;
-            this.L_DumpPath.Text = "Game Dump";
-            // 
-            // TB_DumpPath
-            // 
-            this.TB_DumpPath.Location = new System.Drawing.Point(6, 32);
-            this.TB_DumpPath.Name = "TB_DumpPath";
-            this.TB_DumpPath.Size = new System.Drawing.Size(488, 20);
-            this.TB_DumpPath.TabIndex = 1;
-            this.TB_DumpPath.TextChanged += new System.EventHandler(this.TB_DumpPath_TextChanged);
-            // 
-            // B_GamePath
-            // 
-            this.B_GamePath.Location = new System.Drawing.Point(500, 31);
-            this.B_GamePath.Name = "B_GamePath";
-            this.B_GamePath.Size = new System.Drawing.Size(36, 20);
-            this.B_GamePath.TabIndex = 2;
-            this.B_GamePath.Text = "...";
-            this.B_GamePath.UseVisualStyleBackColor = true;
-            this.B_GamePath.Click += new System.EventHandler(this.B_GamePath_Click);
-            // 
-            // CB_PathVarify
-            // 
-            this.CB_PathVarify.AutoCheck = false;
-            this.CB_PathVarify.AutoSize = true;
-            this.CB_PathVarify.Location = new System.Drawing.Point(542, 33);
-            this.CB_PathVarify.Name = "CB_PathVarify";
-            this.CB_PathVarify.Size = new System.Drawing.Size(15, 14);
-            this.CB_PathVarify.TabIndex = 3;
-            this.CB_PathVarify.UseVisualStyleBackColor = true;
-            // 
-            // L_Export
-            // 
-            this.L_Export.AutoSize = true;
-            this.L_Export.Location = new System.Drawing.Point(6, 55);
-            this.L_Export.Name = "L_Export";
-            this.L_Export.Size = new System.Drawing.Size(62, 13);
-            this.L_Export.TabIndex = 4;
-            this.L_Export.Text = "Export Path";
-            // 
-            // TB_Export
-            // 
-            this.TB_Export.Location = new System.Drawing.Point(6, 71);
-            this.TB_Export.Name = "TB_Export";
-            this.TB_Export.Size = new System.Drawing.Size(488, 20);
-            this.TB_Export.TabIndex = 5;
-            // 
-            // B_ExportPath
-            // 
-            this.B_ExportPath.Location = new System.Drawing.Point(500, 70);
-            this.B_ExportPath.Name = "B_ExportPath";
-            this.B_ExportPath.Size = new System.Drawing.Size(36, 20);
-            this.B_ExportPath.TabIndex = 6;
-            this.B_ExportPath.Text = "...";
-            this.B_ExportPath.UseVisualStyleBackColor = true;
-            this.B_ExportPath.Click += new System.EventHandler(this.B_ExportPath_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.TB_Default_Author);
-            this.groupBox2.Controls.Add(this.L_Default_Author);
-            this.groupBox2.Location = new System.Drawing.Point(6, 115);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(562, 68);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Info";
-            // 
-            // L_Default_Author
-            // 
-            this.L_Default_Author.AutoSize = true;
-            this.L_Default_Author.Location = new System.Drawing.Point(6, 16);
-            this.L_Default_Author.Name = "L_Default_Author";
-            this.L_Default_Author.Size = new System.Drawing.Size(75, 13);
-            this.L_Default_Author.TabIndex = 2;
-            this.L_Default_Author.Text = "Default Author";
-            // 
-            // TB_Default_Author
-            // 
-            this.TB_Default_Author.Location = new System.Drawing.Point(6, 32);
-            this.TB_Default_Author.Name = "TB_Default_Author";
-            this.TB_Default_Author.Size = new System.Drawing.Size(550, 20);
-            this.TB_Default_Author.TabIndex = 3;
-            // 
-            // B_SaveSettings
-            // 
-            this.B_SaveSettings.Location = new System.Drawing.Point(463, 363);
-            this.B_SaveSettings.Name = "B_SaveSettings";
-            this.B_SaveSettings.Size = new System.Drawing.Size(105, 36);
-            this.B_SaveSettings.TabIndex = 2;
-            this.B_SaveSettings.Text = "Save";
-            this.B_SaveSettings.UseVisualStyleBackColor = true;
-            this.B_SaveSettings.Click += new System.EventHandler(this.B_SaveSettings_Click);
             // 
             // groupBox3
             // 
@@ -243,60 +128,50 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Merge Options";
             // 
-            // label5
+            // CB_farc_Merge
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "pv_db";
-            // 
-            // CB_pv_Merge
-            // 
-            this.CB_pv_Merge.FormattingEnabled = true;
-            this.CB_pv_Merge.Items.AddRange(new object[] {
+            this.CB_farc_Merge.Enabled = false;
+            this.CB_farc_Merge.FormattingEnabled = true;
+            this.CB_farc_Merge.Items.AddRange(new object[] {
             "No Merge",
             "Lite Merge"});
-            this.CB_pv_Merge.Location = new System.Drawing.Point(52, 19);
-            this.CB_pv_Merge.Name = "CB_pv_Merge";
-            this.CB_pv_Merge.Size = new System.Drawing.Size(121, 21);
-            this.CB_pv_Merge.TabIndex = 5;
-            this.CB_pv_Merge.Text = "No Merge";
+            this.CB_farc_Merge.Location = new System.Drawing.Point(52, 127);
+            this.CB_farc_Merge.Name = "CB_farc_Merge";
+            this.CB_farc_Merge.Size = new System.Drawing.Size(121, 21);
+            this.CB_farc_Merge.TabIndex = 13;
+            this.CB_farc_Merge.Text = "No Merge";
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 49);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 15);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "obj_db";
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(6, 130);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 15);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "farc";
             // 
-            // CB_obj_Merge
+            // CB_tex_Merge
             // 
-            this.CB_obj_Merge.Enabled = false;
-            this.CB_obj_Merge.FormattingEnabled = true;
-            this.CB_obj_Merge.Items.AddRange(new object[] {
+            this.CB_tex_Merge.FormattingEnabled = true;
+            this.CB_tex_Merge.Items.AddRange(new object[] {
             "No Merge",
             "Lite Merge"});
-            this.CB_obj_Merge.Location = new System.Drawing.Point(52, 46);
-            this.CB_obj_Merge.Name = "CB_obj_Merge";
-            this.CB_obj_Merge.Size = new System.Drawing.Size(121, 21);
-            this.CB_obj_Merge.TabIndex = 7;
-            this.CB_obj_Merge.Text = "No Merge";
+            this.CB_tex_Merge.Location = new System.Drawing.Point(52, 100);
+            this.CB_tex_Merge.Name = "CB_tex_Merge";
+            this.CB_tex_Merge.Size = new System.Drawing.Size(121, 21);
+            this.CB_tex_Merge.TabIndex = 11;
+            this.CB_tex_Merge.Text = "No Merge";
             // 
-            // label7
+            // label8
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 76);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 15);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "spr_db";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(6, 103);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 15);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "tex_db";
             // 
             // CB_spr_Merge
             // 
@@ -311,51 +186,175 @@
             this.CB_spr_Merge.TabIndex = 9;
             this.CB_spr_Merge.Text = "No Merge";
             // 
-            // label8
+            // label7
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 103);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 15);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "tex_db";
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(6, 76);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 15);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "spr_db";
             // 
-            // CB_tex_Merge
+            // CB_obj_Merge
             // 
-            this.CB_tex_Merge.Enabled = false;
-            this.CB_tex_Merge.FormattingEnabled = true;
-            this.CB_tex_Merge.Items.AddRange(new object[] {
+            this.CB_obj_Merge.FormattingEnabled = true;
+            this.CB_obj_Merge.Items.AddRange(new object[] {
             "No Merge",
             "Lite Merge"});
-            this.CB_tex_Merge.Location = new System.Drawing.Point(52, 100);
-            this.CB_tex_Merge.Name = "CB_tex_Merge";
-            this.CB_tex_Merge.Size = new System.Drawing.Size(121, 21);
-            this.CB_tex_Merge.TabIndex = 11;
-            this.CB_tex_Merge.Text = "No Merge";
+            this.CB_obj_Merge.Location = new System.Drawing.Point(52, 46);
+            this.CB_obj_Merge.Name = "CB_obj_Merge";
+            this.CB_obj_Merge.Size = new System.Drawing.Size(121, 21);
+            this.CB_obj_Merge.TabIndex = 7;
+            this.CB_obj_Merge.Text = "No Merge";
             // 
-            // label9
+            // label6
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(6, 130);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 15);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "farc";
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 15);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "obj_db";
             // 
-            // CB_farc_Merge
+            // CB_pv_Merge
             // 
-            this.CB_farc_Merge.Enabled = false;
-            this.CB_farc_Merge.FormattingEnabled = true;
-            this.CB_farc_Merge.Items.AddRange(new object[] {
+            this.CB_pv_Merge.FormattingEnabled = true;
+            this.CB_pv_Merge.Items.AddRange(new object[] {
             "No Merge",
             "Lite Merge"});
-            this.CB_farc_Merge.Location = new System.Drawing.Point(52, 127);
-            this.CB_farc_Merge.Name = "CB_farc_Merge";
-            this.CB_farc_Merge.Size = new System.Drawing.Size(121, 21);
-            this.CB_farc_Merge.TabIndex = 13;
-            this.CB_farc_Merge.Text = "No Merge";
+            this.CB_pv_Merge.Location = new System.Drawing.Point(52, 19);
+            this.CB_pv_Merge.Name = "CB_pv_Merge";
+            this.CB_pv_Merge.Size = new System.Drawing.Size(121, 21);
+            this.CB_pv_Merge.TabIndex = 5;
+            this.CB_pv_Merge.Text = "No Merge";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(40, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "pv_db";
+            // 
+            // B_SaveSettings
+            // 
+            this.B_SaveSettings.Location = new System.Drawing.Point(463, 363);
+            this.B_SaveSettings.Name = "B_SaveSettings";
+            this.B_SaveSettings.Size = new System.Drawing.Size(105, 36);
+            this.B_SaveSettings.TabIndex = 2;
+            this.B_SaveSettings.Text = "Save";
+            this.B_SaveSettings.UseVisualStyleBackColor = true;
+            this.B_SaveSettings.Click += new System.EventHandler(this.B_SaveSettings_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.TB_Default_Author);
+            this.groupBox2.Controls.Add(this.L_Default_Author);
+            this.groupBox2.Location = new System.Drawing.Point(6, 115);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(562, 68);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Info";
+            // 
+            // TB_Default_Author
+            // 
+            this.TB_Default_Author.Location = new System.Drawing.Point(6, 32);
+            this.TB_Default_Author.Name = "TB_Default_Author";
+            this.TB_Default_Author.Size = new System.Drawing.Size(550, 20);
+            this.TB_Default_Author.TabIndex = 3;
+            // 
+            // L_Default_Author
+            // 
+            this.L_Default_Author.AutoSize = true;
+            this.L_Default_Author.Location = new System.Drawing.Point(6, 16);
+            this.L_Default_Author.Name = "L_Default_Author";
+            this.L_Default_Author.Size = new System.Drawing.Size(75, 13);
+            this.L_Default_Author.TabIndex = 2;
+            this.L_Default_Author.Text = "Default Author";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.B_ExportPath);
+            this.groupBox1.Controls.Add(this.TB_Export);
+            this.groupBox1.Controls.Add(this.L_Export);
+            this.groupBox1.Controls.Add(this.CB_PathVarify);
+            this.groupBox1.Controls.Add(this.B_GamePath);
+            this.groupBox1.Controls.Add(this.TB_DumpPath);
+            this.groupBox1.Controls.Add(this.L_DumpPath);
+            this.groupBox1.Location = new System.Drawing.Point(6, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(562, 102);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Paths";
+            // 
+            // B_ExportPath
+            // 
+            this.B_ExportPath.Location = new System.Drawing.Point(500, 70);
+            this.B_ExportPath.Name = "B_ExportPath";
+            this.B_ExportPath.Size = new System.Drawing.Size(36, 20);
+            this.B_ExportPath.TabIndex = 6;
+            this.B_ExportPath.Text = "...";
+            this.B_ExportPath.UseVisualStyleBackColor = true;
+            this.B_ExportPath.Click += new System.EventHandler(this.B_ExportPath_Click);
+            // 
+            // TB_Export
+            // 
+            this.TB_Export.Location = new System.Drawing.Point(6, 71);
+            this.TB_Export.Name = "TB_Export";
+            this.TB_Export.Size = new System.Drawing.Size(488, 20);
+            this.TB_Export.TabIndex = 5;
+            // 
+            // L_Export
+            // 
+            this.L_Export.AutoSize = true;
+            this.L_Export.Location = new System.Drawing.Point(6, 55);
+            this.L_Export.Name = "L_Export";
+            this.L_Export.Size = new System.Drawing.Size(62, 13);
+            this.L_Export.TabIndex = 4;
+            this.L_Export.Text = "Export Path";
+            // 
+            // CB_PathVarify
+            // 
+            this.CB_PathVarify.AutoCheck = false;
+            this.CB_PathVarify.AutoSize = true;
+            this.CB_PathVarify.Location = new System.Drawing.Point(542, 33);
+            this.CB_PathVarify.Name = "CB_PathVarify";
+            this.CB_PathVarify.Size = new System.Drawing.Size(15, 14);
+            this.CB_PathVarify.TabIndex = 3;
+            this.CB_PathVarify.UseVisualStyleBackColor = true;
+            // 
+            // B_GamePath
+            // 
+            this.B_GamePath.Location = new System.Drawing.Point(500, 31);
+            this.B_GamePath.Name = "B_GamePath";
+            this.B_GamePath.Size = new System.Drawing.Size(36, 20);
+            this.B_GamePath.TabIndex = 2;
+            this.B_GamePath.Text = "...";
+            this.B_GamePath.UseVisualStyleBackColor = true;
+            this.B_GamePath.Click += new System.EventHandler(this.B_GamePath_Click);
+            // 
+            // TB_DumpPath
+            // 
+            this.TB_DumpPath.Location = new System.Drawing.Point(6, 32);
+            this.TB_DumpPath.Name = "TB_DumpPath";
+            this.TB_DumpPath.Size = new System.Drawing.Size(488, 20);
+            this.TB_DumpPath.TabIndex = 1;
+            this.TB_DumpPath.TextChanged += new System.EventHandler(this.TB_DumpPath_TextChanged);
+            // 
+            // L_DumpPath
+            // 
+            this.L_DumpPath.AutoSize = true;
+            this.L_DumpPath.Location = new System.Drawing.Point(6, 16);
+            this.L_DumpPath.Name = "L_DumpPath";
+            this.L_DumpPath.Size = new System.Drawing.Size(66, 13);
+            this.L_DumpPath.TabIndex = 0;
+            this.L_DumpPath.Text = "Game Dump";
             // 
             // TP_ModCreator
             // 
@@ -382,111 +381,24 @@
             this.TP_ModCreator.TabIndex = 1;
             this.TP_ModCreator.Text = "Mod Creator";
             // 
-            // L_ModPath
+            // B_ModCreatorClear
             // 
-            this.L_ModPath.AutoSize = true;
-            this.L_ModPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.L_ModPath.Location = new System.Drawing.Point(6, 9);
-            this.L_ModPath.Name = "L_ModPath";
-            this.L_ModPath.Size = new System.Drawing.Size(68, 17);
-            this.L_ModPath.TabIndex = 0;
-            this.L_ModPath.Text = "Mod Path";
+            this.B_ModCreatorClear.Location = new System.Drawing.Point(128, 348);
+            this.B_ModCreatorClear.Name = "B_ModCreatorClear";
+            this.B_ModCreatorClear.Size = new System.Drawing.Size(111, 50);
+            this.B_ModCreatorClear.TabIndex = 14;
+            this.B_ModCreatorClear.Text = "Clear";
+            this.B_ModCreatorClear.UseVisualStyleBackColor = true;
+            this.B_ModCreatorClear.Click += new System.EventHandler(this.B_ModCreatorClear_Click);
             // 
-            // TB_ModPath
+            // PB_ModCreateImg
             // 
-            this.TB_ModPath.Location = new System.Drawing.Point(9, 29);
-            this.TB_ModPath.Name = "TB_ModPath";
-            this.TB_ModPath.Size = new System.Drawing.Size(348, 20);
-            this.TB_ModPath.TabIndex = 1;
-            // 
-            // B_ModPath
-            // 
-            this.B_ModPath.Location = new System.Drawing.Point(363, 29);
-            this.B_ModPath.Name = "B_ModPath";
-            this.B_ModPath.Size = new System.Drawing.Size(37, 20);
-            this.B_ModPath.TabIndex = 2;
-            this.B_ModPath.Text = "...";
-            this.B_ModPath.UseVisualStyleBackColor = true;
-            this.B_ModPath.Click += new System.EventHandler(this.B_ModPath_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 95);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 17);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Name";
-            // 
-            // TB_ModName
-            // 
-            this.TB_ModName.Location = new System.Drawing.Point(9, 115);
-            this.TB_ModName.Name = "TB_ModName";
-            this.TB_ModName.Size = new System.Drawing.Size(391, 20);
-            this.TB_ModName.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 181);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Description";
-            // 
-            // RTB_ModDescription
-            // 
-            this.RTB_ModDescription.Location = new System.Drawing.Point(9, 201);
-            this.RTB_ModDescription.Name = "RTB_ModDescription";
-            this.RTB_ModDescription.Size = new System.Drawing.Size(391, 141);
-            this.RTB_ModDescription.TabIndex = 6;
-            this.RTB_ModDescription.Text = "";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 138);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Author";
-            // 
-            // TB_ModAuthor
-            // 
-            this.TB_ModAuthor.Location = new System.Drawing.Point(9, 158);
-            this.TB_ModAuthor.Name = "TB_ModAuthor";
-            this.TB_ModAuthor.Size = new System.Drawing.Size(391, 20);
-            this.TB_ModAuthor.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 17);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Image Preview Path";
-            // 
-            // TB_ImgPreview
-            // 
-            this.TB_ImgPreview.Location = new System.Drawing.Point(9, 72);
-            this.TB_ImgPreview.Name = "TB_ImgPreview";
-            this.TB_ImgPreview.Size = new System.Drawing.Size(348, 20);
-            this.TB_ImgPreview.TabIndex = 10;
-            // 
-            // B_ImgPreview
-            // 
-            this.B_ImgPreview.Location = new System.Drawing.Point(363, 72);
-            this.B_ImgPreview.Name = "B_ImgPreview";
-            this.B_ImgPreview.Size = new System.Drawing.Size(37, 20);
-            this.B_ImgPreview.TabIndex = 11;
-            this.B_ImgPreview.Text = "...";
-            this.B_ImgPreview.UseVisualStyleBackColor = true;
-            this.B_ImgPreview.Click += new System.EventHandler(this.B_ImgPreview_Click);
+            this.PB_ModCreateImg.Location = new System.Drawing.Point(406, 9);
+            this.PB_ModCreateImg.Name = "PB_ModCreateImg";
+            this.PB_ModCreateImg.Size = new System.Drawing.Size(161, 117);
+            this.PB_ModCreateImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PB_ModCreateImg.TabIndex = 13;
+            this.PB_ModCreateImg.TabStop = false;
             // 
             // B_CreateMod
             // 
@@ -498,14 +410,111 @@
             this.B_CreateMod.UseVisualStyleBackColor = true;
             this.B_CreateMod.Click += new System.EventHandler(this.B_CreateMod_Click);
             // 
-            // PB_ModCreateImg
+            // B_ImgPreview
             // 
-            this.PB_ModCreateImg.Location = new System.Drawing.Point(406, 9);
-            this.PB_ModCreateImg.Name = "PB_ModCreateImg";
-            this.PB_ModCreateImg.Size = new System.Drawing.Size(161, 117);
-            this.PB_ModCreateImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PB_ModCreateImg.TabIndex = 13;
-            this.PB_ModCreateImg.TabStop = false;
+            this.B_ImgPreview.Location = new System.Drawing.Point(363, 72);
+            this.B_ImgPreview.Name = "B_ImgPreview";
+            this.B_ImgPreview.Size = new System.Drawing.Size(37, 20);
+            this.B_ImgPreview.TabIndex = 11;
+            this.B_ImgPreview.Text = "...";
+            this.B_ImgPreview.UseVisualStyleBackColor = true;
+            this.B_ImgPreview.Click += new System.EventHandler(this.B_ImgPreview_Click);
+            // 
+            // TB_ImgPreview
+            // 
+            this.TB_ImgPreview.Location = new System.Drawing.Point(9, 72);
+            this.TB_ImgPreview.Name = "TB_ImgPreview";
+            this.TB_ImgPreview.Size = new System.Drawing.Size(348, 20);
+            this.TB_ImgPreview.TabIndex = 10;
+            // 
+            // TB_ModAuthor
+            // 
+            this.TB_ModAuthor.Location = new System.Drawing.Point(9, 158);
+            this.TB_ModAuthor.Name = "TB_ModAuthor";
+            this.TB_ModAuthor.Size = new System.Drawing.Size(391, 20);
+            this.TB_ModAuthor.TabIndex = 8;
+            // 
+            // RTB_ModDescription
+            // 
+            this.RTB_ModDescription.Location = new System.Drawing.Point(9, 201);
+            this.RTB_ModDescription.Name = "RTB_ModDescription";
+            this.RTB_ModDescription.Size = new System.Drawing.Size(391, 141);
+            this.RTB_ModDescription.TabIndex = 6;
+            this.RTB_ModDescription.Text = "";
+            // 
+            // TB_ModName
+            // 
+            this.TB_ModName.Location = new System.Drawing.Point(9, 115);
+            this.TB_ModName.Name = "TB_ModName";
+            this.TB_ModName.Size = new System.Drawing.Size(391, 20);
+            this.TB_ModName.TabIndex = 4;
+            // 
+            // TB_ModPath
+            // 
+            this.TB_ModPath.Location = new System.Drawing.Point(9, 29);
+            this.TB_ModPath.Name = "TB_ModPath";
+            this.TB_ModPath.Size = new System.Drawing.Size(348, 20);
+            this.TB_ModPath.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Image Preview Path";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 138);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Author";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 181);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Description";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 95);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Name";
+            // 
+            // B_ModPath
+            // 
+            this.B_ModPath.Location = new System.Drawing.Point(363, 29);
+            this.B_ModPath.Name = "B_ModPath";
+            this.B_ModPath.Size = new System.Drawing.Size(37, 20);
+            this.B_ModPath.TabIndex = 2;
+            this.B_ModPath.Text = "...";
+            this.B_ModPath.UseVisualStyleBackColor = true;
+            this.B_ModPath.Click += new System.EventHandler(this.B_ModPath_Click);
+            // 
+            // L_ModPath
+            // 
+            this.L_ModPath.AutoSize = true;
+            this.L_ModPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_ModPath.Location = new System.Drawing.Point(6, 9);
+            this.L_ModPath.Name = "L_ModPath";
+            this.L_ModPath.Size = new System.Drawing.Size(68, 17);
+            this.L_ModPath.TabIndex = 0;
+            this.L_ModPath.Text = "Mod Path";
             // 
             // TP_Mods
             // 
@@ -518,6 +527,103 @@
             this.TP_Mods.Size = new System.Drawing.Size(573, 404);
             this.TP_Mods.TabIndex = 0;
             this.TP_Mods.Text = "Mods";
+            // 
+            // GB_ModDetails
+            // 
+            this.GB_ModDetails.Controls.Add(this.PB_InstallProgress);
+            this.GB_ModDetails.Controls.Add(this.B_ClearMods);
+            this.GB_ModDetails.Controls.Add(this.B_ModDown);
+            this.GB_ModDetails.Controls.Add(this.B_ExportMods);
+            this.GB_ModDetails.Controls.Add(this.B_ModUp);
+            this.GB_ModDetails.Controls.Add(this.RTB_ModDetails);
+            this.GB_ModDetails.Controls.Add(this.B_RemoveMod);
+            this.GB_ModDetails.Controls.Add(this.PB_ModPreview);
+            this.GB_ModDetails.Controls.Add(this.B_InstallMod);
+            this.GB_ModDetails.Location = new System.Drawing.Point(220, 6);
+            this.GB_ModDetails.Name = "GB_ModDetails";
+            this.GB_ModDetails.Size = new System.Drawing.Size(347, 392);
+            this.GB_ModDetails.TabIndex = 2;
+            this.GB_ModDetails.TabStop = false;
+            this.GB_ModDetails.Text = "Mod Details";
+            // 
+            // B_ClearMods
+            // 
+            this.B_ClearMods.Location = new System.Drawing.Point(188, 363);
+            this.B_ClearMods.Name = "B_ClearMods";
+            this.B_ClearMods.Size = new System.Drawing.Size(71, 23);
+            this.B_ClearMods.TabIndex = 4;
+            this.B_ClearMods.Text = "Clear Mods";
+            this.B_ClearMods.UseVisualStyleBackColor = true;
+            this.B_ClearMods.Click += new System.EventHandler(this.B_ClearMods_Click);
+            // 
+            // B_ModDown
+            // 
+            this.B_ModDown.Location = new System.Drawing.Point(37, 363);
+            this.B_ModDown.Name = "B_ModDown";
+            this.B_ModDown.Size = new System.Drawing.Size(28, 23);
+            this.B_ModDown.TabIndex = 3;
+            this.B_ModDown.Text = "v";
+            this.B_ModDown.UseVisualStyleBackColor = true;
+            this.B_ModDown.Click += new System.EventHandler(this.B_ModDown_Click);
+            // 
+            // B_ExportMods
+            // 
+            this.B_ExportMods.Location = new System.Drawing.Point(261, 363);
+            this.B_ExportMods.Name = "B_ExportMods";
+            this.B_ExportMods.Size = new System.Drawing.Size(80, 23);
+            this.B_ExportMods.TabIndex = 2;
+            this.B_ExportMods.Text = "Export Mods";
+            this.B_ExportMods.UseVisualStyleBackColor = true;
+            this.B_ExportMods.Click += new System.EventHandler(this.B_ExportMods_Click);
+            // 
+            // B_ModUp
+            // 
+            this.B_ModUp.Location = new System.Drawing.Point(6, 363);
+            this.B_ModUp.Name = "B_ModUp";
+            this.B_ModUp.Size = new System.Drawing.Size(28, 23);
+            this.B_ModUp.TabIndex = 2;
+            this.B_ModUp.Text = "^";
+            this.B_ModUp.UseVisualStyleBackColor = true;
+            this.B_ModUp.Click += new System.EventHandler(this.B_ModUp_Click);
+            // 
+            // RTB_ModDetails
+            // 
+            this.RTB_ModDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.RTB_ModDetails.Location = new System.Drawing.Point(6, 216);
+            this.RTB_ModDetails.Name = "RTB_ModDetails";
+            this.RTB_ModDetails.ReadOnly = true;
+            this.RTB_ModDetails.Size = new System.Drawing.Size(335, 141);
+            this.RTB_ModDetails.TabIndex = 1;
+            this.RTB_ModDetails.Text = "";
+            // 
+            // B_RemoveMod
+            // 
+            this.B_RemoveMod.Location = new System.Drawing.Point(127, 363);
+            this.B_RemoveMod.Name = "B_RemoveMod";
+            this.B_RemoveMod.Size = new System.Drawing.Size(59, 23);
+            this.B_RemoveMod.TabIndex = 2;
+            this.B_RemoveMod.Text = "Remove";
+            this.B_RemoveMod.UseVisualStyleBackColor = true;
+            this.B_RemoveMod.Click += new System.EventHandler(this.B_RemoveMod_Click);
+            // 
+            // PB_ModPreview
+            // 
+            this.PB_ModPreview.Location = new System.Drawing.Point(6, 19);
+            this.PB_ModPreview.Name = "PB_ModPreview";
+            this.PB_ModPreview.Size = new System.Drawing.Size(335, 191);
+            this.PB_ModPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PB_ModPreview.TabIndex = 0;
+            this.PB_ModPreview.TabStop = false;
+            // 
+            // B_InstallMod
+            // 
+            this.B_InstallMod.Location = new System.Drawing.Point(69, 363);
+            this.B_InstallMod.Name = "B_InstallMod";
+            this.B_InstallMod.Size = new System.Drawing.Size(56, 23);
+            this.B_InstallMod.TabIndex = 2;
+            this.B_InstallMod.Text = "Install";
+            this.B_InstallMod.UseVisualStyleBackColor = true;
+            this.B_InstallMod.Click += new System.EventHandler(this.B_InstallMod_Click);
             // 
             // GB_ModList
             // 
@@ -537,102 +643,6 @@
             this.TV_ModList.TabIndex = 0;
             this.TV_ModList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_ModList_AfterSelect);
             // 
-            // GB_ModDetails
-            // 
-            this.GB_ModDetails.Controls.Add(this.B_ClearMods);
-            this.GB_ModDetails.Controls.Add(this.B_ModDown);
-            this.GB_ModDetails.Controls.Add(this.B_ExportMods);
-            this.GB_ModDetails.Controls.Add(this.B_ModUp);
-            this.GB_ModDetails.Controls.Add(this.RTB_ModDetails);
-            this.GB_ModDetails.Controls.Add(this.B_RemoveMod);
-            this.GB_ModDetails.Controls.Add(this.PB_ModPreview);
-            this.GB_ModDetails.Controls.Add(this.B_InstallMod);
-            this.GB_ModDetails.Location = new System.Drawing.Point(220, 6);
-            this.GB_ModDetails.Name = "GB_ModDetails";
-            this.GB_ModDetails.Size = new System.Drawing.Size(347, 392);
-            this.GB_ModDetails.TabIndex = 2;
-            this.GB_ModDetails.TabStop = false;
-            this.GB_ModDetails.Text = "Mod Details";
-            // 
-            // B_InstallMod
-            // 
-            this.B_InstallMod.Location = new System.Drawing.Point(69, 363);
-            this.B_InstallMod.Name = "B_InstallMod";
-            this.B_InstallMod.Size = new System.Drawing.Size(56, 23);
-            this.B_InstallMod.TabIndex = 2;
-            this.B_InstallMod.Text = "Install";
-            this.B_InstallMod.UseVisualStyleBackColor = true;
-            this.B_InstallMod.Click += new System.EventHandler(this.B_InstallMod_Click);
-            // 
-            // PB_ModPreview
-            // 
-            this.PB_ModPreview.Location = new System.Drawing.Point(6, 19);
-            this.PB_ModPreview.Name = "PB_ModPreview";
-            this.PB_ModPreview.Size = new System.Drawing.Size(335, 191);
-            this.PB_ModPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PB_ModPreview.TabIndex = 0;
-            this.PB_ModPreview.TabStop = false;
-            // 
-            // B_RemoveMod
-            // 
-            this.B_RemoveMod.Location = new System.Drawing.Point(127, 363);
-            this.B_RemoveMod.Name = "B_RemoveMod";
-            this.B_RemoveMod.Size = new System.Drawing.Size(59, 23);
-            this.B_RemoveMod.TabIndex = 2;
-            this.B_RemoveMod.Text = "Remove";
-            this.B_RemoveMod.UseVisualStyleBackColor = true;
-            this.B_RemoveMod.Click += new System.EventHandler(this.B_RemoveMod_Click);
-            // 
-            // RTB_ModDetails
-            // 
-            this.RTB_ModDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.RTB_ModDetails.Location = new System.Drawing.Point(6, 216);
-            this.RTB_ModDetails.Name = "RTB_ModDetails";
-            this.RTB_ModDetails.ReadOnly = true;
-            this.RTB_ModDetails.Size = new System.Drawing.Size(335, 141);
-            this.RTB_ModDetails.TabIndex = 1;
-            this.RTB_ModDetails.Text = "";
-            // 
-            // B_ModUp
-            // 
-            this.B_ModUp.Location = new System.Drawing.Point(6, 363);
-            this.B_ModUp.Name = "B_ModUp";
-            this.B_ModUp.Size = new System.Drawing.Size(28, 23);
-            this.B_ModUp.TabIndex = 2;
-            this.B_ModUp.Text = "^";
-            this.B_ModUp.UseVisualStyleBackColor = true;
-            this.B_ModUp.Click += new System.EventHandler(this.B_ModUp_Click);
-            // 
-            // B_ExportMods
-            // 
-            this.B_ExportMods.Location = new System.Drawing.Point(261, 363);
-            this.B_ExportMods.Name = "B_ExportMods";
-            this.B_ExportMods.Size = new System.Drawing.Size(80, 23);
-            this.B_ExportMods.TabIndex = 2;
-            this.B_ExportMods.Text = "Export Mods";
-            this.B_ExportMods.UseVisualStyleBackColor = true;
-            this.B_ExportMods.Click += new System.EventHandler(this.B_ExportMods_Click);
-            // 
-            // B_ModDown
-            // 
-            this.B_ModDown.Location = new System.Drawing.Point(37, 363);
-            this.B_ModDown.Name = "B_ModDown";
-            this.B_ModDown.Size = new System.Drawing.Size(28, 23);
-            this.B_ModDown.TabIndex = 3;
-            this.B_ModDown.Text = "v";
-            this.B_ModDown.UseVisualStyleBackColor = true;
-            this.B_ModDown.Click += new System.EventHandler(this.B_ModDown_Click);
-            // 
-            // B_ClearMods
-            // 
-            this.B_ClearMods.Location = new System.Drawing.Point(188, 363);
-            this.B_ClearMods.Name = "B_ClearMods";
-            this.B_ClearMods.Size = new System.Drawing.Size(71, 23);
-            this.B_ClearMods.TabIndex = 4;
-            this.B_ClearMods.Text = "Clear Mods";
-            this.B_ClearMods.UseVisualStyleBackColor = true;
-            this.B_ClearMods.Click += new System.EventHandler(this.B_ClearMods_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.TP_Mods);
@@ -644,15 +654,14 @@
             this.tabControl1.Size = new System.Drawing.Size(581, 430);
             this.tabControl1.TabIndex = 0;
             // 
-            // B_ModCreatorClear
+            // PB_InstallProgress
             // 
-            this.B_ModCreatorClear.Location = new System.Drawing.Point(128, 348);
-            this.B_ModCreatorClear.Name = "B_ModCreatorClear";
-            this.B_ModCreatorClear.Size = new System.Drawing.Size(111, 50);
-            this.B_ModCreatorClear.TabIndex = 14;
-            this.B_ModCreatorClear.Text = "Clear";
-            this.B_ModCreatorClear.UseVisualStyleBackColor = true;
-            this.B_ModCreatorClear.Click += new System.EventHandler(this.B_ModCreatorClear_Click);
+            this.PB_InstallProgress.Location = new System.Drawing.Point(6, 338);
+            this.PB_InstallProgress.Name = "PB_InstallProgress";
+            this.PB_InstallProgress.Size = new System.Drawing.Size(335, 23);
+            this.PB_InstallProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.PB_InstallProgress.TabIndex = 5;
+            this.PB_InstallProgress.Visible = false;
             // 
             // Form1
             // 
@@ -665,19 +674,19 @@
             this.Name = "Form1";
             this.Text = "Mega Mix Mod Manager";
             this.TP_Settings.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.TP_ModCreator.ResumeLayout(false);
             this.TP_ModCreator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).EndInit();
             this.TP_Mods.ResumeLayout(false);
-            this.GB_ModList.ResumeLayout(false);
             this.GB_ModDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).EndInit();
+            this.GB_ModList.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -738,6 +747,7 @@
         private System.Windows.Forms.GroupBox GB_ModList;
         private System.Windows.Forms.TreeView TV_ModList;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.ProgressBar PB_InstallProgress;
     }
 }
 

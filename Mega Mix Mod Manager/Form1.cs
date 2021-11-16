@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
 
-using Microsoft.VisualBasic;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 
-using Mega_Mix_Mod_Manager.DeepMerge;
 using Mega_Mix_Mod_Manager.IO;
 using Mega_Mix_Mod_Manager.Lite_Merge;
+using Mega_Mix_Mod_Manager.Objects;
 using MikuMikuLibrary.Archives;
 
 namespace Mega_Mix_Mod_Manager
@@ -41,6 +37,69 @@ namespace Mega_Mix_Mod_Manager
         public ModList installedmodList;
 
         #region Mod Install
+        #region UI Funtions
+        private void B_RemoveMod_Click(object sender, EventArgs e)
+        {
+            if (TV_ModList.SelectedNode == null)
+                return;
+            installedmodList.mods.Remove(installedmodList.mods.Where(x => x.hash == TV_ModList.SelectedNode.Name).First());
+            PB_ModPreview.Image.Dispose();
+            PB_ModPreview.Image = null;
+            RTB_ModDetails.Clear();
+            Directory.Delete($"Mods\\{TV_ModList.SelectedNode.Name}", true);
+            TV_ModList.SelectedNode.Remove();
+
+            WriteModList();
+        }
+
+        private void B_ModUp_Click(object sender, EventArgs e)
+        {
+            if (TV_ModList.SelectedNode == null || TV_ModList.SelectedNode.Index <= 0)
+                return;
+            TreeViewAddon.MoveUp(TV_ModList.SelectedNode);
+            installedmodList.MoveUp(TV_ModList.SelectedNode.Index);
+            WriteModList();
+        }
+
+        private void B_ModDown_Click(object sender, EventArgs e)
+        {
+            if (TV_ModList.SelectedNode == null || TV_ModList.SelectedNode.Index >= installedmodList.mods.Count - 1)
+                return;
+            TreeViewAddon.MoveDown(TV_ModList.SelectedNode);
+            installedmodList.MoveDown(TV_ModList.SelectedNode.Index);
+            WriteModList();
+        }
+
+        private void B_ClearMods_Click(object sender, EventArgs e)
+        {
+            installedmodList = new ModList();
+            if (PB_ModPreview.Image != null)
+            {
+                PB_ModPreview.Image.Dispose();
+                PB_ModPreview.Image = null;
+            }
+            RTB_ModDetails.Clear();
+            TV_ModList.Nodes.Clear();
+            Directory.Delete("Mods", true);
+            Directory.CreateDirectory("Mods");
+        }
+
+        private void TV_ModList_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (File.Exists($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg"))
+            {
+                Image img = new Bitmap($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
+                PB_ModPreview.Image = img;
+                //img.Dispose();
+            }
+
+
+            string json = File.ReadAllText($"Mods\\{TV_ModList.SelectedNode.Name}\\modinfo.json");
+            ModInfo modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
+
+            RTB_ModDetails.Text = $"Name: {modinfo.Name}\nAuthor: {modinfo.Author}\n{modinfo.Description}";
+        }
+        #endregion
 
         private void B_InstallMod_Click(object sender, EventArgs e)
         {
@@ -94,20 +153,6 @@ namespace Mega_Mix_Mod_Manager
             }
         }
 
-        private void B_RemoveMod_Click(object sender, EventArgs e)
-        {
-            if (TV_ModList.SelectedNode == null)
-                return;
-            installedmodList.mods.Remove(installedmodList.mods.Where(x => x.hash == TV_ModList.SelectedNode.Name).First());
-            PB_ModPreview.Image.Dispose();
-            PB_ModPreview.Image = null;
-            RTB_ModDetails.Clear();
-            Directory.Delete($"Mods\\{TV_ModList.SelectedNode.Name}", true);
-            TV_ModList.SelectedNode.Remove();
-
-            WriteModList();
-        }
-
         private void B_ExportMods_Click(object sender, EventArgs e)
         {
             if (TB_Export == null || TB_Export.Text.Length == 0)
@@ -152,66 +197,13 @@ namespace Mega_Mix_Mod_Manager
                     if (Path.GetFileName(file) == "pv_db.txt" && CB_PathVarify.Checked && CB_pv_Merge.SelectedIndex > 0)
                         continue;
 
-                    string outfile = file.Replace($"Mods\\{node.Name}", TB_Export.Text);
+                    string outfile = file.Replace($"Mods\\{node.Name}", "");
                     outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");
-                    if (!Directory.Exists(Path.GetDirectoryName(outfile)))
-                        Directory.CreateDirectory(Path.GetDirectoryName(outfile));
-                    File.Copy(file, outfile, true);
+                    if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}")))
+                        Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}"));
+                    File.Copy(file, $"{TB_Export.Text}\\{outfile}", true);
                 }
             }
-
-            SortedDictionary<string, List<string>> merged = pv_db.Read(pv_db_Path);
-            foreach (var entry in pvdb)
-            {
-                if (merged.ContainsKey(entry.Key))
-                    merged.Remove(entry.Key);
-                merged.Add(entry.Key, entry.Value);
-            }
-            pv_db.Write(merged, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
-        }
-
-        private void B_ModUp_Click(object sender, EventArgs e)
-        {
-            if (TV_ModList.SelectedNode == null)
-                return;
-            TreeViewAddon.MoveUp(TV_ModList.SelectedNode);
-        }
-
-        private void B_ModDown_Click(object sender, EventArgs e)
-        {
-            if (TV_ModList.SelectedNode == null)
-                return;
-            TreeViewAddon.MoveDown(TV_ModList.SelectedNode);
-        }
-
-        private void B_ClearMods_Click(object sender, EventArgs e)
-        {
-            installedmodList = new ModList();
-            if (PB_ModPreview.Image != null)
-            {
-                PB_ModPreview.Image.Dispose();
-                PB_ModPreview.Image = null;
-            }
-            RTB_ModDetails.Clear();
-            TV_ModList.Nodes.Clear();
-            Directory.Delete("Mods", true);
-            Directory.CreateDirectory("Mods");
-        }
-
-        private void TV_ModList_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (File.Exists($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg"))
-            {
-                Image img = new Bitmap($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
-                PB_ModPreview.Image = img;
-                //img.Dispose();
-            }
-                
-
-            string json = File.ReadAllText($"Mods\\{TV_ModList.SelectedNode.Name}\\modinfo.json");
-            ModInfo modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
-
-            RTB_ModDetails.Text = $"Name: {modinfo.Name}\nAuthor: {modinfo.Author}\n{modinfo.Description}";
             PB_InstallProgress.Value = 100;
             MessageBox.Show("Mods Exported Successfully", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             PB_InstallProgress.Value = 0;
