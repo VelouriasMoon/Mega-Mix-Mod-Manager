@@ -114,6 +114,12 @@ namespace Mega_Mix_Mod_Manager
             Directory.Delete(TB_Export.Text, true);
             Directory.CreateDirectory(TB_Export.Text);
             SortedDictionary<string, List<string>> pvdb = new SortedDictionary<string, List<string>>();
+            #region Merging
+            if (CB_pv_Merge.Text == "Lite Merge")
+            {
+                pv_db.MergeMods(Directory.GetFiles("Mods", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
+            }
+            #endregion
 
             foreach (TreeNode node in TV_ModList.Nodes)
             {
@@ -123,14 +129,8 @@ namespace Mega_Mix_Mod_Manager
                     if (Path.GetFileName(file) == "modinfo.json" || Path.GetFileName(file) == "thumbnail.jpg")
                         continue;
 
-                    if (Path.GetFileName(file) == "pv_db.txt" && CB_PathVarify.Checked)
-                    {
-                        if (CB_pv_Merge.Text == "Lite Merge")
-                        {
-                            pvdb = pv_db.GetNewEntries(pv_db_Path, file, pvdb);
-                        }
+                    if (Path.GetFileName(file) == "pv_db.txt" && CB_PathVarify.Checked && CB_pv_Merge.SelectedIndex > 0)
                         continue;
-                    }
 
                     string outfile = file.Replace($"Mods\\{node.Name}", TB_Export.Text);
                     outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");

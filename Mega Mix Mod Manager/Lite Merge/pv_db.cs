@@ -39,6 +39,9 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 pv_db.Add(entry.Value.ToArray());
             }
 
+            if (!Directory.Exists(Path.GetDirectoryName(outpath)))
+                Directory.CreateDirectory(Path.GetDirectoryName(outpath));
+
             using (StreamWriter sw = new StreamWriter(outpath))
             {
                 foreach (string[] data in pv_db)
@@ -74,6 +77,26 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
             }
 
             return final_db;
+        }
+
+        public static void MergeMods(string[] files, string Basepv, string outfile)
+        {
+            SortedDictionary<string, List<string>> pvdb = new SortedDictionary<string, List<string>>();
+            SortedDictionary<string, List<string>> merged = pv_db.Read(Basepv);
+
+            foreach (string file in files)
+            {
+                if (Path.GetFileName(file) == "pv_db.txt")
+                    pvdb = GetNewEntries(Basepv, file, pvdb);
+            }
+            
+            foreach (var entry in pvdb)
+            {
+                if (merged.ContainsKey(entry.Key))
+                    merged.Remove(entry.Key);
+                merged.Add(entry.Key, entry.Value);
+            }
+            Write(merged, outfile);
         }
     }
 }
