@@ -23,8 +23,6 @@ namespace Mega_Mix_Mod_Manager
         public Form1()
         {
             InitializeComponent();
-            if (TB_Default_Author.Text != null || TB_Default_Author.Text.Length != 0)
-                TB_ModAuthor.Text = TB_Default_Author.Text;
             if (!Directory.Exists("Mods"))
                 Directory.CreateDirectory("Mods");
             if (File.Exists($"Mods\\Modlist.json"))
@@ -32,6 +30,8 @@ namespace Mega_Mix_Mod_Manager
             else
                 installedmodList = new ModList();
             LoadSettings();
+            if (TB_Default_Author.Text != null || TB_Default_Author.Text.Length != 0)
+                TB_ModAuthor.Text = TB_Default_Author.Text;
         }
         public string pv_db_Path;
         public ModList installedmodList;
