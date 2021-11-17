@@ -49,6 +49,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
         {
             SpriteDatabase original = Read(BaseObj);
             SpriteDatabase spriteDatabase = new SpriteDatabase();
+            log = new List<string>();
 
             foreach (string mod in mods)
             {
