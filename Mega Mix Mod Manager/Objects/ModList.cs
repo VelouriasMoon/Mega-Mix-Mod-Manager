@@ -9,7 +9,7 @@ namespace Mega_Mix_Mod_Manager.Objects
 {
     public class ModList
     {
-        public Region region { get; set; } = Region.EN;
+        public Region region { get; set; } = Region.rom_switch_en;
         public List<ModList_Entry> mods { get; set; } = new List<ModList_Entry>();
         public class ModList_Entry
         {
@@ -19,8 +19,10 @@ namespace Mega_Mix_Mod_Manager.Objects
 
         public enum Region
         {
-            JPN,
-            EN
+            rom_switch,
+            rom_switch_en,
+            rom_switch_cn,
+            rom_switch_tw
         }
 
         public void MoveDown(int selected_index)

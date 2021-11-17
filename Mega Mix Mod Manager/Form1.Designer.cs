@@ -83,6 +83,8 @@
             this.TV_ModList = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.PB_InstallProgress = new System.Windows.Forms.ProgressBar();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -111,6 +113,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.comboBox1);
+            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.CB_farc_Merge);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.CB_tex_Merge);
@@ -130,7 +134,6 @@
             // 
             // CB_farc_Merge
             // 
-            this.CB_farc_Merge.Enabled = false;
             this.CB_farc_Merge.FormattingEnabled = true;
             this.CB_farc_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -175,7 +178,6 @@
             // 
             // CB_spr_Merge
             // 
-            this.CB_spr_Merge.Enabled = false;
             this.CB_spr_Merge.FormattingEnabled = true;
             this.CB_spr_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -663,6 +665,30 @@
             this.PB_InstallProgress.TabIndex = 5;
             this.PB_InstallProgress.Visible = false;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "rom_switch",
+            "rom_switch_en",
+            "rom_switch_cn",
+            "rom_switch_tw"});
+            this.comboBox1.Location = new System.Drawing.Point(52, 183);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 15;
+            this.comboBox1.Text = "rom_switch_en";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 186);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 15);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Region";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,6 +774,8 @@
         private System.Windows.Forms.TreeView TV_ModList;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ProgressBar PB_InstallProgress;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label10;
     }
 }
 
