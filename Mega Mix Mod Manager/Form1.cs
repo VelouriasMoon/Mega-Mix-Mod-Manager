@@ -183,6 +183,15 @@ namespace Mega_Mix_Mod_Manager
                 tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\tex_db.bin");
                 PB_InstallProgress.Value = 30;
             }
+            if (CB_spr_Merge.Text == "Lite Merge")
+            {
+                PB_InstallProgress.Value = 35;
+                string[] files = Directory.GetFiles("Mods", "*spr_db.bin", SearchOption.AllDirectories);
+                string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
+
+                spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_Export.Text}\\{region}\\rom\\2d\\spr_db.bin");
+                PB_InstallProgress.Value = 40;
+            }
             #endregion
 
             PB_InstallProgress.Value = 80;

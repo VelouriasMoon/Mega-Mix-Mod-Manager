@@ -113,6 +113,7 @@
     <Compile Include="IO\TreeViewAddon.cs" />
     <Compile Include="Lite Merge\obj_db.cs" />
     <Compile Include="Lite Merge\pv_db.cs" />
+    <Compile Include="Lite Merge\spr_db.cs" />
     <Compile Include="Lite Merge\tex_db.cs" />
     <Compile Include="Objects\ModInfo.cs" />
     <Compile Include="Objects\ModList.cs" />
