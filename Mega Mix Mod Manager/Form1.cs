@@ -155,7 +155,7 @@ namespace Mega_Mix_Mod_Manager
 
         private void B_ExportMods_Click(object sender, EventArgs e)
         {
-            if (TB_Export == null || TB_Export.Text.Length == 0)
+            if (TB_Export == null || TB_Export.Text.Length == 0 || !CB_PathVarify.Checked)
                 return;
             Directory.Delete(TB_Export.Text, true);
             Directory.CreateDirectory(TB_Export.Text);
