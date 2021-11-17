@@ -11,11 +11,11 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
     internal class farc
     {
-        private static FarcArchive Read(string infile)
+        public static FarcArchive Read(string infile)
         {
             using (FileStream fs = new FileStream(infile, FileMode.Open))
             {
-                using (EndianBinaryReader ebr = new EndianBinaryReader(fs, MikuMikuLibrary.IO.Endianness.Little))
+                using (EndianBinaryReader ebr = new EndianBinaryReader(fs, MikuMikuLibrary.IO.Endianness.Big))
                 {
                     FarcArchive farcArchive = new FarcArchive();
                     farcArchive.Read(ebr);
