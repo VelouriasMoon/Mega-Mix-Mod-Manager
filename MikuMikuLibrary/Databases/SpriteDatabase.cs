@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MikuMikuLibrary.IO;
 using MikuMikuLibrary.IO.Common;
@@ -153,6 +154,12 @@ namespace MikuMikuLibrary.Databases
                 }
             } );
         }
+
+        public SpriteSetInfo GetSpriteSetInfo(string spriteSetName) =>
+            SpriteSets.FirstOrDefault(x => x.Name.Equals(spriteSetName, StringComparison.OrdinalIgnoreCase));
+
+        public SpriteSetInfo GetSpriteSetInfo(uint spriteSetID) =>
+            SpriteSets.FirstOrDefault(x => x.Id.Equals(spriteSetID));
 
         public SpriteDatabase()
         {
