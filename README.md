@@ -1,6 +1,6 @@
 # Mega Mix Mod Manager
- Basic mod creator and installer for Hatsune Miku Project Diva Mega Mix/M39
- ![UI](Preview%20Images/ImageMain.png)
+Basic mod creator and installer for Hatsune Miku Project Diva Mega Mix/M39
+![UI](Preview%20Images/Logo.png)
 
 ## Features
 Install mods into a sortable list that determines load order, the higher the mod the earlier it will load. mods installed should be structured with either the romfs folder as the zip root, or the romfs folder in the zip root.<br/>
@@ -18,8 +18,10 @@ or
 
 Create mod zip files with info and thumbnail viewable in the mod manager. the selected mod folder should have the same structure as displayed above.<br/>
 
-File Merging, certain database files can be merged(currently only supports pv,obj,and tex db lite merging) so that mods that edit the same database can be used together.<br/>
+File Merging, certain database files can be merged so that mods that edit the same database can be used together.<br/>
 merging comes in different options, Lite merging is per entry based, so it will check the entry as a whole object. Deep merging will analyze each part of an entry and merge them all together.<br/>
+##### Note: Deep Merge not functional yet
+![UI](Preview%20Images/ImageMain.png)
 **Example:**<br/>
 Lite merging the pv_db is check if the pv_001 in the mod folder is different than then one in the game dump, if so it will use that entry instead of the final merged pv_db.<br/>
 Deep merging will check each line in the pv_db and determine whats new and what to add, so if one mod adds an extra_singer to pv_001 and changes the songinfo, the final merged pv_db will have both changes.
