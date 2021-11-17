@@ -610,6 +610,8 @@
             // 
             // PB_ModPreview
             // 
+            this.PB_ModPreview.Image = ((System.Drawing.Image)(resources.GetObject("PB_ModPreview.Image")));
+            this.PB_ModPreview.InitialImage = null;
             this.PB_ModPreview.Location = new System.Drawing.Point(6, 19);
             this.PB_ModPreview.Name = "PB_ModPreview";
             this.PB_ModPreview.Size = new System.Drawing.Size(335, 191);
