@@ -155,7 +155,7 @@ namespace Mega_Mix_Mod_Manager
 
         private void B_ExportMods_Click(object sender, EventArgs e)
         {
-            if (TB_Export == null || TB_Export.Text.Length == 0 || !CB_PathVarify.Checked)
+            if (TB_Export == null || TB_Export.Text.Length == 0)
                 return;
             Directory.Delete(TB_Export.Text, true);
             Directory.CreateDirectory(TB_Export.Text);
@@ -163,34 +163,45 @@ namespace Mega_Mix_Mod_Manager
             PB_InstallProgress.Value = 0;
 
             #region Merging
-            if (CB_pv_Merge.Text == "Lite Merge")
+            if (!CB_PathVarify.Checked && 
+                (CB_obj_Merge.SelectedIndex > 1 || 
+                CB_tex_Merge.SelectedIndex > 1 ||
+                CB_spr_Merge.SelectedIndex > 1 ||
+                CB_pv_Merge.SelectedIndex > 1))
             {
-                PB_InstallProgress.Value = 5;
-                pv_db.MergeMods(Directory.GetFiles("Mods", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
-                PB_InstallProgress.Value = 10;
+                MessageBox.Show("No valid game path found, merging will be skipped", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-            if (CB_obj_Merge.Text == "Lite Merge")
+            else
             {
-                PB_InstallProgress.Value = 15;
-                string[] files = Directory.GetFiles("Mods", "*obj_db.bin", SearchOption.AllDirectories);
-                obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\obj_db.bin");
-                PB_InstallProgress.Value = 20;
-            }
-            if (CB_tex_Merge.Text == "Lite Merge")
-            {
-                PB_InstallProgress.Value = 25;
-                string[] files = Directory.GetFiles("Mods", "*tex_db.bin", SearchOption.AllDirectories);
-                tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\tex_db.bin");
-                PB_InstallProgress.Value = 30;
-            }
-            if (CB_spr_Merge.Text == "Lite Merge")
-            {
-                PB_InstallProgress.Value = 35;
-                string[] files = Directory.GetFiles("Mods", "*spr_db.bin", SearchOption.AllDirectories);
-                string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
+                if (CB_pv_Merge.Text == "Lite Merge")
+                {
+                    PB_InstallProgress.Value = 5;
+                    pv_db.MergeMods(Directory.GetFiles("Mods", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
+                    PB_InstallProgress.Value = 10;
+                }
+                if (CB_obj_Merge.Text == "Lite Merge")
+                {
+                    PB_InstallProgress.Value = 15;
+                    string[] files = Directory.GetFiles("Mods", "*obj_db.bin", SearchOption.AllDirectories);
+                    obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\obj_db.bin");
+                    PB_InstallProgress.Value = 20;
+                }
+                if (CB_tex_Merge.Text == "Lite Merge")
+                {
+                    PB_InstallProgress.Value = 25;
+                    string[] files = Directory.GetFiles("Mods", "*tex_db.bin", SearchOption.AllDirectories);
+                    tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\tex_db.bin");
+                    PB_InstallProgress.Value = 30;
+                }
+                if (CB_spr_Merge.Text == "Lite Merge")
+                {
+                    PB_InstallProgress.Value = 35;
+                    string[] files = Directory.GetFiles("Mods", "*spr_db.bin", SearchOption.AllDirectories);
+                    string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
 
-                spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_Export.Text}\\{region}\\rom\\2d\\spr_db.bin");
-                PB_InstallProgress.Value = 40;
+                    spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_Export.Text}\\{region}\\rom\\2d\\spr_db.bin");
+                    PB_InstallProgress.Value = 40;
+                }
             }
             #endregion
 
@@ -204,6 +215,12 @@ namespace Mega_Mix_Mod_Manager
                         continue;
 
                     if (Path.GetFileName(file) == "pv_db.txt" && CB_PathVarify.Checked && CB_pv_Merge.SelectedIndex > 0)
+                        continue;
+                    if (Path.GetFileName(file) == "obj_db.bin" && CB_PathVarify.Checked && CB_obj_Merge.SelectedIndex > 0)
+                        continue;
+                    if (Path.GetFileName(file) == "tex_db.bin" && CB_PathVarify.Checked && CB_tex_Merge.SelectedIndex > 0)
+                        continue;
+                    if (Path.GetFileName(file) == "spr_db.bin" && CB_PathVarify.Checked && CB_spr_Merge.SelectedIndex > 0)
                         continue;
 
                     string outfile = file.Replace($"Mods\\{node.Name}", "");
