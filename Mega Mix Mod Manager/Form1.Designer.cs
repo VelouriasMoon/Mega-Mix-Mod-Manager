@@ -601,11 +601,12 @@
             // 
             // B_ModDown
             // 
+            this.B_ModDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B_ModDown.Location = new System.Drawing.Point(37, 363);
             this.B_ModDown.Name = "B_ModDown";
             this.B_ModDown.Size = new System.Drawing.Size(28, 23);
             this.B_ModDown.TabIndex = 3;
-            this.B_ModDown.Text = "v";
+            this.B_ModDown.Text = "🠟";
             this.B_ModDown.UseVisualStyleBackColor = true;
             this.B_ModDown.Click += new System.EventHandler(this.B_ModDown_Click);
             // 
@@ -621,11 +622,12 @@
             // 
             // B_ModUp
             // 
+            this.B_ModUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B_ModUp.Location = new System.Drawing.Point(6, 363);
             this.B_ModUp.Name = "B_ModUp";
             this.B_ModUp.Size = new System.Drawing.Size(28, 23);
             this.B_ModUp.TabIndex = 2;
-            this.B_ModUp.Text = "^";
+            this.B_ModUp.Text = "🠝";
             this.B_ModUp.UseVisualStyleBackColor = true;
             this.B_ModUp.Click += new System.EventHandler(this.B_ModUp_Click);
             // 
