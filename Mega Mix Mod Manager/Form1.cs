@@ -14,7 +14,8 @@ using Newtonsoft.Json;
 using Mega_Mix_Mod_Manager.IO;
 using Mega_Mix_Mod_Manager.Lite_Merge;
 using Mega_Mix_Mod_Manager.Objects;
-using MikuMikuLibrary.Archives;
+using Mega_Mix_Mod_Manager.Editors;
+
 
 namespace Mega_Mix_Mod_Manager
 {
@@ -494,5 +495,36 @@ namespace Mega_Mix_Mod_Manager
         }
 
         #endregion
+
+        private void B_DBOpen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "db Files(*.bin)|*.bin";
+                ofd.RestoreDirectory = true;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Explorer.Reset(this);
+                    if (Path.GetFileName(ofd.FileName) == "obj_db.bin")
+                        Explorer.OpenObj(this, ofd.FileName);
+                    else if (Path.GetFileName(ofd.FileName) == "tex_db.bin")
+                        Explorer.OpenTex(this, ofd.FileName);
+                    else if (Path.GetFileName(ofd.FileName) == "spr_db.bin")
+                        Explorer.OpenSpr(this, ofd.FileName);
+                }
+            }
+        }
+
+        private void DB_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DB_Data.SelectedObject = null;
+            if (groupBox4.Text == "obj_db")
+                Explorer.SelectObj(this, DB_List.Text);
+            else if (groupBox4.Text == "tex_db")
+                Explorer.SelectTex(this, DB_List.Text);
+            else if (groupBox4.Text == "spr_db")
+                Explorer.SelectSpr(this, DB_List.Text);
+        }
     }
 }

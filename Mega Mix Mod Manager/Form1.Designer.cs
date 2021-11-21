@@ -85,6 +85,13 @@
             this.GB_ModList = new System.Windows.Forms.GroupBox();
             this.TV_ModList = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TP_DBExplorer = new System.Windows.Forms.TabPage();
+            this.DB_Data = new System.Windows.Forms.PropertyGrid();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.B_DBMinus = new System.Windows.Forms.Button();
+            this.B_DBPlus = new System.Windows.Forms.Button();
+            this.B_DBOpen = new System.Windows.Forms.Button();
+            this.DB_List = new System.Windows.Forms.ListBox();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -96,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).BeginInit();
             this.GB_ModList.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.TP_DBExplorer.SuspendLayout();
             this.SuspendLayout();
             // 
             // TP_Settings
@@ -687,11 +695,82 @@
             this.tabControl1.Controls.Add(this.TP_Mods);
             this.tabControl1.Controls.Add(this.TP_ModCreator);
             this.tabControl1.Controls.Add(this.TP_Settings);
+            this.tabControl1.Controls.Add(this.TP_DBExplorer);
             this.tabControl1.Location = new System.Drawing.Point(12, 8);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(581, 430);
             this.tabControl1.TabIndex = 0;
+            // 
+            // TP_DBExplorer
+            // 
+            this.TP_DBExplorer.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_DBExplorer.Controls.Add(this.DB_Data);
+            this.TP_DBExplorer.Controls.Add(this.groupBox4);
+            this.TP_DBExplorer.Controls.Add(this.B_DBMinus);
+            this.TP_DBExplorer.Controls.Add(this.B_DBPlus);
+            this.TP_DBExplorer.Controls.Add(this.B_DBOpen);
+            this.TP_DBExplorer.Controls.Add(this.DB_List);
+            this.TP_DBExplorer.Location = new System.Drawing.Point(4, 22);
+            this.TP_DBExplorer.Name = "TP_DBExplorer";
+            this.TP_DBExplorer.Size = new System.Drawing.Size(573, 404);
+            this.TP_DBExplorer.TabIndex = 4;
+            this.TP_DBExplorer.Text = "Database Explorer";
+            // 
+            // DB_Data
+            // 
+            this.DB_Data.HelpVisible = false;
+            this.DB_Data.Location = new System.Drawing.Point(171, 49);
+            this.DB_Data.Name = "DB_Data";
+            this.DB_Data.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.DB_Data.Size = new System.Drawing.Size(393, 343);
+            this.DB_Data.TabIndex = 5;
+            this.DB_Data.ToolbarVisible = false;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Location = new System.Drawing.Point(165, 30);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(405, 368);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            // 
+            // B_DBMinus
+            // 
+            this.B_DBMinus.Location = new System.Drawing.Point(124, 3);
+            this.B_DBMinus.Name = "B_DBMinus";
+            this.B_DBMinus.Size = new System.Drawing.Size(31, 23);
+            this.B_DBMinus.TabIndex = 4;
+            this.B_DBMinus.Text = "-";
+            this.B_DBMinus.UseVisualStyleBackColor = true;
+            // 
+            // B_DBPlus
+            // 
+            this.B_DBPlus.Location = new System.Drawing.Point(87, 3);
+            this.B_DBPlus.Name = "B_DBPlus";
+            this.B_DBPlus.Size = new System.Drawing.Size(31, 23);
+            this.B_DBPlus.TabIndex = 3;
+            this.B_DBPlus.Text = "+";
+            this.B_DBPlus.UseVisualStyleBackColor = true;
+            // 
+            // B_DBOpen
+            // 
+            this.B_DBOpen.Location = new System.Drawing.Point(6, 3);
+            this.B_DBOpen.Name = "B_DBOpen";
+            this.B_DBOpen.Size = new System.Drawing.Size(75, 23);
+            this.B_DBOpen.TabIndex = 2;
+            this.B_DBOpen.Text = "Open";
+            this.B_DBOpen.UseVisualStyleBackColor = true;
+            this.B_DBOpen.Click += new System.EventHandler(this.B_DBOpen_Click);
+            // 
+            // DB_List
+            // 
+            this.DB_List.FormattingEnabled = true;
+            this.DB_List.Location = new System.Drawing.Point(6, 30);
+            this.DB_List.Name = "DB_List";
+            this.DB_List.Size = new System.Drawing.Size(153, 368);
+            this.DB_List.TabIndex = 1;
+            this.DB_List.SelectedIndexChanged += new System.EventHandler(this.DB_List_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -718,6 +797,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).EndInit();
             this.GB_ModList.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.TP_DBExplorer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -780,6 +860,13 @@
         private System.Windows.Forms.ProgressBar PB_InstallProgress;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TabPage TP_DBExplorer;
+        private System.Windows.Forms.Button B_DBOpen;
+        public System.Windows.Forms.ListBox DB_List;
+        public System.Windows.Forms.Button B_DBMinus;
+        public System.Windows.Forms.Button B_DBPlus;
+        public System.Windows.Forms.PropertyGrid DB_Data;
+        public System.Windows.Forms.GroupBox groupBox4;
     }
 }
 
