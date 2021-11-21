@@ -11,7 +11,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
     public class obj_db
     {
-        private static ObjectDatabase Read(string infile)
+        public static ObjectDatabase Read(string infile)
         {
             using (FileStream fs = new FileStream(infile, FileMode.Open))
             {

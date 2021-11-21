@@ -12,7 +12,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
     internal class tex_db
     {
         public static List<string> log;
-        private static TextureDatabase Read(string infile)
+        public static TextureDatabase Read(string infile)
         {
             using (FileStream fs = new FileStream(infile, FileMode.Open))
             {
