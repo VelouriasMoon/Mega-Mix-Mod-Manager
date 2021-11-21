@@ -9,7 +9,7 @@ using System.IO.Compression;
 using System.Text.RegularExpressions;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Newtonsoft.Json;
+using YamlDotNet.Serialization;
 
 using Mega_Mix_Mod_Manager.IO;
 using Mega_Mix_Mod_Manager.Lite_Merge;
@@ -26,7 +26,7 @@ namespace Mega_Mix_Mod_Manager
             InitializeComponent();
             if (!Directory.Exists("Mods"))
                 Directory.CreateDirectory("Mods");
-            if (File.Exists($"Mods\\Modlist.json"))
+            if (File.Exists($"Mods\\Modlist.yaml"))
                 LoadModList();
             else
                 installedmodList = new ModList();
@@ -95,8 +95,9 @@ namespace Mega_Mix_Mod_Manager
             }
 
 
-            string json = File.ReadAllText($"Mods\\{TV_ModList.SelectedNode.Name}\\modinfo.json");
-            ModInfo modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
+            string yaml = File.ReadAllText($"Mods\\{TV_ModList.SelectedNode.Name}\\modinfo.yaml");
+            var deserializer = new DeserializerBuilder().Build();
+            ModInfo modinfo = deserializer.Deserialize<ModInfo>(yaml);
 
             RTB_ModDetails.Text = $"Name: {modinfo.Name}\nAuthor: {modinfo.Author}\n{modinfo.Description}";
         }
@@ -129,7 +130,7 @@ namespace Mega_Mix_Mod_Manager
                         }
                         ModInfo modinfo = new ModInfo();
 
-                        if (!File.Exists($"Mods\\{hash}\\modinfo.json"))
+                        if (!File.Exists($"Mods\\{hash}\\modinfo.yaml"))
                         {
                             modinfo.Name = Path.GetFileNameWithoutExtension(file);
                             modinfo.Description = "No info found";
@@ -137,8 +138,9 @@ namespace Mega_Mix_Mod_Manager
                         }
                         else
                         {
-                            string json = File.ReadAllText($"Mods\\{hash}\\modinfo.json");
-                            modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
+                            string yaml = File.ReadAllText($"Mods\\{hash}\\modinfo.yaml");
+                            var deserializer = new DeserializerBuilder().Build();
+                            modinfo = deserializer.Deserialize<ModInfo>(yaml);
                         }
 
                         ModList.ModList_Entry newmod = new ModList.ModList_Entry();
@@ -220,7 +222,7 @@ namespace Mega_Mix_Mod_Manager
                 string[] files = Directory.GetFiles($"Mods\\{node.Name}", "*", SearchOption.AllDirectories);
                 foreach (string file in files)
                 {
-                    if (Path.GetFileName(file) == "modinfo.json" || Path.GetFileName(file) == "thumbnail.jpg")
+                    if (Path.GetFileName(file) == "modinfo.yaml" || Path.GetFileName(file) == "thumbnail.jpg")
                         continue;
 
                     if (Path.GetFileName(file) == "pv_db.txt" && CB_PathVarify.Checked && CB_pv_Merge.SelectedIndex > 0)
@@ -414,16 +416,18 @@ namespace Mega_Mix_Mod_Manager
             modinfo.Description = RTB_ModDescription.Text;
             modinfo.Author = TB_ModAuthor.Text;
 
-            string json = JsonConvert.SerializeObject(modinfo, Formatting.Indented);
-            File.WriteAllText($"{TB_ModPath.Text}\\.temp\\modinfo.json", json);
+            var serializer = new SerializerBuilder().Build();
+            string yaml = serializer.Serialize(modinfo);
+            File.WriteAllText($"{TB_ModPath.Text}\\.temp\\modinfo.yaml", yaml);
         }
 
         public void LoadModInfo()
         {
-            if (File.Exists($"{TB_ModPath.Text}\\modinfo.json"))
+            if (File.Exists($"{TB_ModPath.Text}\\modinfo.yaml"))
             {
-                string json = File.ReadAllText($"{TB_ModPath.Text}\\modinfo.json");
-                ModInfo modinfo = JsonConvert.DeserializeObject<ModInfo>(json);
+                string yaml = File.ReadAllText($"{TB_ModPath.Text}\\modinfo.yaml");
+                var deserializer = new DeserializerBuilder().Build();
+                ModInfo modinfo = deserializer.Deserialize<ModInfo>(yaml);
 
                 TB_ModName.Text = modinfo.Name;
                 TB_ModAuthor.Text = modinfo.Author;
@@ -448,16 +452,18 @@ namespace Mega_Mix_Mod_Manager
             settings.tex_Merge = CB_tex_Merge.Text;
             settings.farc_Merge = CB_farc_Merge.Text;
 
-            string json = JsonConvert.SerializeObject(settings, Formatting.Indented);
-            File.WriteAllText($"settings.json", json);
+            var serializer = new SerializerBuilder().Build();
+            string yaml = serializer.Serialize(settings);
+            File.WriteAllText($"settings.yaml", yaml);
         }
 
         public void LoadSettings()
         {
-            if (File.Exists($"settings.json"))
+            if (File.Exists($"settings.yaml"))
             {
-                string json = File.ReadAllText($"settings.json");
-                Settings setting = JsonConvert.DeserializeObject<Settings>(json);
+                string yaml = File.ReadAllText($"settings.yaml");
+                var deserializer = new DeserializerBuilder().Build();
+                Settings setting = deserializer.Deserialize<Settings>(yaml);
 
                 TB_DumpPath.Text = setting.Game_Dump;
                 TB_Export.Text = setting.Export_Path;
@@ -472,19 +478,21 @@ namespace Mega_Mix_Mod_Manager
 
         public void WriteModList()
         {
-            if (File.Exists($"Mods\\Modlist.json"))
-                File.Delete($"Mods\\Modlist.json");
+            if (File.Exists($"Mods\\Modlist.yaml"))
+                File.Delete($"Mods\\Modlist.yaml");
 
-            string json = JsonConvert.SerializeObject(installedmodList, Formatting.Indented);
-            File.WriteAllText($"Mods\\Modlist.json", json);
+            var serializer = new SerializerBuilder().Build();
+            string yaml = serializer.Serialize(installedmodList);
+            File.WriteAllText($"Mods\\Modlist.yaml", yaml);
         }
 
         public void LoadModList()
         {
-            if (File.Exists($"Mods\\Modlist.json"))
+            if (File.Exists($"Mods\\Modlist.yaml"))
             {
-                string json = File.ReadAllText($"Mods\\Modlist.json");
-                ModList modlist = JsonConvert.DeserializeObject<ModList>(json);
+                string yaml = File.ReadAllText($"Mods\\Modlist.yaml");
+                var deserializer = new DeserializerBuilder().Build();
+                ModList modlist = deserializer.Deserialize<ModList>(yaml);
                 installedmodList = modlist;
 
                 foreach (ModList.ModList_Entry mod in modlist.mods)
