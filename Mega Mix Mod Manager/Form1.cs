@@ -514,12 +514,7 @@ namespace Mega_Mix_Mod_Manager
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     Explorer.Reset(this);
-                    if (Path.GetFileName(ofd.FileName) == "obj_db.bin")
-                        Explorer.OpenObj(this, ofd.FileName);
-                    else if (Path.GetFileName(ofd.FileName) == "tex_db.bin")
-                        Explorer.OpenTex(this, ofd.FileName);
-                    else if (Path.GetFileName(ofd.FileName) == "spr_db.bin")
-                        Explorer.OpenSpr(this, ofd.FileName);
+                    Explorer.Open(this, ofd.FileName);
                 }
             }
         }
@@ -527,12 +522,7 @@ namespace Mega_Mix_Mod_Manager
         private void DB_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             DB_Data.SelectedObject = null;
-            if (groupBox4.Text == "obj_db")
-                Explorer.SelectObj(this, DB_List.Text);
-            else if (groupBox4.Text == "tex_db")
-                Explorer.SelectTex(this, DB_List.Text);
-            else if (groupBox4.Text == "spr_db")
-                Explorer.SelectSpr(this, DB_List.Text);
+            Explorer.Select(this, DB_List.Text);
         }
     }
 }

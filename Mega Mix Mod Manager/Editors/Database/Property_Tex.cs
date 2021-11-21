@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using MikuMikuLibrary.Databases;
+using Mega_Mix_Mod_Manager.Objects;
 
 namespace Mega_Mix_Mod_Manager.Editors.Database
 {
@@ -15,15 +16,15 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
         [ReadOnly(false)]
         public uint ID { get; set; }
 
-        public void Read(TextureInfo textureInfo)
+        public void Read(CommonSet textureInfo)
         {
             Name = textureInfo.Name;
             ID = textureInfo.Id;
         }
 
-        public TextureInfo Write()
+        public CommonSet Write()
         {
-            TextureInfo textureInfo = new TextureInfo();
+            CommonSet textureInfo = new CommonSet();
             textureInfo.Name = Name;
             textureInfo.Id = ID;
             return textureInfo;

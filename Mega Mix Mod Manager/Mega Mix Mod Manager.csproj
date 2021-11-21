@@ -112,6 +112,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\CommonDatabase.cs" />
     <Compile Include="IO\DatabaseTypeConverter.cs" />
     <Compile Include="IO\Hash.cs" />
     <Compile Include="IO\StreamReaderLookAhead.cs" />

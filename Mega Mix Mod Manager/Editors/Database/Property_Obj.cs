@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Mega_Mix_Mod_Manager.IO;
 using MikuMikuLibrary.Databases;
 using System.Reflection;
+using Mega_Mix_Mod_Manager.Objects;
 
 namespace Mega_Mix_Mod_Manager.Editors.Database
 {
@@ -41,7 +42,7 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
         [ReadOnly(false)]
         public List<DatabaseObject> Objects { get; set; } = new List<DatabaseObject>();
 
-        public void Read(ObjectSetInfo objectSetInfo)
+        public void Read(CommonSet objectSetInfo)
         {
             Name = objectSetInfo.Name;
             ID = objectSetInfo.Id;
@@ -50,7 +51,7 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
             ArchiveFileName = objectSetInfo.ArchiveFileName;
 
             Objects = new List<DatabaseObject>();
-            foreach (ObjectInfo obj in objectSetInfo.Objects)
+            foreach (CommonEntry obj in objectSetInfo.Entries)
             {
                 DatabaseObject databaseObject = new DatabaseObject() { Name = obj.Name, ID = obj.Id };
                 PropertyDescriptor propDescr = TypeDescriptor.GetProperties(databaseObject.GetType())["Index"];
@@ -61,9 +62,9 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
             }
         }
 
-        public ObjectSetInfo Write()
+        public CommonSet Write()
         {
-            ObjectSetInfo objectSetInfo = new ObjectSetInfo();
+            CommonSet objectSetInfo = new CommonSet();
             objectSetInfo.Name = Name;
             objectSetInfo.Id = ID;
             objectSetInfo.FileName = FileName;
@@ -72,8 +73,8 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
 
             foreach (DatabaseObject obj in Objects)
             {
-                ObjectInfo objectInfo = new ObjectInfo() { Name = obj.Name, Id = obj.ID };
-                objectSetInfo.Objects.Add(objectInfo);
+                CommonEntry objectInfo = new CommonEntry() { Name = obj.Name, Id = obj.ID };
+                objectSetInfo.Entries.Add(objectInfo);
 
             }
             return objectSetInfo;

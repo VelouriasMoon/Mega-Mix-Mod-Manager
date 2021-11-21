@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Mega_Mix_Mod_Manager.IO;
 using MikuMikuLibrary.Databases;
 using System.Reflection;
+using Mega_Mix_Mod_Manager.Objects;
 
 namespace Mega_Mix_Mod_Manager.Editors.Database
 {
@@ -35,41 +36,41 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
         [ReadOnly(false)]
         public List<DatabaseObject> Textures { get; set; } = new List<DatabaseObject>();
 
-        public void Read(SpriteSetInfo spriteSetInfo)
+        public void Read(CommonSet spriteSetInfo)
         {
             Name = spriteSetInfo.Name;
             ID = spriteSetInfo.Id;
             FileName = spriteSetInfo.FileName;
 
-            foreach (SpriteInfo spr in spriteSetInfo.Sprites)
+            foreach (CommonEntry spr in spriteSetInfo.Entries)
             {
                 DatabaseObject databaseObject = new DatabaseObject() { Name = spr.Name, ID = spr.Id, Index = spr.Index};
                 Sprites.Add(databaseObject);
             }
 
-            foreach (SpriteTextureInfo tex in spriteSetInfo.Textures)
+            foreach (CommonEntry tex in spriteSetInfo.Entries_2)
             {
                 DatabaseObject databaseObject = new DatabaseObject() { Name = tex.Name, ID = tex.Id, Index = tex.Index };
                 Textures.Add(databaseObject);
             }
         }
 
-        public SpriteSetInfo Write()
+        public CommonSet Write()
         {
-            SpriteSetInfo spriteSetInfo = new SpriteSetInfo();
+            CommonSet spriteSetInfo = new CommonSet();
             spriteSetInfo.Name = Name;
             spriteSetInfo.Id = ID;
             spriteSetInfo.FileName = FileName;
 
             foreach (DatabaseObject spr in Sprites)
             {
-                SpriteInfo spriteInfo = new SpriteInfo() { Name = spr.Name, Id = spr.ID, Index = (ushort)spr.Index};
-                spriteSetInfo.Sprites.Add(spriteInfo);
+                CommonEntry spriteInfo = new CommonEntry() { Name = spr.Name, Id = spr.ID, Index = (ushort)spr.Index};
+                spriteSetInfo.Entries.Add(spriteInfo);
             }
             foreach (DatabaseObject tex in Textures)
             {
-                SpriteTextureInfo spriteTextureInfo = new SpriteTextureInfo() { Name = tex.Name, Id = tex.ID, Index = (ushort)tex.Index};
-                spriteSetInfo.Textures.Add(spriteTextureInfo);
+                CommonEntry spriteTextureInfo = new CommonEntry() { Name = tex.Name, Id = tex.ID, Index = (ushort)tex.Index};
+                spriteSetInfo.Entries_2.Add(spriteTextureInfo);
             }
 
             return spriteSetInfo;
