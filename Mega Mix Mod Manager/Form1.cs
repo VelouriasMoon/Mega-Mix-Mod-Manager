@@ -179,21 +179,21 @@ namespace Mega_Mix_Mod_Manager
                     pv_db.MergeMods(Directory.GetFiles("Mods", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
                     PB_InstallProgress.Value = 10;
                 }
-                if (CB_obj_Merge.Text == "Lite Merge")
+                if (CB_obj_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 15;
                     string[] files = Directory.GetFiles("Mods", "*obj_db.bin", SearchOption.AllDirectories);
                     obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\obj_db.bin");
                     PB_InstallProgress.Value = 20;
                 }
-                if (CB_tex_Merge.Text == "Lite Merge")
+                if (CB_tex_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 25;
                     string[] files = Directory.GetFiles("Mods", "*tex_db.bin", SearchOption.AllDirectories);
                     tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\tex_db.bin");
                     PB_InstallProgress.Value = 30;
                 }
-                if (CB_spr_Merge.Text == "Lite Merge")
+                if (CB_spr_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 35;
                     string[] files = Directory.GetFiles("Mods", "*spr_db.bin", SearchOption.AllDirectories);
