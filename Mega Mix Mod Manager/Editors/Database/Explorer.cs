@@ -23,11 +23,11 @@ namespace Mega_Mix_Mod_Manager.Editors
             form1.DB_List.Items.Clear();
             form1.DB_Data.SelectedObject = null;
             if (objDatabase != null)
-                objDatabase.Dispose();
+                objDatabase = null;
             if (texDatabase != null)
-                texDatabase.Dispose();
+                texDatabase = null;
             if (spriteDatabase != null)
-                spriteDatabase.Dispose();
+                spriteDatabase = null;
         }
 
         public static void OpenObj(Form1 form1, string obj)
