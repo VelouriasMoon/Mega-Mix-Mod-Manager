@@ -43,6 +43,52 @@ namespace Mega_Mix_Mod_Manager.Objects
             Entries_2.FirstOrDefault(e => e.Name.Equals(entryName, StringComparison.OrdinalIgnoreCase));
         public CommonEntry GetCommonEntry_2(uint entryId) =>
             Entries_2.FirstOrDefault(e => e.Id.Equals(entryId));
+
+        public void Read(ObjectSetInfo set)
+        {
+            Name = set.Name;
+            Id = set.Id;
+            FileName = set.FileName;
+            TextureFileName = set.TextureFileName;
+            ArchiveFileName = set.ArchiveFileName;
+            Entries = new List<CommonEntry>();
+            foreach (var entry in set.Objects)
+            {
+                CommonEntry commonEntry = new CommonEntry();
+                commonEntry.Name = entry.Name;
+                commonEntry.Id = entry.Id;
+                Entries.Add(commonEntry);
+            }
+        }
+        public void Read(TextureInfo set)
+        {
+            Name = set.Name;
+            Id = set.Id;
+        }
+        public void Read(SpriteSetInfo set)
+        {
+            Name = set.Name;
+            Id = set.Id;
+            FileName = set.FileName;
+            Entries = new List<CommonEntry>();
+            Entries_2 = new List<CommonEntry>();
+            foreach (var entry in set.Sprites)
+            {
+                CommonEntry commonEntry = new CommonEntry();
+                commonEntry.Name = entry.Name;
+                commonEntry.Id = entry.Id;
+                commonEntry.Index = entry.Index;
+                Entries.Add(commonEntry);
+            }
+            foreach (var entry in set.Textures)
+            {
+                CommonEntry commonEntry = new CommonEntry();
+                commonEntry.Name = entry.Name;
+                commonEntry.Id = entry.Id;
+                commonEntry.Index = entry.Index;
+                Entries_2.Add(commonEntry);
+            }
+        }
     }
 
     public class CommonDatabase
@@ -67,19 +113,7 @@ namespace Mega_Mix_Mod_Manager.Objects
             foreach (var set in objDatabase.ObjectSets)
             {
                 CommonSet commonSet = new CommonSet();
-                commonSet.Name = set.Name;
-                commonSet.Id = set.Id;
-                commonSet.FileName = set.FileName;
-                commonSet.TextureFileName = set.TextureFileName;
-                commonSet.ArchiveFileName = set.ArchiveFileName;
-                commonSet.Entries = new List<CommonEntry>();
-                foreach (var entry in set.Objects)
-                {
-                    CommonEntry commonEntry = new CommonEntry();
-                    commonEntry.Name = entry.Name;
-                    commonEntry.Id = entry.Id;
-                    commonSet.Entries.Add(commonEntry);
-                }
+                commonSet.Read(set);
                 Entries.Add(commonSet);
             }
         }
@@ -90,8 +124,7 @@ namespace Mega_Mix_Mod_Manager.Objects
             foreach (var set in textureDatabase.Textures)
             {
                 CommonSet commonSet = new CommonSet();
-                commonSet.Name = set.Name;
-                commonSet.Id = set.Id;
+                commonSet.Read(set);
                 Entries.Add(commonSet);
             }
         }
@@ -102,27 +135,7 @@ namespace Mega_Mix_Mod_Manager.Objects
             foreach (var set in spriteDatabase.SpriteSets)
             {
                 CommonSet commonSet = new CommonSet();
-                commonSet.Name = set.Name;
-                commonSet.Id = set.Id;
-                commonSet.FileName = set.FileName;
-                commonSet.Entries = new List<CommonEntry>();
-                commonSet.Entries_2 = new List<CommonEntry>();
-                foreach (var entry in set.Sprites)
-                {
-                    CommonEntry commonEntry = new CommonEntry();
-                    commonEntry.Name = entry.Name;
-                    commonEntry.Id = entry.Id;
-                    commonEntry.Index = entry.Index;
-                    commonSet.Entries.Add(commonEntry);
-                }
-                foreach (var entry in set.Textures)
-                {
-                    CommonEntry commonEntry = new CommonEntry();
-                    commonEntry.Name = entry.Name;
-                    commonEntry.Id = entry.Id;
-                    commonEntry.Index = entry.Index;
-                    commonSet.Entries_2.Add(commonEntry);
-                }
+                commonSet.Read(set);
                 Entries.Add(commonSet);
             }
         }
@@ -151,7 +164,7 @@ namespace Mega_Mix_Mod_Manager.Objects
                 }
                 return db;
             }
-            if (typeof(T) == typeof(TextureDatabase))
+            else if (typeof(T) == typeof(TextureDatabase))
             {
                 TextureDatabase db = new TextureDatabase();
                 foreach (var set in Entries)
@@ -163,7 +176,7 @@ namespace Mega_Mix_Mod_Manager.Objects
                 }
                 return db;
             }
-            if (typeof (T) == typeof(SpriteDatabase))
+            else if (typeof (T) == typeof(SpriteDatabase))
             {
                 SpriteDatabase db = new SpriteDatabase();
                 foreach (var set in Entries)
@@ -196,7 +209,6 @@ namespace Mega_Mix_Mod_Manager.Objects
                 return null;
         }
 
-
         public void Save(string outpath)
         {
             switch (DatabaseType)
@@ -212,6 +224,40 @@ namespace Mega_Mix_Mod_Manager.Objects
                 case CommonType.spr:
                     SpriteDatabase spr = Write<SpriteDatabase>();
                     spr.Save(outpath);
+                    break;
+            }
+        }
+
+        public void Add(string Name)
+        {
+            switch (DatabaseType)
+            {
+                case CommonType.obj:
+                    {
+                        ObjectSetInfo set = new ObjectSetInfo();
+                        set.Name = Name;
+                        CommonSet setInfo = new CommonSet();
+                        setInfo.Read(set);
+                        Entries.Add(setInfo);
+                    }
+                    break;
+                case CommonType.tex:
+                    {
+                        TextureInfo set = new TextureInfo();
+                        set.Name = Name;
+                        CommonSet setInfo = new CommonSet();
+                        setInfo.Read(set);
+                        Entries.Add(setInfo);
+                    }
+                    break;
+                case CommonType.spr:
+                    {
+                        SpriteSetInfo set = new SpriteSetInfo();
+                        set.Name = Name;
+                        CommonSet setInfo = new CommonSet();
+                        setInfo.Read(set);
+                        Entries.Add(setInfo);
+                    }
                     break;
             }
         }

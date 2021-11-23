@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
 
+using Microsoft.VisualBasic;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using YamlDotNet.Serialization;
 
@@ -523,6 +524,68 @@ namespace Mega_Mix_Mod_Manager
         {
             DB_Data.SelectedObject = null;
             Explorer.Select(this, DB_List.Text);
+        }
+
+        private void DB_Save_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "db Files(*.bin)|*.bin";
+                sfd.RestoreDirectory = true;
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    Explorer.Database.Save(sfd.FileName);
+                }
+            }
+        }
+
+        private void B_DBPlus_Click(object sender, EventArgs e)
+        {
+            string input = Interaction.InputBox("Name of Set to add", "Set Name").Replace(" ", "_");
+            DB_List.Items.Add(input);
+            Explorer.Database.Add(input);
+        }
+
+        private void B_DBMinus_Click(object sender, EventArgs e)
+        {
+            DB_Data.SelectedObject = null;
+            Explorer.Database.Entries.Remove(Explorer.Database.GetCommonSet(DB_List.Text));
+            DB_List.Items.Remove(DB_List.Text);
+        }
+
+        private void BD_EntrySave_Click(object sender, EventArgs e)
+        {
+            Explorer.SaveEntry(this, DB_List.Text);
+        }
+
+        private void DB_EntryImport_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "yaml Files(*.yaml)|*.yaml";
+                ofd.RestoreDirectory = true;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    Explorer.Import(this, ofd.FileName);
+                }
+            }
+        }
+
+        private void DB_EntryExport_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "yaml Files(*.yaml)|*.yaml";
+                sfd.RestoreDirectory = true;
+                sfd.FileName = DB_List.Text;
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    Explorer.Export(this, sfd.FileName);
+                }
+            }
         }
     }
 }

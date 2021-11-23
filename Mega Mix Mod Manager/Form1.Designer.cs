@@ -86,12 +86,16 @@
             this.TV_ModList = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TP_DBExplorer = new System.Windows.Forms.TabPage();
-            this.DB_Data = new System.Windows.Forms.PropertyGrid();
+            this.DB_Save = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.DB_EntryExport = new System.Windows.Forms.Button();
+            this.BD_EntrySave = new System.Windows.Forms.Button();
+            this.DB_Data = new System.Windows.Forms.PropertyGrid();
             this.B_DBMinus = new System.Windows.Forms.Button();
             this.B_DBPlus = new System.Windows.Forms.Button();
             this.B_DBOpen = new System.Windows.Forms.Button();
             this.DB_List = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -104,6 +108,7 @@
             this.GB_ModList.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TP_DBExplorer.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // TP_Settings
@@ -707,7 +712,7 @@
             // TP_DBExplorer
             // 
             this.TP_DBExplorer.BackColor = System.Drawing.SystemColors.Control;
-            this.TP_DBExplorer.Controls.Add(this.DB_Data);
+            this.TP_DBExplorer.Controls.Add(this.DB_Save);
             this.TP_DBExplorer.Controls.Add(this.groupBox4);
             this.TP_DBExplorer.Controls.Add(this.B_DBMinus);
             this.TP_DBExplorer.Controls.Add(this.B_DBPlus);
@@ -719,47 +724,84 @@
             this.TP_DBExplorer.TabIndex = 4;
             this.TP_DBExplorer.Text = "Database Explorer";
             // 
-            // DB_Data
+            // DB_Save
             // 
-            this.DB_Data.HelpVisible = false;
-            this.DB_Data.Location = new System.Drawing.Point(171, 49);
-            this.DB_Data.Name = "DB_Data";
-            this.DB_Data.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.DB_Data.Size = new System.Drawing.Size(393, 343);
-            this.DB_Data.TabIndex = 5;
-            this.DB_Data.ToolbarVisible = false;
+            this.DB_Save.Location = new System.Drawing.Point(59, 3);
+            this.DB_Save.Name = "DB_Save";
+            this.DB_Save.Size = new System.Drawing.Size(46, 23);
+            this.DB_Save.TabIndex = 7;
+            this.DB_Save.Text = "Save";
+            this.DB_Save.UseVisualStyleBackColor = true;
+            this.DB_Save.Click += new System.EventHandler(this.DB_Save_Click);
             // 
             // groupBox4
             // 
-            this.groupBox4.Location = new System.Drawing.Point(165, 30);
+            this.groupBox4.Controls.Add(this.button1);
+            this.groupBox4.Controls.Add(this.DB_EntryExport);
+            this.groupBox4.Controls.Add(this.BD_EntrySave);
+            this.groupBox4.Controls.Add(this.DB_Data);
+            this.groupBox4.Location = new System.Drawing.Point(184, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(405, 368);
+            this.groupBox4.Size = new System.Drawing.Size(386, 395);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             // 
+            // DB_EntryExport
+            // 
+            this.DB_EntryExport.Location = new System.Drawing.Point(143, 366);
+            this.DB_EntryExport.Name = "DB_EntryExport";
+            this.DB_EntryExport.Size = new System.Drawing.Size(75, 23);
+            this.DB_EntryExport.TabIndex = 8;
+            this.DB_EntryExport.Text = "Export";
+            this.DB_EntryExport.UseVisualStyleBackColor = true;
+            this.DB_EntryExport.Click += new System.EventHandler(this.DB_EntryExport_Click);
+            // 
+            // BD_EntrySave
+            // 
+            this.BD_EntrySave.Location = new System.Drawing.Point(305, 366);
+            this.BD_EntrySave.Name = "BD_EntrySave";
+            this.BD_EntrySave.Size = new System.Drawing.Size(75, 23);
+            this.BD_EntrySave.TabIndex = 8;
+            this.BD_EntrySave.Text = "Save";
+            this.BD_EntrySave.UseVisualStyleBackColor = true;
+            this.BD_EntrySave.Click += new System.EventHandler(this.BD_EntrySave_Click);
+            // 
+            // DB_Data
+            // 
+            this.DB_Data.HelpVisible = false;
+            this.DB_Data.Location = new System.Drawing.Point(8, 13);
+            this.DB_Data.Name = "DB_Data";
+            this.DB_Data.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.DB_Data.Size = new System.Drawing.Size(372, 347);
+            this.DB_Data.TabIndex = 5;
+            this.DB_Data.ToolbarVisible = false;
+            // 
             // B_DBMinus
             // 
-            this.B_DBMinus.Location = new System.Drawing.Point(124, 3);
+            this.B_DBMinus.Location = new System.Drawing.Point(147, 3);
             this.B_DBMinus.Name = "B_DBMinus";
             this.B_DBMinus.Size = new System.Drawing.Size(31, 23);
             this.B_DBMinus.TabIndex = 4;
             this.B_DBMinus.Text = "-";
             this.B_DBMinus.UseVisualStyleBackColor = true;
+            this.B_DBMinus.Click += new System.EventHandler(this.B_DBMinus_Click);
             // 
             // B_DBPlus
             // 
-            this.B_DBPlus.Location = new System.Drawing.Point(87, 3);
+            this.B_DBPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.B_DBPlus.Location = new System.Drawing.Point(110, 3);
             this.B_DBPlus.Name = "B_DBPlus";
             this.B_DBPlus.Size = new System.Drawing.Size(31, 23);
             this.B_DBPlus.TabIndex = 3;
             this.B_DBPlus.Text = "+";
             this.B_DBPlus.UseVisualStyleBackColor = true;
+            this.B_DBPlus.Click += new System.EventHandler(this.B_DBPlus_Click);
             // 
             // B_DBOpen
             // 
             this.B_DBOpen.Location = new System.Drawing.Point(6, 3);
             this.B_DBOpen.Name = "B_DBOpen";
-            this.B_DBOpen.Size = new System.Drawing.Size(75, 23);
+            this.B_DBOpen.Size = new System.Drawing.Size(49, 23);
             this.B_DBOpen.TabIndex = 2;
             this.B_DBOpen.Text = "Open";
             this.B_DBOpen.UseVisualStyleBackColor = true;
@@ -770,9 +812,19 @@
             this.DB_List.FormattingEnabled = true;
             this.DB_List.Location = new System.Drawing.Point(6, 30);
             this.DB_List.Name = "DB_List";
-            this.DB_List.Size = new System.Drawing.Size(153, 368);
+            this.DB_List.Size = new System.Drawing.Size(172, 368);
             this.DB_List.TabIndex = 1;
             this.DB_List.SelectedIndexChanged += new System.EventHandler(this.DB_List_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(224, 366);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Import";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.DB_EntryImport_Click);
             // 
             // Form1
             // 
@@ -800,6 +852,7 @@
             this.GB_ModList.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.TP_DBExplorer.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -869,6 +922,10 @@
         public System.Windows.Forms.Button B_DBPlus;
         public System.Windows.Forms.PropertyGrid DB_Data;
         public System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button DB_Save;
+        private System.Windows.Forms.Button DB_EntryExport;
+        private System.Windows.Forms.Button BD_EntrySave;
+        private System.Windows.Forms.Button button1;
     }
 }
 
