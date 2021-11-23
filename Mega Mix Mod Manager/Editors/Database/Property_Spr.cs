@@ -75,5 +75,26 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
 
             return spriteSetInfo;
         }
+
+        public SpriteSetInfo Export()
+        {
+            SpriteSetInfo spriteSetInfo = new SpriteSetInfo();
+            spriteSetInfo.Name = Name;
+            spriteSetInfo.Id = ID;
+            spriteSetInfo.FileName = FileName;
+
+            foreach (DatabaseObject spr in Sprites)
+            {
+                SpriteInfo spriteInfo = new SpriteInfo() { Name = spr.Name, Id = spr.ID, Index = (ushort)spr.Index };
+                spriteSetInfo.Sprites.Add(spriteInfo);
+            }
+            foreach (DatabaseObject tex in Textures)
+            {
+                SpriteTextureInfo spriteTextureInfo = new SpriteTextureInfo() { Name = tex.Name, Id = tex.ID, Index = (ushort)tex.Index };
+                spriteSetInfo.Textures.Add(spriteTextureInfo);
+            }
+
+            return spriteSetInfo;
+        }
     }
 }

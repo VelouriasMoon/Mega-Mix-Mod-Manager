@@ -29,5 +29,13 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
             textureInfo.Id = ID;
             return textureInfo;
         }
+
+        public TextureInfo Export()
+        {
+            TextureInfo textureInfo = new TextureInfo();
+            textureInfo.Name = Name;
+            textureInfo.Id = ID;
+            return textureInfo;
+        }
     }
 }

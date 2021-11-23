@@ -79,5 +79,22 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
             }
             return objectSetInfo;
         }
+
+        public ObjectSetInfo Export()
+        {
+            ObjectSetInfo objectSetInfo = new ObjectSetInfo();
+            objectSetInfo.Name = Name;
+            objectSetInfo.Id = ID;
+            objectSetInfo.FileName = FileName;
+            objectSetInfo.TextureFileName = TextureFileName;
+            objectSetInfo.ArchiveFileName = ArchiveFileName;
+            foreach (DatabaseObject obj in Objects)
+            {
+                ObjectInfo objectInfo = new ObjectInfo() { Name = obj.Name, Id = obj.ID };
+                objectSetInfo.Objects.Add(objectInfo);
+
+            }
+            return objectSetInfo;
+        }
     }
 }
