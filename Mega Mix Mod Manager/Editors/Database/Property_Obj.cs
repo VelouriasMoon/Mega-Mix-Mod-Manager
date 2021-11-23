@@ -70,7 +70,7 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
             objectSetInfo.FileName = FileName;
             objectSetInfo.TextureFileName = TextureFileName;
             objectSetInfo.ArchiveFileName = ArchiveFileName;
-
+            objectSetInfo.Entries = new List<CommonEntry>();
             foreach (DatabaseObject obj in Objects)
             {
                 CommonEntry objectInfo = new CommonEntry() { Name = obj.Name, Id = obj.ID };

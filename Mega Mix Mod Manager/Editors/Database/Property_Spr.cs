@@ -61,6 +61,8 @@ namespace Mega_Mix_Mod_Manager.Editors.Database
             spriteSetInfo.Name = Name;
             spriteSetInfo.Id = ID;
             spriteSetInfo.FileName = FileName;
+            spriteSetInfo.Entries = new List<CommonEntry>();
+            spriteSetInfo.Entries_2 = new List<CommonEntry>();
 
             foreach (DatabaseObject spr in Sprites)
             {
