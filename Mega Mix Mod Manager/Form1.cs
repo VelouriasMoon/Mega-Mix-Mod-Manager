@@ -25,9 +25,9 @@ namespace Mega_Mix_Mod_Manager
         public Form1()
         {
             InitializeComponent();
-            if (!Directory.Exists("Mods"))
-                Directory.CreateDirectory("Mods");
-            if (File.Exists($"Mods\\Modlist.yaml"))
+            if (!Directory.Exists($"{TB_ModStagePath.Text}"))
+                Directory.CreateDirectory($"{TB_ModStagePath.Text}");
+            if (File.Exists($"{TB_ModStagePath.Text}\\Modlist.yaml"))
                 LoadModList();
             else
                 installedmodList = new ModList();
@@ -48,7 +48,7 @@ namespace Mega_Mix_Mod_Manager
             PB_ModPreview.Image.Dispose();
             PB_ModPreview.Image = Properties.Resources.Logo;
             RTB_ModDetails.Clear();
-            Directory.Delete($"Mods\\{TV_ModList.SelectedNode.Name}", true);
+            Directory.Delete($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}", true);
             TV_ModList.SelectedNode.Remove();
 
             WriteModList();
@@ -82,21 +82,21 @@ namespace Mega_Mix_Mod_Manager
             }
             RTB_ModDetails.Clear();
             TV_ModList.Nodes.Clear();
-            Directory.Delete("Mods", true);
-            Directory.CreateDirectory("Mods");
+            Directory.Delete($"{TB_ModStagePath.Text}", true);
+            Directory.CreateDirectory($"{TB_ModStagePath.Text}");
         }
 
         private void TV_ModList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (File.Exists($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg"))
+            if (File.Exists($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg"))
             {
-                Image img = new Bitmap($"Mods\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
+                Image img = new Bitmap($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
                 PB_ModPreview.Image = img;
                 //img.Dispose();
             }
 
 
-            string yaml = File.ReadAllText($"Mods\\{TV_ModList.SelectedNode.Name}\\modinfo.yaml");
+            string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}\\modinfo.yaml");
             var deserializer = new DeserializerBuilder().Build();
             ModInfo modinfo = deserializer.Deserialize<ModInfo>(yaml);
 
@@ -117,21 +117,21 @@ namespace Mega_Mix_Mod_Manager
                     {
                         byte[] data = File.ReadAllBytes(file);
                         string hash = Hash.HashFile(data);
-                        if (Directory.Exists($"Mods\\{hash}"))
-                            Directory.Delete($"Mods\\{hash}", true);
-                        Directory.CreateDirectory($"Mods\\{hash}");
+                        if (Directory.Exists($"{TB_ModStagePath.Text}\\{hash}"))
+                            Directory.Delete($"{TB_ModStagePath.Text}\\{hash}", true);
+                        Directory.CreateDirectory($"{TB_ModStagePath.Text}\\{hash}");
 
                         using (MemoryStream ms = new MemoryStream(data))
                         {
                             using (ZipArchive mod = new ZipArchive(ms, ZipArchiveMode.Read, false))
                             {
-                                mod.ExtractToDirectory($"Mods\\{hash}");
+                                mod.ExtractToDirectory($"{TB_ModStagePath.Text}\\{hash}");
                                 mod.Dispose();
                             }
                         }
                         ModInfo modinfo = new ModInfo();
 
-                        if (!File.Exists($"Mods\\{hash}\\modinfo.yaml"))
+                        if (!File.Exists($"{TB_ModStagePath.Text}\\{hash}\\modinfo.yaml"))
                         {
                             modinfo.Name = Path.GetFileNameWithoutExtension(file);
                             modinfo.Description = "No info found";
@@ -139,7 +139,7 @@ namespace Mega_Mix_Mod_Manager
                         }
                         else
                         {
-                            string yaml = File.ReadAllText($"Mods\\{hash}\\modinfo.yaml");
+                            string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\{hash}\\modinfo.yaml");
                             var deserializer = new DeserializerBuilder().Build();
                             modinfo = deserializer.Deserialize<ModInfo>(yaml);
                         }
@@ -180,27 +180,27 @@ namespace Mega_Mix_Mod_Manager
                 if (CB_pv_Merge.Text == "Lite Merge")
                 {
                     PB_InstallProgress.Value = 5;
-                    pv_db.MergeMods(Directory.GetFiles("Mods", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
+                    pv_db.MergeMods(Directory.GetFiles($"{TB_ModStagePath.Text}", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_Export.Text}\\rom_switch\\rom\\pv_db.txt");
                     PB_InstallProgress.Value = 10;
                 }
                 if (CB_obj_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 15;
-                    string[] files = Directory.GetFiles("Mods", "*obj_db.bin", SearchOption.AllDirectories);
+                    string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}", "*obj_db.bin", SearchOption.AllDirectories);
                     obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\obj_db.bin");
                     PB_InstallProgress.Value = 20;
                 }
                 if (CB_tex_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 25;
-                    string[] files = Directory.GetFiles("Mods", "*tex_db.bin", SearchOption.AllDirectories);
+                    string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}", "*tex_db.bin", SearchOption.AllDirectories);
                     tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_Export.Text}\\rom_switch\\rom\\objset\\tex_db.bin");
                     PB_InstallProgress.Value = 30;
                 }
                 if (CB_spr_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 35;
-                    string[] files = Directory.GetFiles("Mods", "*spr_db.bin", SearchOption.AllDirectories);
+                    string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}", "*spr_db.bin", SearchOption.AllDirectories);
                     string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
 
                     spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_Export.Text}\\{region}\\rom\\2d\\spr_db.bin");
@@ -209,7 +209,7 @@ namespace Mega_Mix_Mod_Manager
                 if (CB_farc_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 45;
-                    farc.Merge(TB_DumpPath.Text, "Mods", TB_Export.Text);
+                    farc.Merge(TB_DumpPath.Text, $"{TB_ModStagePath.Text}", TB_Export.Text, installedmodList.region);
                     PB_InstallProgress.Value = 50;
                 }
             }
@@ -218,7 +218,7 @@ namespace Mega_Mix_Mod_Manager
             PB_InstallProgress.Value = 80;
             foreach (TreeNode node in TV_ModList.Nodes)
             {
-                string[] files = Directory.GetFiles($"Mods\\{node.Name}", "*", SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}\\{node.Name}", "*", SearchOption.AllDirectories);
                 foreach (string file in files)
                 {
                     if (Path.GetFileName(file) == "modinfo.yaml" || Path.GetFileName(file) == "thumbnail.jpg")
@@ -235,7 +235,7 @@ namespace Mega_Mix_Mod_Manager
                     if (Path.GetExtension(file) == ".farc" && !Path.GetDirectoryName(file).Contains("2d") && CB_PathVarify.Checked && CB_farc_Merge.SelectedIndex > 0)
                         continue;
 
-                    string outfile = file.Replace($"Mods\\{node.Name}", "");
+                    string outfile = file.Replace($"{TB_ModStagePath.Text}\\{node.Name}", "");
                     outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");
                     if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}")))
                         Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}"));
@@ -386,6 +386,60 @@ namespace Mega_Mix_Mod_Manager
             }
         }
 
+        private void B_ModsPath_Click(object sender, EventArgs e)
+        {
+            using (CommonOpenFileDialog cofd = new CommonOpenFileDialog())
+            {
+                cofd.IsFolderPicker = true;
+                cofd.RestoreDirectory = true;
+
+                if (cofd.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    if (cofd.FileName == TB_ModStagePath.Text || cofd.FileName.Replace(Directory.GetCurrentDirectory(), ".") == TB_ModStagePath.Text)
+                    {
+                        return;
+                    }
+
+                    string OldPath = TB_ModStagePath.Text;
+                    if (cofd.FileName.Contains(Directory.GetCurrentDirectory()))
+                        TB_ModStagePath.Text = cofd.FileName.Replace(Directory.GetCurrentDirectory(), ".");
+                    else
+                        TB_ModStagePath.Text = cofd.FileName;
+                    ChangeModStagingPath(OldPath, TB_ModStagePath.Text);
+                }
+            }
+        }
+
+        private void ChangeModStagingPath(string OldPath, string NewPath)
+        {
+            string[] Files = Directory.GetFiles(OldPath, "*", SearchOption.AllDirectories);
+            TV_ModList.SelectedNode = null;
+            PB_ModPreview.Image.Dispose();
+            PB_ModPreview.Image = Properties.Resources.Logo;
+            RTB_ModDetails.Clear();
+            foreach (string file in Files)
+            {
+                if (!Directory.Exists(Path.GetDirectoryName(file.Replace(OldPath, NewPath))))
+                    Directory.CreateDirectory(Path.GetDirectoryName(file.Replace(OldPath, NewPath)));
+                File.Copy(file, file.Replace(OldPath, NewPath), true);
+                File.Delete(file);
+            }
+            processDirectory(OldPath);
+            WriteSettings();
+        }
+        private static void processDirectory(string startLocation)
+        {
+            foreach (var directory in Directory.GetDirectories(startLocation))
+            {
+                processDirectory(directory);
+                if (Directory.GetFiles(directory).Length == 0 &&
+                    Directory.GetDirectories(directory).Length == 0)
+                {
+                    Directory.Delete(directory, false);
+                }
+            }
+        }
+
         private void TB_DumpPath_TextChanged(object sender, EventArgs e)
         {
             string basepath = $"{TB_DumpPath.Text}\\rom_switch\\rom";
@@ -444,6 +498,10 @@ namespace Mega_Mix_Mod_Manager
             Settings settings = new Settings();
             settings.Game_Dump = TB_DumpPath.Text;
             settings.Export_Path = TB_Export.Text;
+            if (TB_ModStagePath.Text.Length == 0)
+                settings.Mods_Folder = ".\\Mods";
+            else
+                settings.Mods_Folder = TB_ModStagePath.Text;
             settings.Default_Author = TB_Default_Author.Text;
             settings.pv_Merge = CB_pv_Merge.Text;
             settings.obj_Merge = CB_obj_Merge.Text;
@@ -466,6 +524,7 @@ namespace Mega_Mix_Mod_Manager
 
                 TB_DumpPath.Text = setting.Game_Dump;
                 TB_Export.Text = setting.Export_Path;
+                TB_ModStagePath.Text = setting.Mods_Folder;
                 TB_Default_Author.Text = setting.Default_Author;
                 CB_pv_Merge.Text = setting.pv_Merge;
                 CB_obj_Merge.Text = setting.obj_Merge;
@@ -477,19 +536,19 @@ namespace Mega_Mix_Mod_Manager
 
         public void WriteModList()
         {
-            if (File.Exists($"Mods\\Modlist.yaml"))
-                File.Delete($"Mods\\Modlist.yaml");
+            if (File.Exists($"{TB_ModStagePath.Text}\\Modlist.yaml"))
+                File.Delete($"{TB_ModStagePath.Text}\\Modlist.yaml");
 
             var serializer = new SerializerBuilder().Build();
             string yaml = serializer.Serialize(installedmodList);
-            File.WriteAllText($"Mods\\Modlist.yaml", yaml);
+            File.WriteAllText($"{TB_ModStagePath.Text}\\Modlist.yaml", yaml);
         }
 
         public void LoadModList()
         {
-            if (File.Exists($"Mods\\Modlist.yaml"))
+            if (File.Exists($"{TB_ModStagePath.Text}\\Modlist.yaml"))
             {
-                string yaml = File.ReadAllText($"Mods\\Modlist.yaml");
+                string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\Modlist.yaml");
                 var deserializer = new DeserializerBuilder().Build();
                 ModList modlist = deserializer.Deserialize<ModList>(yaml);
                 installedmodList = modlist;

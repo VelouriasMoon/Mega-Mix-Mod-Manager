@@ -96,6 +96,9 @@
             this.B_DBOpen = new System.Windows.Forms.Button();
             this.DB_List = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.B_ModsPath = new System.Windows.Forms.Button();
+            this.TB_ModStagePath = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -825,6 +828,33 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.DB_EntryImport_Click);
             // 
+            // B_ModsPath
+            // 
+            this.B_ModsPath.Location = new System.Drawing.Point(500, 109);
+            this.B_ModsPath.Name = "B_ModsPath";
+            this.B_ModsPath.Size = new System.Drawing.Size(36, 20);
+            this.B_ModsPath.TabIndex = 9;
+            this.B_ModsPath.Text = "...";
+            this.B_ModsPath.UseVisualStyleBackColor = true;
+            this.B_ModsPath.Click += new System.EventHandler(this.B_ModsPath_Click);
+            // 
+            // TB_ModStagePath
+            // 
+            this.TB_ModStagePath.Location = new System.Drawing.Point(6, 110);
+            this.TB_ModStagePath.Name = "TB_ModStagePath";
+            this.TB_ModStagePath.Size = new System.Drawing.Size(488, 20);
+            this.TB_ModStagePath.TabIndex = 8;
+            this.TB_ModStagePath.Text = ".\\Mods";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 94);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(99, 13);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Mod Staging Folder";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -925,6 +955,9 @@
         private System.Windows.Forms.Button DB_EntryExport;
         private System.Windows.Forms.Button BD_EntrySave;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button B_ModsPath;
+        private System.Windows.Forms.TextBox TB_ModStagePath;
+        private System.Windows.Forms.Label label11;
     }
 }
 

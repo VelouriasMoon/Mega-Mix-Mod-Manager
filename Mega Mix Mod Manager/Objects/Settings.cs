@@ -11,6 +11,7 @@ namespace Mega_Mix_Mod_Manager.Objects
     {
         public string Game_Dump { get; set; }
         public string Export_Path { get; set; }
+        public string Mods_Folder { get; set; } = ".\\Mods";
         public string Default_Author { get; set; }
         public string pv_Merge { get; set; }
         public string obj_Merge { get; set; }
