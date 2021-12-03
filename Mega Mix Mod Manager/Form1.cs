@@ -102,8 +102,20 @@ namespace Mega_Mix_Mod_Manager
 
             RTB_ModDetails.Text = $"Name: {modinfo.Name}\nAuthor: {modinfo.Author}\n{modinfo.Description}";
         }
+
+        private void B_OpenMod_Click(object sender, EventArgs e)
+        {
+            if (TV_ModList.SelectedNode == null)
+                System.Diagnostics.Process.Start("explorer.exe", $"{TB_ModStagePath.Text}");
+            else
+                System.Diagnostics.Process.Start("explorer.exe", $"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}");
+        }
         #endregion
 
+        private void TS_MergeMods_Click(object sender, EventArgs e)
+        {
+
+        }
         private void B_InstallMod_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -562,6 +574,7 @@ namespace Mega_Mix_Mod_Manager
 
         #endregion
 
+        #region Database Explorer
         private void B_DBOpen_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -644,5 +657,12 @@ namespace Mega_Mix_Mod_Manager
                 }
             }
         }
+
+
+
+
+        #endregion
+
+        
     }
 }
