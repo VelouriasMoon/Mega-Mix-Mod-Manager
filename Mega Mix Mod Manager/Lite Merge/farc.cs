@@ -24,7 +24,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 //check if the game dump contains the modded file
                 string VanillaFile = vanillaFiles.LastOrDefault(x => x.Contains(file.Substring(file.LastIndexOf("rom"))));
                 string export = $"{outPath}\\rom_switch\\{file.Substring(file.LastIndexOf("rom"))}";
-                if (export.Contains("2d"))
+                if (export.Contains("2d") && !export.Contains(Enum.GetName(typeof(ModList.Region), region)))
                     export = export.Replace("rom_switch", Enum.GetName(typeof(ModList.Region), region));
                 if (File.Exists(export))
                     VanillaFile = export;
@@ -53,7 +53,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 //If game dump contains an farc with the same name read that for merging
                 if (vanillaFiles.Contains(VanillaFile))
                 {
-                    if (VanillaFile.Contains("2d"))
+                    if (VanillaFile.Contains("2d") && !export.Contains(Enum.GetName(typeof(ModList.Region), region)))
                         export = export.Replace("rom_switch", Enum.GetName(typeof(ModList.Region), region));
 
                     //Extract Vanilla Files from farc into memory

@@ -102,6 +102,7 @@
             this.B_ModsPath = new System.Windows.Forms.Button();
             this.TB_ModStagePath = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.CB_MergeWhen = new System.Windows.Forms.ComboBox();
             this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -134,6 +135,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.CB_MergeWhen);
             this.groupBox3.Controls.Add(this.CB_farc_Merge);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.CB_tex_Merge);
@@ -144,9 +146,9 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.CB_pv_Merge);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(6, 189);
+            this.groupBox3.Location = new System.Drawing.Point(6, 159);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(179, 210);
+            this.groupBox3.Size = new System.Drawing.Size(179, 240);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Merge Options";
@@ -301,12 +303,12 @@
             this.groupBox2.Controls.Add(this.TB_Default_Author);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.L_Default_Author);
-            this.groupBox2.Location = new System.Drawing.Point(191, 189);
+            this.groupBox2.Location = new System.Drawing.Point(191, 159);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(150, 210);
+            this.groupBox2.Size = new System.Drawing.Size(150, 240);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Info";
+            this.groupBox2.Text = "Other Options";
             // 
             // TB_Default_Author
             // 
@@ -875,6 +877,20 @@
             this.label11.TabIndex = 7;
             this.label11.Text = "Mod Staging Folder";
             // 
+            // CB_MergeWhen
+            // 
+            this.CB_MergeWhen.FormattingEnabled = true;
+            this.CB_MergeWhen.Items.AddRange(new object[] {
+            "Merge on Install and Export",
+            "Merge on Install",
+            "Merge on Export",
+            "Merge Manually"});
+            this.CB_MergeWhen.Location = new System.Drawing.Point(9, 213);
+            this.CB_MergeWhen.Name = "CB_MergeWhen";
+            this.CB_MergeWhen.Size = new System.Drawing.Size(164, 21);
+            this.CB_MergeWhen.TabIndex = 15;
+            this.CB_MergeWhen.Text = "Merge on Install and Export";
+            // 
             // MB_Export
             // 
             this.MB_Export.Location = new System.Drawing.Point(274, 364);
@@ -993,6 +1009,7 @@
         private System.Windows.Forms.Button B_ModsPath;
         private System.Windows.Forms.TextBox TB_ModStagePath;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox CB_MergeWhen;
     }
 }
 
