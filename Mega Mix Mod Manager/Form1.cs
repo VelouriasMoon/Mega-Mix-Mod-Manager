@@ -46,7 +46,7 @@ namespace Mega_Mix_Mod_Manager
                 return;
             installedmodList.mods.Remove(installedmodList.mods.Where(x => x.hash == TV_ModList.SelectedNode.Name).First());
             PB_ModPreview.Image.Dispose();
-            PB_ModPreview.Image = null;
+            PB_ModPreview.Image = Properties.Resources.Logo;
             RTB_ModDetails.Clear();
             Directory.Delete($"Mods\\{TV_ModList.SelectedNode.Name}", true);
             TV_ModList.SelectedNode.Remove();
