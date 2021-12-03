@@ -27,11 +27,11 @@ namespace Mega_Mix_Mod_Manager
             InitializeComponent();
             if (!Directory.Exists($"{TB_ModStagePath.Text}"))
                 Directory.CreateDirectory($"{TB_ModStagePath.Text}");
+            LoadSettings();
             if (File.Exists($"{TB_ModStagePath.Text}\\Modlist.yaml"))
                 LoadModList();
             else
                 installedmodList = new ModList();
-            LoadSettings();
             if (TB_Default_Author.Text != null || TB_Default_Author.Text.Length != 0)
                 TB_ModAuthor.Text = TB_Default_Author.Text;
         }
@@ -446,9 +446,9 @@ namespace Mega_Mix_Mod_Manager
             if (File.Exists($"{basepath}\\pv_db.txt") && File.Exists($"{basepath}\\objset\\obj_db.bin") && File.Exists($"{basepath}\\objset\\tex_db.bin"))
             {
                 if (File.Exists($"{ TB_DumpPath.Text}\\rom_switch_en\\rom\\2d\\spr_db.bin"))
-                    installedmodList.region = ModList.Region.rom_switch_en;
+                    CB_Region.SelectedIndex = (int)ModList.Region.rom_switch_en;
                 else
-                    installedmodList.region = ModList.Region.rom_switch;
+                    CB_Region.SelectedIndex = (int)ModList.Region.rom_switch;
 
                 pv_db_Path = $"{basepath}\\pv_db.txt";
                 CB_PathVarify.Checked = true;
