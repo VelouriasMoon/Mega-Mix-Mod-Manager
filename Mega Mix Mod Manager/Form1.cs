@@ -206,14 +206,12 @@ namespace Mega_Mix_Mod_Manager
                     spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_Export.Text}\\{region}\\rom\\2d\\spr_db.bin");
                     PB_InstallProgress.Value = 40;
                 }
-                /*
                 if (CB_farc_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 45;
                     farc.Merge(TB_DumpPath.Text, "Mods", TB_Export.Text);
                     PB_InstallProgress.Value = 50;
                 }
-                */
             }
             #endregion
 
@@ -234,8 +232,8 @@ namespace Mega_Mix_Mod_Manager
                         continue;
                     if (Path.GetFileName(file) == "spr_db.bin" && CB_PathVarify.Checked && CB_spr_Merge.SelectedIndex > 0)
                         continue;
-                    //if (Path.GetExtension(file) == ".farc" && !Path.GetDirectoryName(file).Contains("2d") && CB_PathVarify.Checked && CB_farc_Merge.SelectedIndex > 0)
-                    //    continue;
+                    if (Path.GetExtension(file) == ".farc" && !Path.GetDirectoryName(file).Contains("2d") && CB_PathVarify.Checked && CB_farc_Merge.SelectedIndex > 0)
+                        continue;
 
                     string outfile = file.Replace($"Mods\\{node.Name}", "");
                     outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");

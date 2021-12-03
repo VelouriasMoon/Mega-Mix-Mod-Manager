@@ -7,25 +7,13 @@ using System.Threading.Tasks;
 using MikuMikuLibrary.Archives;
 using MikuMikuLibrary.IO;
 using MikuMikuLibrary.IO.Common;
+using Mega_Mix_Mod_Manager.Objects;
 
 namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
     internal class farc
     {
-        private static FarcArchive Read(string infile)
-        {
-            using (FileStream fs = new FileStream(infile, FileMode.Open))
-            {
-                using (EndianBinaryReader ebr = new EndianBinaryReader(fs, MikuMikuLibrary.IO.Endianness.Big))
-                {
-                    FarcArchive farcArchive = new FarcArchive();
-                    farcArchive.Read(ebr);
-                    return farcArchive;
-                }
-            }
-        }
-
-        public static void Merge(string dumpPath, string ModPath, string outPath)
+        public static void Merge(string dumpPath, string ModPath, string outPath, ModList.Region region = ModList.Region.rom_switch_en)
         {
             string[] modFiles = Directory.GetFiles(ModPath, "*.farc", SearchOption.AllDirectories);
             string[] vanillaFiles = Directory.GetFiles(dumpPath, "*.farc", SearchOption.AllDirectories);
@@ -33,41 +21,79 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
             //file loop to check and merge each file in the mods folder
             foreach (string file in modFiles)
             {
-                MemoryStream ms = new MemoryStream();
-                FarcArchive Final = new FarcArchive();
                 //check if the game dump contains the modded file
-                if (vanillaFiles.Contains( vanillaFiles.LastOrDefault(x => x.Contains(file.Substring(file.LastIndexOf("rom")))) ))
+                string VanillaFile = vanillaFiles.LastOrDefault(x => x.Contains(file.Substring(file.LastIndexOf("rom"))));
+                string export = $"{outPath}\\rom_switch\\{file.Substring(file.LastIndexOf("rom"))}";
+                if (export.Contains("2d"))
+                    export = export.Replace("rom_switch", Enum.GetName(typeof(ModList.Region), region));
+                if (File.Exists(export))
+                    VanillaFile = export;
+                Dictionary<string, byte[]> ModFarcFiles = new Dictionary<string, byte[]>();
+                Dictionary<string, byte[]> VanillaFarcFiles = new Dictionary<string, byte[]>();
+                bool compressed = true;
+                int alignment = 16;
+
+                //Extract Mod Files from farc into memory
+                using (FileStream fs = File.OpenRead(file))
                 {
-                    string VanillaFile = vanillaFiles.LastOrDefault(x => x.Contains(file.Substring(file.LastIndexOf("rom"))));
-                    if (VanillaFile.Contains("2d"))
-                        continue;
-
-                    FileStream fs = File.OpenRead(VanillaFile);
-                    Final = BinaryFile.Load<FarcArchive>(fs);
-
-                    using (var Stream = File.OpenRead(file))
+                    var Farc = BinaryFile.Load<FarcArchive>(fs);
+                    compressed = Farc.IsCompressed;
+                    alignment = Farc.Alignment;
+                    foreach (string filename in Farc)
                     {
-                        FarcArchive ModFarc = BinaryFile.Load<FarcArchive>(Stream);
-
-                        //loop through the mod file's contents to find what to add to vanilla farc
-                        foreach (string entry in ModFarc)
+                        using (MemoryStream destination = new MemoryStream())
+                        using (var source = Farc.Open(filename, EntryStreamMode.OriginalStream))
                         {
-                            using (var source = ModFarc.Open(entry, EntryStreamMode.MemoryStream))
-                            {
-                                Final.Add(entry, source, false, ConflictPolicy.Replace);
-                            }
-
+                            source.CopyTo(destination);
+                            ModFarcFiles.Add(filename, destination.ToArray());
                         }
                     }
                 }
-                else
+
+                //If game dump contains an farc with the same name read that for merging
+                if (vanillaFiles.Contains(VanillaFile))
                 {
-                    Final = Read(file);
+                    if (VanillaFile.Contains("2d"))
+                        export = export.Replace("rom_switch", Enum.GetName(typeof(ModList.Region), region));
+
+                    //Extract Vanilla Files from farc into memory
+                    using (FileStream fs = File.OpenRead(VanillaFile))
+                    {
+                        var Farc = BinaryFile.Load<FarcArchive>(fs);
+                        foreach (string filename in Farc)
+                        {
+                            using (MemoryStream destination = new MemoryStream())
+                            using (var source = Farc.Open(filename, EntryStreamMode.OriginalStream))
+                            {
+                                source.CopyTo(destination);
+                                VanillaFarcFiles.Add(filename, destination.ToArray());
+                            }
+                        }
+                    }
                 }
 
-                if (!Directory.Exists(Path.GetDirectoryName($"{outPath}\\rom_switch\\{file.Substring(file.LastIndexOf("rom"))}")))
-                    Directory.CreateDirectory(Path.GetDirectoryName($"{outPath}\\rom_switch\\{file.Substring(file.LastIndexOf("rom"))}"));
-                Final.Save($"{outPath}\\rom_switch\\{file.Substring(file.LastIndexOf("rom"))}");
+                foreach (var entry in ModFarcFiles)
+                {
+                    if (VanillaFarcFiles.ContainsKey(entry.Key) && entry.Value != VanillaFarcFiles[entry.Key])
+                        VanillaFarcFiles[entry.Key] = entry.Value;
+                    if (!VanillaFarcFiles.ContainsKey(entry.Key))
+                        VanillaFarcFiles.Add(entry.Key, entry.Value);
+                }
+
+                if (!Directory.Exists(Path.GetDirectoryName(export)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(export));
+                if (File.Exists(export))
+                    File.Delete(export);
+
+                var ExportFarc = new FarcArchive { IsCompressed = compressed, Alignment = alignment };
+                Directory.CreateDirectory(Path.GetFileName(file));
+                foreach (var entry in VanillaFarcFiles)
+                {
+                    File.WriteAllBytes($"{Path.GetFileName(file)}\\{entry.Key}", entry.Value);
+                    ExportFarc.Add(entry.Key, $"{Path.GetFileName(file)}\\{entry.Key}");
+                }
+                ExportFarc.Save(export);
+                Directory.Delete(Path.GetFileName(file), true);
             }
         }
     }
