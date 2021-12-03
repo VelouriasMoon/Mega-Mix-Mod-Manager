@@ -42,12 +42,18 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                     foreach (string filename in Farc)
                     {
                         using (MemoryStream destination = new MemoryStream())
-                        using (var source = Farc.Open(filename, EntryStreamMode.OriginalStream))
                         {
-                            source.CopyTo(destination);
-                            ModFarcFiles.Add(filename, destination.ToArray());
+                            using (var source = Farc.Open(filename, EntryStreamMode.OriginalStream))
+                            {
+                                source.CopyTo(destination);
+                                ModFarcFiles.Add(filename, destination.ToArray());
+                                source.Close();
+                            }
+                            destination.Close();
                         }
                     }
+                    fs.Close();
+                    Farc.Dispose();
                 }
 
                 //If game dump contains an farc with the same name read that for merging
@@ -63,12 +69,18 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                         foreach (string filename in Farc)
                         {
                             using (MemoryStream destination = new MemoryStream())
-                            using (var source = Farc.Open(filename, EntryStreamMode.OriginalStream))
                             {
-                                source.CopyTo(destination);
-                                VanillaFarcFiles.Add(filename, destination.ToArray());
+                                using (var source = Farc.Open(filename, EntryStreamMode.OriginalStream))
+                                {
+                                    source.CopyTo(destination);
+                                    VanillaFarcFiles.Add(filename, destination.ToArray());
+                                    source.Close();
+                                }
+                                destination.Close();
                             }
                         }
+                        fs.Close();
+                        Farc.Dispose();
                     }
                 }
 
@@ -94,6 +106,8 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 }
                 ExportFarc.Save(export);
                 Directory.Delete(Path.GetFileName(file), true);
+                ExportFarc.Dispose();
+
             }
         }
     }
