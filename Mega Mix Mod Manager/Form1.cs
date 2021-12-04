@@ -224,6 +224,7 @@ namespace Mega_Mix_Mod_Manager
                         }
                         WriteModList();
                     }
+
                 }
             }
         }
@@ -255,21 +256,30 @@ namespace Mega_Mix_Mod_Manager
                     File.Copy(file, $"{TB_Export.Text}\\{outfile}", true);
                 }
             }
-            PB_InstallProgress.Value = 80;
+            
             if (Directory.Exists($"{TB_ModStagePath.Text}\\Merged"))
             {
+                PB_InstallProgress.Value = 80;
                 string[] mergedFiles = Directory.GetFiles($"{TB_ModStagePath.Text}\\Merged", "*", SearchOption.AllDirectories);
                 foreach (string file in mergedFiles)
                 {
-                    if (Path.GetFileName(file) == "modinfo.yaml" || Path.GetFileName(file) == "thumbnail.jpg")
+                    if (Path.GetDirectoryName(file).Contains(".farc"))
                         continue;
 
                     string outfile = file.Replace($"{TB_ModStagePath.Text}\\Merged", "");
-                    outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");
                     if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}")))
                         Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}"));
                     File.Copy(file, $"{TB_Export.Text}\\{outfile}", true);
                 }
+                PB_InstallProgress.Value = 85;
+
+                PB_InstallProgress.Value = 90;
+                mergedFiles = Directory.GetDirectories($"{TB_ModStagePath.Text}\\Merged", "*.farc", SearchOption.AllDirectories);
+                foreach (string file in mergedFiles)
+                {
+                    farc.PackFarc(file, $"{TB_ModStagePath.Text}\\Merged", $"{TB_Export.Text}");
+                }
+                PB_InstallProgress.Value = 95;
             }
 
             PB_InstallProgress.Value = 100;
@@ -457,7 +467,7 @@ namespace Mega_Mix_Mod_Manager
             processDirectory(OldPath);
             WriteSettings();
         }
-        private static void processDirectory(string startLocation)
+        private void processDirectory(string startLocation)
         {
             foreach (var directory in Directory.GetDirectories(startLocation))
             {

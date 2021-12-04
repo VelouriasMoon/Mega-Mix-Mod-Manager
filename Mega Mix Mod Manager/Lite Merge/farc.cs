@@ -8,6 +8,7 @@ using MikuMikuLibrary.Archives;
 using MikuMikuLibrary.IO;
 using MikuMikuLibrary.IO.Common;
 using Mega_Mix_Mod_Manager.Objects;
+using YamlDotNet.Serialization;
 
 namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
@@ -92,23 +93,50 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                         VanillaFarcFiles.Add(entry.Key, entry.Value);
                 }
 
-                if (!Directory.Exists(Path.GetDirectoryName(export)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(export));
-                if (File.Exists(export))
-                    File.Delete(export);
+                if (Directory.Exists(export))
+                    Directory.Delete(export, true);
 
                 var ExportFarc = new FarcArchive { IsCompressed = compressed, Alignment = alignment };
-                Directory.CreateDirectory(Path.GetFileName(file));
+                Directory.CreateDirectory(export);
                 foreach (var entry in VanillaFarcFiles)
                 {
-                    File.WriteAllBytes($"{Path.GetFileName(file)}\\{entry.Key}", entry.Value);
-                    ExportFarc.Add(entry.Key, $"{Path.GetFileName(file)}\\{entry.Key}");
+                    File.WriteAllBytes($"{export}\\{entry.Key}", entry.Value);
                 }
-                ExportFarc.Save(export);
-                Directory.Delete(Path.GetFileName(file), true);
-                ExportFarc.Dispose();
+                FarcLog farcLog = new FarcLog();
+                farcLog.Alignment = alignment;
+                farcLog.Compressed = compressed;
 
+                var serializer = new SerializerBuilder().Build();
+                string yaml = serializer.Serialize(farcLog);
+                File.WriteAllText($"{export}\\FarcLog.yaml", yaml);
             }
+        }
+
+        public static void PackFarc(string inpath, string basepath, string outpath, bool Compressed = false, int Alignment = 0)
+        {
+            string[] files = Directory.GetFiles(inpath, "*", SearchOption.AllDirectories);
+            
+            //Check if Folder has a yaml log
+            string yaml = files.FirstOrDefault(x => x.Contains("FarcLog.yaml"));
+            if (yaml != null)
+            {
+                yaml = File.ReadAllText(yaml);
+                var deserializer = new DeserializerBuilder().Build();
+                FarcLog farcLog = deserializer.Deserialize<FarcLog>(yaml);
+                Compressed = farcLog.Compressed;
+                Alignment = farcLog.Alignment;
+            }
+
+            var Farc = new FarcArchive { IsCompressed = Compressed, Alignment = Alignment };
+            foreach (string file in files)
+            {
+                if (file.Contains("FarcLog.yaml"))
+                    continue;
+
+                Farc.Add(Path.GetFileName(file), file);
+            }
+            Farc.Save(inpath.Replace(basepath, outpath));
+            Farc.Dispose();
         }
     }
 }
