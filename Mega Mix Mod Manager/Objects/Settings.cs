@@ -18,6 +18,15 @@ namespace Mega_Mix_Mod_Manager.Objects
         public string spr_Merge { get; set; }
         public string tex_Merge { get; set; }
         public string farc_Merge { get; set; }
+        public MergeOptions Merge_Option { get; set; }
+
+        public enum MergeOptions
+        {
+            Both,
+            Install,
+            Export,
+            None
+        }
 
     }
 }

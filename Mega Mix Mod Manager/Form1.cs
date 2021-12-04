@@ -538,6 +538,7 @@ namespace Mega_Mix_Mod_Manager
             settings.spr_Merge = CB_spr_Merge.Text;
             settings.tex_Merge = CB_tex_Merge.Text;
             settings.farc_Merge = CB_farc_Merge.Text;
+            settings.Merge_Option = (Settings.MergeOptions)CB_MergeWhen.SelectedIndex;
 
             var serializer = new SerializerBuilder().Build();
             string yaml = serializer.Serialize(settings);
@@ -561,6 +562,7 @@ namespace Mega_Mix_Mod_Manager
                 CB_spr_Merge.Text = setting.spr_Merge;
                 CB_tex_Merge.Text = setting.tex_Merge;
                 CB_farc_Merge.Text = setting.farc_Merge;
+                CB_MergeWhen.SelectedIndex = (int)setting.Merge_Option;
             }
         }
 
