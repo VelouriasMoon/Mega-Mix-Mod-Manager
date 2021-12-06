@@ -25,6 +25,20 @@ namespace Mega_Mix_Mod_Manager
         public Form1()
         {
             InitializeComponent();
+            MainLoad();
+        }
+        public string pv_db_Path;
+        public ModList installedmodList;
+
+        public void MainLoad()
+        {
+            CB_farc_Merge.SelectedIndex = 0;
+            CB_obj_Merge.SelectedIndex = 0;
+            CB_pv_Merge.SelectedIndex = 0;
+            CB_spr_Merge.SelectedIndex = 0;
+            CB_tex_Merge.SelectedIndex = 0;
+            CB_MergeWhen.SelectedIndex = 0;
+            CB_Region.SelectedIndex = 1;
             if (!Directory.Exists($"{TB_ModStagePath.Text}"))
                 Directory.CreateDirectory($"{TB_ModStagePath.Text}");
             LoadSettings();
@@ -35,8 +49,6 @@ namespace Mega_Mix_Mod_Manager
             if (TB_Default_Author.Text != null || TB_Default_Author.Text.Length != 0)
                 TB_ModAuthor.Text = TB_Default_Author.Text;
         }
-        public string pv_db_Path;
-        public ModList installedmodList;
 
         #region Mod Install
         #region UI Funtions
@@ -52,24 +64,48 @@ namespace Mega_Mix_Mod_Manager
             TV_ModList.SelectedNode.Remove();
 
             WriteModList();
+            if (CB_MergeWhen.SelectedIndex <= 1)
+            {
+                PB_InstallProgress.Visible = true;
+                PB_InstallProgress.Value = 0;
+                MergeMods();
+                PB_InstallProgress.Visible = false;
+                PB_InstallProgress.Value = 0;
+            }
+
+            TV_ModList.Focus();
         }
 
         private void B_ModUp_Click(object sender, EventArgs e)
         {
             if (TV_ModList.SelectedNode == null || TV_ModList.SelectedNode.Index <= 0)
+            {
+                TV_ModList.Focus();
                 return;
+            }
+                
+            int currentIndex = TV_ModList.SelectedNode.Index;
+            installedmodList.MoveUp(currentIndex);
             TreeViewAddon.MoveUp(TV_ModList.SelectedNode);
-            installedmodList.MoveUp(TV_ModList.SelectedNode.Index);
             WriteModList();
+            TV_ModList.SelectedNode = TV_ModList.Nodes[currentIndex - 1];
+            TV_ModList.Focus();
         }
 
         private void B_ModDown_Click(object sender, EventArgs e)
         {
             if (TV_ModList.SelectedNode == null || TV_ModList.SelectedNode.Index >= installedmodList.mods.Count - 1)
+            {
+                TV_ModList.Focus();
                 return;
+            }
+                
+            int currentIndex = TV_ModList.SelectedNode.Index;
+            installedmodList.MoveDown(currentIndex);
             TreeViewAddon.MoveDown(TV_ModList.SelectedNode);
-            installedmodList.MoveDown(TV_ModList.SelectedNode.Index);
             WriteModList();
+            TV_ModList.SelectedNode = TV_ModList.Nodes[currentIndex + 1];
+            TV_ModList.Focus();
         }
 
         private void B_ClearMods_Click(object sender, EventArgs e)
@@ -78,7 +114,7 @@ namespace Mega_Mix_Mod_Manager
             if (PB_ModPreview.Image != null)
             {
                 PB_ModPreview.Image.Dispose();
-                PB_ModPreview.Image = null;
+                PB_ModPreview.Image = Properties.Resources.Logo;
             }
             RTB_ModDetails.Clear();
             TV_ModList.Nodes.Clear();
@@ -109,6 +145,27 @@ namespace Mega_Mix_Mod_Manager
                 System.Diagnostics.Process.Start("explorer.exe", $"{TB_ModStagePath.Text}");
             else
                 System.Diagnostics.Process.Start("explorer.exe", $"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}");
+        }
+
+        private void TV_ModList_MouseUp(object sender, MouseEventArgs e)
+        {
+            var clickedNode = TV_ModList.GetNodeAt(e.X, e.Y);
+            if (clickedNode == null)
+            {
+                //clicked on background
+                TV_ModList.SelectedNode = null;
+                if (PB_ModPreview.Image != null)
+                {
+                    PB_ModPreview.Image.Dispose();
+                    PB_ModPreview.Image = Properties.Resources.Logo;
+                }
+                RTB_ModDetails.Clear();
+            }
+            else
+            {
+                //clicked on node
+                return;
+            }
         }
         #endregion
 
@@ -179,7 +236,8 @@ namespace Mega_Mix_Mod_Manager
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Zip Files(*.zip)|*.zip";
+                //ofd.Filter = "Archive Files|*.zip;*.rar;*.7z|Zip Files|*.zip|Rar File|*.rar|7zip File|*.7z";
+                ofd.Filter = "Zip File|*.zip";
                 ofd.RestoreDirectory = true;
 
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -224,7 +282,17 @@ namespace Mega_Mix_Mod_Manager
                         }
                         WriteModList();
                     }
-
+                    if (CB_MergeWhen.SelectedIndex <= 1)
+                    {
+                        PB_InstallProgress.Visible = true;
+                        PB_InstallProgress.Value = 0;
+                        MergeMods(); 
+                        PB_InstallProgress.Visible = false;
+                        PB_InstallProgress.Value = 0;
+                    }
+                        
+                    TV_ModList.SelectedNode = TV_ModList.Nodes[TV_ModList.Nodes.Count - 1];
+                    TV_ModList.Focus();
                 }
             }
         }
@@ -691,8 +759,7 @@ namespace Mega_Mix_Mod_Manager
 
 
 
-        #endregion
 
-        
+        #endregion
     }
 }

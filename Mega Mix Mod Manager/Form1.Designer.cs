@@ -32,8 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.TP_Settings = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.CB_Region = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.CB_MergeWhen = new System.Windows.Forms.ComboBox();
             this.CB_farc_Merge = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.CB_tex_Merge = new System.Windows.Forms.ComboBox();
@@ -46,9 +45,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.B_SaveSettings = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CB_Region = new System.Windows.Forms.ComboBox();
             this.TB_Default_Author = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.L_Default_Author = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.B_ModsPath = new System.Windows.Forms.Button();
+            this.TB_ModStagePath = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.B_ExportPath = new System.Windows.Forms.Button();
             this.TB_Export = new System.Windows.Forms.TextBox();
             this.L_Export = new System.Windows.Forms.Label();
@@ -74,14 +78,18 @@
             this.L_ModPath = new System.Windows.Forms.Label();
             this.TP_Mods = new System.Windows.Forms.TabPage();
             this.GB_ModDetails = new System.Windows.Forms.GroupBox();
-            this.PB_InstallProgress = new System.Windows.Forms.ProgressBar();
-            this.B_OpenMod = new System.Windows.Forms.Button();
-            this.B_ModDown = new System.Windows.Forms.Button();
+            this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TS_MergeMods = new System.Windows.Forms.ToolStripMenuItem();
+            this.TS_ClearMods = new System.Windows.Forms.ToolStripMenuItem();
             this.B_ModUp = new System.Windows.Forms.Button();
-            this.RTB_ModDetails = new System.Windows.Forms.RichTextBox();
-            this.B_RemoveMod = new System.Windows.Forms.Button();
-            this.PB_ModPreview = new System.Windows.Forms.PictureBox();
+            this.PB_InstallProgress = new System.Windows.Forms.ProgressBar();
+            this.B_ModDown = new System.Windows.Forms.Button();
+            this.B_OpenMod = new System.Windows.Forms.Button();
             this.B_InstallMod = new System.Windows.Forms.Button();
+            this.B_RemoveMod = new System.Windows.Forms.Button();
+            this.RTB_ModDetails = new System.Windows.Forms.RichTextBox();
+            this.PB_ModPreview = new System.Windows.Forms.PictureBox();
             this.GB_ModList = new System.Windows.Forms.GroupBox();
             this.TV_ModList = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -96,14 +104,6 @@
             this.B_DBPlus = new System.Windows.Forms.Button();
             this.B_DBOpen = new System.Windows.Forms.Button();
             this.DB_List = new System.Windows.Forms.ListBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.TS_ClearMods = new System.Windows.Forms.ToolStripMenuItem();
-            this.TS_MergeMods = new System.Windows.Forms.ToolStripMenuItem();
-            this.B_ModsPath = new System.Windows.Forms.Button();
-            this.TB_ModStagePath = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.CB_MergeWhen = new System.Windows.Forms.ComboBox();
-            this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -112,12 +112,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).BeginInit();
             this.TP_Mods.SuspendLayout();
             this.GB_ModDetails.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).BeginInit();
             this.GB_ModList.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.TP_DBExplorer.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TP_Settings
@@ -153,32 +153,23 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Merge Options";
             // 
-            // CB_Region
+            // CB_MergeWhen
             // 
-            this.CB_Region.FormattingEnabled = true;
-            this.CB_Region.Items.AddRange(new object[] {
-            "rom_switch",
-            "rom_switch_en",
-            "rom_switch_cn",
-            "rom_switch_tw"});
-            this.CB_Region.Location = new System.Drawing.Point(6, 73);
-            this.CB_Region.Name = "CB_Region";
-            this.CB_Region.Size = new System.Drawing.Size(138, 21);
-            this.CB_Region.TabIndex = 15;
-            this.CB_Region.Text = "rom_switch_en";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 55);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 15);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Region";
+            this.CB_MergeWhen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_MergeWhen.FormattingEnabled = true;
+            this.CB_MergeWhen.Items.AddRange(new object[] {
+            "Merge on Install and Export",
+            "Merge on Install",
+            "Merge on Export",
+            "Merge Manually"});
+            this.CB_MergeWhen.Location = new System.Drawing.Point(9, 213);
+            this.CB_MergeWhen.Name = "CB_MergeWhen";
+            this.CB_MergeWhen.Size = new System.Drawing.Size(164, 21);
+            this.CB_MergeWhen.TabIndex = 15;
             // 
             // CB_farc_Merge
             // 
+            this.CB_farc_Merge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_farc_Merge.FormattingEnabled = true;
             this.CB_farc_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -187,7 +178,6 @@
             this.CB_farc_Merge.Name = "CB_farc_Merge";
             this.CB_farc_Merge.Size = new System.Drawing.Size(121, 21);
             this.CB_farc_Merge.TabIndex = 13;
-            this.CB_farc_Merge.Text = "No Merge";
             // 
             // label9
             // 
@@ -201,6 +191,7 @@
             // 
             // CB_tex_Merge
             // 
+            this.CB_tex_Merge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_tex_Merge.FormattingEnabled = true;
             this.CB_tex_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -209,7 +200,6 @@
             this.CB_tex_Merge.Name = "CB_tex_Merge";
             this.CB_tex_Merge.Size = new System.Drawing.Size(121, 21);
             this.CB_tex_Merge.TabIndex = 11;
-            this.CB_tex_Merge.Text = "No Merge";
             // 
             // label8
             // 
@@ -223,6 +213,7 @@
             // 
             // CB_spr_Merge
             // 
+            this.CB_spr_Merge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_spr_Merge.FormattingEnabled = true;
             this.CB_spr_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -231,7 +222,6 @@
             this.CB_spr_Merge.Name = "CB_spr_Merge";
             this.CB_spr_Merge.Size = new System.Drawing.Size(121, 21);
             this.CB_spr_Merge.TabIndex = 9;
-            this.CB_spr_Merge.Text = "No Merge";
             // 
             // label7
             // 
@@ -245,6 +235,7 @@
             // 
             // CB_obj_Merge
             // 
+            this.CB_obj_Merge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_obj_Merge.FormattingEnabled = true;
             this.CB_obj_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -253,7 +244,6 @@
             this.CB_obj_Merge.Name = "CB_obj_Merge";
             this.CB_obj_Merge.Size = new System.Drawing.Size(121, 21);
             this.CB_obj_Merge.TabIndex = 7;
-            this.CB_obj_Merge.Text = "No Merge";
             // 
             // label6
             // 
@@ -267,6 +257,7 @@
             // 
             // CB_pv_Merge
             // 
+            this.CB_pv_Merge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_pv_Merge.FormattingEnabled = true;
             this.CB_pv_Merge.Items.AddRange(new object[] {
             "No Merge",
@@ -275,7 +266,6 @@
             this.CB_pv_Merge.Name = "CB_pv_Merge";
             this.CB_pv_Merge.Size = new System.Drawing.Size(121, 21);
             this.CB_pv_Merge.TabIndex = 5;
-            this.CB_pv_Merge.Text = "No Merge";
             // 
             // label5
             // 
@@ -310,12 +300,36 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Options";
             // 
+            // CB_Region
+            // 
+            this.CB_Region.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Region.FormattingEnabled = true;
+            this.CB_Region.Items.AddRange(new object[] {
+            "rom_switch",
+            "rom_switch_en",
+            "rom_switch_cn",
+            "rom_switch_tw"});
+            this.CB_Region.Location = new System.Drawing.Point(6, 73);
+            this.CB_Region.Name = "CB_Region";
+            this.CB_Region.Size = new System.Drawing.Size(138, 21);
+            this.CB_Region.TabIndex = 15;
+            // 
             // TB_Default_Author
             // 
             this.TB_Default_Author.Location = new System.Drawing.Point(6, 32);
             this.TB_Default_Author.Name = "TB_Default_Author";
             this.TB_Default_Author.Size = new System.Drawing.Size(138, 20);
             this.TB_Default_Author.TabIndex = 3;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(6, 55);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 15);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Region";
             // 
             // L_Default_Author
             // 
@@ -344,6 +358,33 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Paths";
+            // 
+            // B_ModsPath
+            // 
+            this.B_ModsPath.Location = new System.Drawing.Point(500, 109);
+            this.B_ModsPath.Name = "B_ModsPath";
+            this.B_ModsPath.Size = new System.Drawing.Size(36, 20);
+            this.B_ModsPath.TabIndex = 9;
+            this.B_ModsPath.Text = "...";
+            this.B_ModsPath.UseVisualStyleBackColor = true;
+            this.B_ModsPath.Click += new System.EventHandler(this.B_ModsPath_Click);
+            // 
+            // TB_ModStagePath
+            // 
+            this.TB_ModStagePath.Location = new System.Drawing.Point(6, 110);
+            this.TB_ModStagePath.Name = "TB_ModStagePath";
+            this.TB_ModStagePath.Size = new System.Drawing.Size(488, 20);
+            this.TB_ModStagePath.TabIndex = 8;
+            this.TB_ModStagePath.Text = ".\\Mods";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 94);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(99, 13);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Mod Staging Folder";
             // 
             // B_ExportPath
             // 
@@ -598,6 +639,50 @@
             this.GB_ModDetails.TabStop = false;
             this.GB_ModDetails.Text = "Mod Details";
             // 
+            // MB_Export
+            // 
+            this.MB_Export.Location = new System.Drawing.Point(274, 364);
+            this.MB_Export.Menu = this.contextMenuStrip1;
+            this.MB_Export.Name = "MB_Export";
+            this.MB_Export.Size = new System.Drawing.Size(67, 23);
+            this.MB_Export.TabIndex = 6;
+            this.MB_Export.Text = "Export     ";
+            this.MB_Export.UseVisualStyleBackColor = true;
+            this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TS_MergeMods,
+            this.TS_ClearMods});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 48);
+            // 
+            // TS_MergeMods
+            // 
+            this.TS_MergeMods.Name = "TS_MergeMods";
+            this.TS_MergeMods.Size = new System.Drawing.Size(154, 22);
+            this.TS_MergeMods.Text = "Remerge Mods";
+            this.TS_MergeMods.Click += new System.EventHandler(this.TS_MergeMods_Click);
+            // 
+            // TS_ClearMods
+            // 
+            this.TS_ClearMods.Name = "TS_ClearMods";
+            this.TS_ClearMods.Size = new System.Drawing.Size(154, 22);
+            this.TS_ClearMods.Text = "Clear Mods";
+            this.TS_ClearMods.Click += new System.EventHandler(this.B_ClearMods_Click);
+            // 
+            // B_ModUp
+            // 
+            this.B_ModUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.B_ModUp.Location = new System.Drawing.Point(6, 364);
+            this.B_ModUp.Name = "B_ModUp";
+            this.B_ModUp.Size = new System.Drawing.Size(28, 23);
+            this.B_ModUp.TabIndex = 2;
+            this.B_ModUp.Text = "🠝";
+            this.B_ModUp.UseVisualStyleBackColor = true;
+            this.B_ModUp.Click += new System.EventHandler(this.B_ModUp_Click);
+            // 
             // PB_InstallProgress
             // 
             this.PB_InstallProgress.Location = new System.Drawing.Point(6, 338);
@@ -606,16 +691,6 @@
             this.PB_InstallProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.PB_InstallProgress.TabIndex = 5;
             this.PB_InstallProgress.Visible = false;
-            // 
-            // B_OpenMod
-            // 
-            this.B_OpenMod.Location = new System.Drawing.Point(192, 364);
-            this.B_OpenMod.Name = "B_OpenMod";
-            this.B_OpenMod.Size = new System.Drawing.Size(80, 23);
-            this.B_OpenMod.TabIndex = 4;
-            this.B_OpenMod.Text = "Open Folder";
-            this.B_OpenMod.UseVisualStyleBackColor = true;
-            this.B_OpenMod.Click += new System.EventHandler(this.B_OpenMod_Click);
             // 
             // B_ModDown
             // 
@@ -628,16 +703,35 @@
             this.B_ModDown.UseVisualStyleBackColor = true;
             this.B_ModDown.Click += new System.EventHandler(this.B_ModDown_Click);
             // 
-            // B_ModUp
+            // B_OpenMod
             // 
-            this.B_ModUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.B_ModUp.Location = new System.Drawing.Point(6, 364);
-            this.B_ModUp.Name = "B_ModUp";
-            this.B_ModUp.Size = new System.Drawing.Size(28, 23);
-            this.B_ModUp.TabIndex = 2;
-            this.B_ModUp.Text = "🠝";
-            this.B_ModUp.UseVisualStyleBackColor = true;
-            this.B_ModUp.Click += new System.EventHandler(this.B_ModUp_Click);
+            this.B_OpenMod.Location = new System.Drawing.Point(192, 364);
+            this.B_OpenMod.Name = "B_OpenMod";
+            this.B_OpenMod.Size = new System.Drawing.Size(80, 23);
+            this.B_OpenMod.TabIndex = 4;
+            this.B_OpenMod.Text = "Open Folder";
+            this.B_OpenMod.UseVisualStyleBackColor = true;
+            this.B_OpenMod.Click += new System.EventHandler(this.B_OpenMod_Click);
+            // 
+            // B_InstallMod
+            // 
+            this.B_InstallMod.Location = new System.Drawing.Point(67, 364);
+            this.B_InstallMod.Name = "B_InstallMod";
+            this.B_InstallMod.Size = new System.Drawing.Size(63, 23);
+            this.B_InstallMod.TabIndex = 2;
+            this.B_InstallMod.Text = "Install";
+            this.B_InstallMod.UseVisualStyleBackColor = true;
+            this.B_InstallMod.Click += new System.EventHandler(this.B_InstallMod_Click);
+            // 
+            // B_RemoveMod
+            // 
+            this.B_RemoveMod.Location = new System.Drawing.Point(131, 364);
+            this.B_RemoveMod.Name = "B_RemoveMod";
+            this.B_RemoveMod.Size = new System.Drawing.Size(59, 23);
+            this.B_RemoveMod.TabIndex = 2;
+            this.B_RemoveMod.Text = "Remove";
+            this.B_RemoveMod.UseVisualStyleBackColor = true;
+            this.B_RemoveMod.Click += new System.EventHandler(this.B_RemoveMod_Click);
             // 
             // RTB_ModDetails
             // 
@@ -651,16 +745,6 @@
             this.RTB_ModDetails.TabStop = false;
             this.RTB_ModDetails.Text = "";
             // 
-            // B_RemoveMod
-            // 
-            this.B_RemoveMod.Location = new System.Drawing.Point(131, 364);
-            this.B_RemoveMod.Name = "B_RemoveMod";
-            this.B_RemoveMod.Size = new System.Drawing.Size(59, 23);
-            this.B_RemoveMod.TabIndex = 2;
-            this.B_RemoveMod.Text = "Remove";
-            this.B_RemoveMod.UseVisualStyleBackColor = true;
-            this.B_RemoveMod.Click += new System.EventHandler(this.B_RemoveMod_Click);
-            // 
             // PB_ModPreview
             // 
             this.PB_ModPreview.Image = global::Mega_Mix_Mod_Manager.Properties.Resources.Logo;
@@ -670,16 +754,6 @@
             this.PB_ModPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PB_ModPreview.TabIndex = 0;
             this.PB_ModPreview.TabStop = false;
-            // 
-            // B_InstallMod
-            // 
-            this.B_InstallMod.Location = new System.Drawing.Point(67, 364);
-            this.B_InstallMod.Name = "B_InstallMod";
-            this.B_InstallMod.Size = new System.Drawing.Size(63, 23);
-            this.B_InstallMod.TabIndex = 2;
-            this.B_InstallMod.Text = "Install";
-            this.B_InstallMod.UseVisualStyleBackColor = true;
-            this.B_InstallMod.Click += new System.EventHandler(this.B_InstallMod_Click);
             // 
             // GB_ModList
             // 
@@ -698,6 +772,7 @@
             this.TV_ModList.Size = new System.Drawing.Size(196, 367);
             this.TV_ModList.TabIndex = 0;
             this.TV_ModList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_ModList_AfterSelect);
+            this.TV_ModList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TV_ModList_MouseUp);
             // 
             // tabControl1
             // 
@@ -828,80 +903,6 @@
             this.DB_List.TabIndex = 1;
             this.DB_List.SelectedIndexChanged += new System.EventHandler(this.DB_List_SelectedIndexChanged);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TS_MergeMods,
-            this.TS_ClearMods});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 48);
-            // 
-            // TS_ClearMods
-            // 
-            this.TS_ClearMods.Name = "TS_ClearMods";
-            this.TS_ClearMods.Size = new System.Drawing.Size(154, 22);
-            this.TS_ClearMods.Text = "Clear Mods";
-            this.TS_ClearMods.Click += new System.EventHandler(this.B_ClearMods_Click);
-            // 
-            // TS_MergeMods
-            // 
-            this.TS_MergeMods.Name = "TS_MergeMods";
-            this.TS_MergeMods.Size = new System.Drawing.Size(154, 22);
-            this.TS_MergeMods.Text = "Remerge Mods";
-            this.TS_MergeMods.Click += new System.EventHandler(this.TS_MergeMods_Click);
-            // 
-            // B_ModsPath
-            // 
-            this.B_ModsPath.Location = new System.Drawing.Point(500, 109);
-            this.B_ModsPath.Name = "B_ModsPath";
-            this.B_ModsPath.Size = new System.Drawing.Size(36, 20);
-            this.B_ModsPath.TabIndex = 9;
-            this.B_ModsPath.Text = "...";
-            this.B_ModsPath.UseVisualStyleBackColor = true;
-            this.B_ModsPath.Click += new System.EventHandler(this.B_ModsPath_Click);
-            // 
-            // TB_ModStagePath
-            // 
-            this.TB_ModStagePath.Location = new System.Drawing.Point(6, 110);
-            this.TB_ModStagePath.Name = "TB_ModStagePath";
-            this.TB_ModStagePath.Size = new System.Drawing.Size(488, 20);
-            this.TB_ModStagePath.TabIndex = 8;
-            this.TB_ModStagePath.Text = ".\\Mods";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 94);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(99, 13);
-            this.label11.TabIndex = 7;
-            this.label11.Text = "Mod Staging Folder";
-            // 
-            // CB_MergeWhen
-            // 
-            this.CB_MergeWhen.FormattingEnabled = true;
-            this.CB_MergeWhen.Items.AddRange(new object[] {
-            "Merge on Install and Export",
-            "Merge on Install",
-            "Merge on Export",
-            "Merge Manually"});
-            this.CB_MergeWhen.Location = new System.Drawing.Point(9, 213);
-            this.CB_MergeWhen.Name = "CB_MergeWhen";
-            this.CB_MergeWhen.Size = new System.Drawing.Size(164, 21);
-            this.CB_MergeWhen.TabIndex = 15;
-            this.CB_MergeWhen.Text = "Merge on Install and Export";
-            // 
-            // MB_Export
-            // 
-            this.MB_Export.Location = new System.Drawing.Point(274, 364);
-            this.MB_Export.Menu = this.contextMenuStrip1;
-            this.MB_Export.Name = "MB_Export";
-            this.MB_Export.Size = new System.Drawing.Size(67, 23);
-            this.MB_Export.TabIndex = 6;
-            this.MB_Export.Text = "Export     ";
-            this.MB_Export.UseVisualStyleBackColor = true;
-            this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -924,12 +925,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).EndInit();
             this.TP_Mods.ResumeLayout(false);
             this.GB_ModDetails.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).EndInit();
             this.GB_ModList.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.TP_DBExplorer.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
