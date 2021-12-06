@@ -43,7 +43,7 @@ namespace Mega_Mix_Mod_Manager.Objects
         {
             ModList_Entry mod = mods[selected_index];
             mods.RemoveAt(selected_index);
-            if (selected_index - 1 <= 0)
+            if (selected_index - 1 < 0)
             {
                 mods.Insert(selected_index, mod);
             }
