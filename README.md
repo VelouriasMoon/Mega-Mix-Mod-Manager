@@ -1,37 +1,17 @@
 # Mega Mix Mod Manager
-Basic mod creator and installer for Hatsune Miku Project Diva Mega Mix/M39
+Basic mod creator and installer for Hatsune Miku Project Diva Mega Mix/M39<br/>
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=7LVCJCM9LNQ2W)<br/>
 ![UI](Preview%20Images/Logo.png)
 
 ## Features
-Install mods into a sortable list that determines load order, the higher the mod the earlier it will load. mods installed should be structured with either the romfs folder as the zip root, or the romfs folder in the zip root.<br/>
-**Example:**
-```bash
-├──romfs
-    ├──rom_switch
-        ├──rom
-```
-or 
-```bash
-├──rom_switch
-    ├──rom
-```
+Mega Mix Mod Manager provides a to install and sort mods in a clean and simple way which allows easy management of conflicting files and even merging commonly edited files so more mods can work seamlessly together.
 
-Create mod zip files with info and thumbnail viewable in the mod manager. the selected mod folder should have the same structure as displayed above.<br/>
+## Dependencies
+- [.NET Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework)<br/>
+- Full dump of the games romfs, if you wish to use merging features.
 
-File Merging, certain database files can be merged so that mods that edit the same database can be used together.<br/>
-merging comes in different options, Lite merging is per entry based, so it will check the entry as a whole object. Deep merging will analyze each part of an entry and merge them all together.<br/>
-##### Note: Deep Merge not functional yet
-![UI](Preview%20Images/ImageMain.png)
-**Example:**<br/>
-Lite merging the pv_db is check if the pv_001 in the mod folder is different than then one in the game dump, if so it will use that entry instead of the final merged pv_db.<br/>
-Deep merging will check each line in the pv_db and determine whats new and what to add, so if one mod adds an extra_singer to pv_001 and changes the songinfo, the final merged pv_db will have both changes.
- 
-
-## Options
-Game Dump Path should select the romfs folder of your game dump, a check box indicate if the game dump has the required files present.<br/>
-The Export Path should select the romfs folder of where you want the mods to be.
-Default Author will auto fill the author line in the mod creator.<br/>
-Merge Options let's you select what level of merging you want for different database files.
+### Usage
+For Detailed usage please check out the wiki section or click [Here](https://github.com/VelouriasMoon/Mega-Mix-Mod-Manager/wiki).
 
 ## Credits
 [MikuMikuLibrary](https://github.com/blueskythlikesclouds/MikuMikuLibrary) File handling for most project diva files.
