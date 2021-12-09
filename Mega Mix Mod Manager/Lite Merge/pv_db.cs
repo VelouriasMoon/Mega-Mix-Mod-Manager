@@ -65,14 +65,16 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 {
                     final_db.Add(entry.Key, entry.Value);
                 }
-
-                var test = string.Concat(entry.Value.ToArray());
-                var test1 = string.Concat(Base[entry.Key].ToArray());
-
-                if (test != test1)
+                else
                 {
-                    final_db.Remove(entry.Key);
-                    final_db.Add(entry.Key, entry.Value);
+                    var test = string.Concat(entry.Value.ToArray());
+                    var test1 = string.Concat(Base[entry.Key].ToArray());
+
+                    if (test != test1)
+                    {
+                        final_db.Remove(entry.Key);
+                        final_db.Add(entry.Key, entry.Value);
+                    }
                 }
             }
 
