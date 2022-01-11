@@ -13,5 +13,10 @@ Mega Mix Mod Manager provides a to install and sort mods in a clean and simple w
 ### Usage
 For Detailed usage please check out the wiki section or click [Here](https://github.com/VelouriasMoon/Mega-Mix-Mod-Manager/wiki).
 
+### Building
+- Download the source code here and for [MikuMikuLibrary](https://github.com/blueskythlikesclouds/MikuMikuLibrary)
+- Open the Solution in Visual Studio and fix the MML reference
+- Right Click the project name and select build 
+
 ## Credits
 [MikuMikuLibrary](https://github.com/blueskythlikesclouds/MikuMikuLibrary) File handling for most project diva files.
