@@ -122,6 +122,7 @@
     <Compile Include="IO\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="IO\MMLExtension.cs" />
     <Compile Include="Objects\CommonDatabase.cs" />
     <Compile Include="IO\DatabaseTypeConverter.cs" />
     <Compile Include="IO\Hash.cs" />
@@ -183,7 +184,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MikuMikuLibrary\MikuMikuLibrary.csproj">
+    <ProjectReference Include="..\..\..\..\..\..\Programs\MikuMikuLibrary-master\MikuMikuLibrary\MikuMikuLibrary.csproj">
       <Project>{9c7171ca-7379-458f-a9ca-293bbf2c74dc}</Project>
       <Name>MikuMikuLibrary</Name>
     </ProjectReference>

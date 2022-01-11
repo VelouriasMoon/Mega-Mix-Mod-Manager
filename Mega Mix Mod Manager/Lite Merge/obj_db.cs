@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MikuMikuLibrary.Databases;
 using MikuMikuLibrary.IO.Common;
+using Mega_Mix_Mod_Manager.IO;
 
 namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
@@ -33,7 +34,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 {
                     foreach (ObjectSetInfo objectSet in results)
                     {
-                        if (!objectSet.Equals(objset))
+                        if (!objectSet.Compare(objset))
                         {
                             Final.ObjectSets.Add(objset);
                         }

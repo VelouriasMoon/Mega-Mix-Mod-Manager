@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mega Mix Mod Manager", "Mega Mix Mod Manager\Mega Mix Mod Manager.csproj", "{AE13FBEB-A132-442F-81D4-5E309E0B6B3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikuMikuLibrary", "MikuMikuLibrary\MikuMikuLibrary.csproj", "{9C7171CA-7379-458F-A9CA-293BBF2C74DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MikuMikuLibrary", "..\..\..\..\..\Programs\MikuMikuLibrary-master\MikuMikuLibrary\MikuMikuLibrary.csproj", "{9C7171CA-7379-458F-A9CA-293BBF2C74DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
