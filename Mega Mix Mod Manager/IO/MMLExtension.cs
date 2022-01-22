@@ -23,7 +23,7 @@ namespace Mega_Mix_Mod_Manager.IO
             bool objects = true;
             for (int i = 0; i < obj.Objects.Count; i++)
             {
-                if (!obj.Objects[i].Equals(objectSet.Objects[i]))
+                if (!obj.Objects[i].Compare(objectSet.Objects[i]))
                     objects = false;
             }
             return obj.Name == objectSet.Name &&
