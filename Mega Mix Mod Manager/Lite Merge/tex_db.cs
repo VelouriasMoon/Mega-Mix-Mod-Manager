@@ -25,7 +25,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
             }
         }
 
-        private static TextureDatabase GetNewEntires(TextureDatabase BaseTex, TextureDatabase ModTex, TextureDatabase Final)
+        public static TextureDatabase GetNewEntires(TextureDatabase BaseTex, TextureDatabase ModTex, TextureDatabase Final)
         {
             foreach (TextureInfo texture in ModTex.Textures)
             {

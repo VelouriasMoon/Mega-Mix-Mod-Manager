@@ -16,6 +16,8 @@ using Mega_Mix_Mod_Manager.IO;
 using Mega_Mix_Mod_Manager.Lite_Merge;
 using Mega_Mix_Mod_Manager.Objects;
 using Mega_Mix_Mod_Manager.Editors;
+using Mega_Mix_Mod_Manager.Editors.ModCreator;
+
 
 
 namespace Mega_Mix_Mod_Manager
@@ -237,7 +239,7 @@ namespace Mega_Mix_Mod_Manager
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 //ofd.Filter = "Archive Files|*.zip;*.rar;*.7z|Zip Files|*.zip|Rar File|*.rar|7zip File|*.7z";
-                ofd.Filter = "Zip File|*.zip";
+                ofd.Filter = "Supported Files(*.zip, *.MikuMod)|*.zip;*.MikuMod|Zip Files(*.zip)|*.zip|Miku Mod(*.MikuMod)|*.MikuMod";
                 ofd.RestoreDirectory = true;
 
                 if (ofd.ShowDialog() == DialogResult.OK)
@@ -271,6 +273,30 @@ namespace Mega_Mix_Mod_Manager
                             string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\{hash}\\modinfo.yaml");
                             var deserializer = new DeserializerBuilder().Build();
                             modinfo = deserializer.Deserialize<ModInfo>(yaml);
+                        }
+
+                        if (Path.GetExtension(file) == ".MikuMod" || Directory.Exists($"{TB_ModStagePath.Text}\\{hash}\\Log"))
+                        {
+                            foreach (string log in Directory.GetFiles($"{TB_ModStagePath.Text}\\{hash}\\Log"))
+                            {
+                                string yaml = File.ReadAllText(log);
+                                var deserializer = new DeserializerBuilder().Build();
+                                CommonDatabase commonDatabase = deserializer.Deserialize<CommonDatabase>(yaml);
+
+                                switch (commonDatabase.DatabaseType)
+                                {
+                                    case CommonType.obj:
+                                        commonDatabase.Save($"{TB_ModStagePath.Text}\\{hash}\\rom_switch\\rom\\objset\\obj_db.bin");
+                                        break;
+                                    case CommonType.tex:
+                                        commonDatabase.Save($"{TB_ModStagePath.Text}\\{hash}\\rom_switch\\rom\\objset\\tex_db.bin");
+                                        break;
+                                    case CommonType.spr:
+                                        string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
+                                        commonDatabase.Save($"{TB_ModStagePath.Text}\\{hash}\\{region}\\rom\\2d\\spr_db.bin");
+                                        break;
+                                }
+                            }
                         }
 
                         ModList.ModList_Entry newmod = new ModList.ModList_Entry();
@@ -411,46 +437,18 @@ namespace Mega_Mix_Mod_Manager
                 return;
             }
 
-            string[] files = Directory.GetFiles(TB_ModPath.Text, "*", SearchOption.AllDirectories);
-            Directory.CreateDirectory($"{TB_ModPath.Text}\\.temp");
-
-            foreach (string file in files)
+            ModInfoCreator creator = new ModInfoCreator()
             {
-                if (CB_pv_Merge.Text == "Deep Merge" && CB_PathVarify.Checked)
-                {
-                    if (Path.GetFileName(file) == "pv_db.txt")
-                    {
+                Name = TB_ModName.Text,
+                Author = TB_ModAuthor.Text,
+                Description = RTB_ModDescription.Text,
+                Path = TB_ModPath.Text,
+                Img = PB_ModCreateImg.Image == null ? null : PB_ModCreateImg.Image,
+                DumpPath = TB_DumpPath.Text,
+                Region = Enum.GetName(typeof(ModList.Region), installedmodList.region),
+            };
 
-                    }
-                }
-                else
-                {
-                    if (!Directory.Exists($"{TB_ModPath.Text}\\.temp\\{Path.GetDirectoryName(file.Replace(TB_ModPath.Text, ""))}"))
-                    {
-                        Directory.CreateDirectory($"{TB_ModPath.Text}\\.temp\\{Path.GetDirectoryName(file.Replace(TB_ModPath.Text, ""))}");
-                    }
-                    File.Copy(file, $"{TB_ModPath.Text}\\.temp\\{file.Replace(TB_ModPath.Text, "")}", true);
-                }
-            }
-            
-            if (PB_ModCreateImg.Image != null)
-                PB_ModCreateImg.Image.Save($"{TB_ModPath.Text}\\.temp\\thumbnail.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
-            WriteModInfo();
-
-            using (SaveFileDialog sdf = new SaveFileDialog())
-            {
-                sdf.Filter = "Zip Files(*.zip)|*.zip";
-                sdf.RestoreDirectory = true;
-                sdf.FileName = TB_ModName.Text + ".zip";
-
-                if (sdf.ShowDialog() == DialogResult.OK)
-                {
-                    if (File.Exists(sdf.FileName))
-                        File.Delete(sdf.FileName);
-                    ZipFile.CreateFromDirectory($"{TB_ModPath.Text}\\.temp", sdf.FileName);
-                }
-            }
-            Directory.Delete($"{TB_ModPath.Text}\\.temp", true);
+            Creator.MakeMod(creator);
         }
 
         private void B_ModCreatorClear_Click(object sender, EventArgs e)

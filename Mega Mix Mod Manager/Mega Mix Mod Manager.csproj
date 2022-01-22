@@ -113,6 +113,7 @@
     <Compile Include="Editors\Database\Property_Obj.cs" />
     <Compile Include="Editors\Database\Property_Spr.cs" />
     <Compile Include="Editors\Database\Property_Tex.cs" />
+    <Compile Include="Editors\ModCreator\Creator.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

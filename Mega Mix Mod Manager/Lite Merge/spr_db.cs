@@ -26,7 +26,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
             }
         }
 
-        private static SpriteDatabase GetNewEntires(SpriteDatabase BaseSpr, SpriteDatabase ModSpr, SpriteDatabase Final)
+        public static SpriteDatabase GetNewEntires(SpriteDatabase BaseSpr, SpriteDatabase ModSpr, SpriteDatabase Final)
         {
             foreach (SpriteSetInfo spriteSetInfo in ModSpr.SpriteSets)
             {

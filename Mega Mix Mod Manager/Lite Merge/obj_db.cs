@@ -25,7 +25,7 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
             }
         }
 
-        private static ObjectDatabase GetNewEntires(ObjectDatabase BaseObj, ObjectDatabase ModObj, ObjectDatabase Final)
+        public static ObjectDatabase GetNewEntires(ObjectDatabase BaseObj, ObjectDatabase ModObj, ObjectDatabase Final)
         {
             foreach (ObjectSetInfo objset in ModObj.ObjectSets)
             {

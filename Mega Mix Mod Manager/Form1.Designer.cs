@@ -959,7 +959,6 @@
         private System.Windows.Forms.Label L_Export;
         private System.Windows.Forms.CheckBox CB_PathVarify;
         private System.Windows.Forms.Button B_GamePath;
-        private System.Windows.Forms.TextBox TB_DumpPath;
         private System.Windows.Forms.Label L_DumpPath;
         private System.Windows.Forms.TabPage TP_ModCreator;
         private System.Windows.Forms.Button B_ModCreatorClear;
@@ -1011,6 +1010,7 @@
         private System.Windows.Forms.TextBox TB_ModStagePath;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox CB_MergeWhen;
+        private System.Windows.Forms.TextBox TB_DumpPath;
     }
 }
 
