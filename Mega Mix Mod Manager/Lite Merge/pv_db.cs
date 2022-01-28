@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
 
 namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
@@ -99,6 +100,11 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 merged.Add(entry.Key, entry.Value);
             }
             Write(merged, outfile);
+        }
+
+        public static void Export(SortedDictionary<string, List<string>> infile)
+        {
+
         }
     }
 }

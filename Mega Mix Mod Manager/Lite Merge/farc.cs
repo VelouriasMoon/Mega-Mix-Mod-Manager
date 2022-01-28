@@ -14,9 +14,9 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
     internal class farc
     {
-        public static void Merge(string dumpPath, string ModPath, string outPath, ModList.Region region = ModList.Region.rom_switch_en)
+        public static void Merge(string dumpPath, string[] modFiles, string outPath, ModList.Region region = ModList.Region.rom_switch_en)
         {
-            string[] modFiles = Directory.GetFiles(ModPath, "*.farc", SearchOption.AllDirectories);
+            //string[] modFiles = Directory.GetFiles(ModPath, "*.farc", SearchOption.AllDirectories);
             string[] vanillaFiles = Directory.GetFiles(dumpPath, "*.farc", SearchOption.AllDirectories);
 
             //file loop to check and merge each file in the mods folder

@@ -229,40 +229,59 @@ namespace Mega_Mix_Mod_Manager
                 if (Directory.Exists($"{TB_ModStagePath.Text}\\Merged"))
                     Directory.Delete($"{TB_ModStagePath.Text}\\Merged", true);
                 Directory.CreateDirectory($"{TB_ModStagePath.Text}\\Merged");
+                string[] Filters = new string[] { "obj_db.bin", "obj_db.yaml", "tex_db.bin", "tex_db.yaml", "spr_db.bin", "spr_db.yaml", "pv_db.txt" };
+
+                List<string> Files = new List<string>();
+                List<string> Farcs = new List<string>();
+
+                foreach (TreeNode node in TV_ModList.Nodes)
+                {
+                    if (!node.Checked)
+                        continue;
+                    string[] files = Filters.SelectMany(x => Directory.GetFiles($"{TB_ModStagePath.Text}\\{node.Name}", x, SearchOption.AllDirectories)).ToArray();
+                    Files.AddRange(files);
+
+                    string[] farcs = Directory.GetFiles($"{TB_ModStagePath.Text}\\{node.Name}", "*.farc", SearchOption.AllDirectories);
+                    Farcs.AddRange(farcs);
+                }
 
                 if (CB_pv_Merge.Text == "Lite Merge")
                 {
                     PB_InstallProgress.Value = 5;
-                    pv_db.MergeMods(Directory.GetFiles($"{TB_ModStagePath.Text}", "*", SearchOption.AllDirectories), pv_db_Path, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\pv_db.txt");
+                    string[] files = Files.Where(x => x.Contains("pv_db.txt")).ToArray();
+                    if (files.Length > 0)
+                        pv_db.MergeMods(files, pv_db_Path, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\pv_db.txt");
                     PB_InstallProgress.Value = 10;
                 }
                 if (CB_obj_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 15;
-                    string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}", "*obj_db.bin", SearchOption.AllDirectories);
-                    obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\objset\\obj_db.bin");
+                    string[] files = Files.Where(x => x.Contains("obj_db")).ToArray();
+                    if (files.Length > 0)
+                        obj_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\obj_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\objset\\obj_db.bin");
                     PB_InstallProgress.Value = 20;
                 }
                 if (CB_tex_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 25;
-                    string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}", "*tex_db.bin", SearchOption.AllDirectories);
-                    tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\objset\\tex_db.bin");
+                    string[] files = Files.Where(x => x.Contains("tex_db")).ToArray();
+                    if (files.Length > 0)
+                        tex_db.Merge($"{TB_DumpPath.Text}\\rom_switch\\rom\\objset\\tex_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\objset\\tex_db.bin");
                     PB_InstallProgress.Value = 30;
                 }
                 if (CB_spr_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 35;
-                    string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}", "*spr_db.bin", SearchOption.AllDirectories);
                     string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
-
-                    spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\{region}\\rom\\2d\\spr_db.bin");
+                    string[] files = Files.Where(x => x.Contains("spr_db")).ToArray();
+                    if (files.Length > 0)
+                        spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\{region}\\rom\\2d\\spr_db.bin");
                     PB_InstallProgress.Value = 40;
                 }
                 if (CB_farc_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 45;
-                    farc.Merge(TB_DumpPath.Text, $"{TB_ModStagePath.Text}", $"{TB_ModStagePath.Text}\\Merged", installedmodList.region);
+                    farc.Merge(TB_DumpPath.Text, Farcs.ToArray(), $"{TB_ModStagePath.Text}\\Merged", installedmodList.region);
                     PB_InstallProgress.Value = 50;
                 }
             }
@@ -294,6 +313,7 @@ namespace Mega_Mix_Mod_Manager
                         if (Directory.Exists($"{TB_ModStagePath.Text}\\{hash}"))
                             Directory.Delete($"{TB_ModStagePath.Text}\\{hash}", true);
                         Directory.CreateDirectory($"{TB_ModStagePath.Text}\\{hash}");
+                        
 
                         using (MemoryStream ms = new MemoryStream(data))
                         {
@@ -316,30 +336,6 @@ namespace Mega_Mix_Mod_Manager
                             string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\{hash}\\modinfo.yaml");
                             var deserializer = new DeserializerBuilder().Build();
                             modinfo = deserializer.Deserialize<ModInfo>(yaml);
-                        }
-
-                        if (Path.GetExtension(file) == ".MikuMod" || Directory.Exists($"{TB_ModStagePath.Text}\\{hash}\\Log"))
-                        {
-                            foreach (string log in Directory.GetFiles($"{TB_ModStagePath.Text}\\{hash}\\Log"))
-                            {
-                                string yaml = File.ReadAllText(log);
-                                var deserializer = new DeserializerBuilder().Build();
-                                CommonDatabase commonDatabase = deserializer.Deserialize<CommonDatabase>(yaml);
-
-                                switch (commonDatabase.DatabaseType)
-                                {
-                                    case CommonType.obj:
-                                        commonDatabase.Save($"{TB_ModStagePath.Text}\\{hash}\\rom_switch\\rom\\objset\\obj_db.bin");
-                                        break;
-                                    case CommonType.tex:
-                                        commonDatabase.Save($"{TB_ModStagePath.Text}\\{hash}\\rom_switch\\rom\\objset\\tex_db.bin");
-                                        break;
-                                    case CommonType.spr:
-                                        string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
-                                        commonDatabase.Save($"{TB_ModStagePath.Text}\\{hash}\\{region}\\rom\\2d\\spr_db.bin");
-                                        break;
-                                }
-                            }
                         }
 
                         ModList.ModList_Entry newmod = new ModList.ModList_Entry();

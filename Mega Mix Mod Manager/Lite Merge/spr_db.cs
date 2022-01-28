@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MikuMikuLibrary.Databases;
 using MikuMikuLibrary.IO.Common;
 using Mega_Mix_Mod_Manager.IO;
+using Mega_Mix_Mod_Manager.Objects;
+using YamlDotNet.Serialization;
 
 namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
@@ -54,7 +56,16 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
 
             foreach (string mod in mods)
             {
-                SpriteDatabase modified = Read(mod);
+                SpriteDatabase modified;
+                if (Path.GetExtension(mod) == ".yaml")
+                {
+                    var deserializer = new DeserializerBuilder().Build();
+                    CommonDatabase commonDatabase = deserializer.Deserialize<CommonDatabase>(File.ReadAllText(mod));
+                    modified = commonDatabase.Write<SpriteDatabase>();
+                }
+                else
+                    modified = Read(mod);
+                
                 spriteDatabase = GetNewEntires(original, modified, spriteDatabase);
             }
 
