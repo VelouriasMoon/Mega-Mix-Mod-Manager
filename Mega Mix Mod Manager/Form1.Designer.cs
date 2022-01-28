@@ -78,7 +78,8 @@
             this.L_ModPath = new System.Windows.Forms.Label();
             this.TP_Mods = new System.Windows.Forms.TabPage();
             this.GB_ModDetails = new System.Windows.Forms.GroupBox();
-            this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
+            this.CMS_RemoveDisable = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TS_MergeMods = new System.Windows.Forms.ToolStripMenuItem();
             this.TS_ClearMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,6 @@
             this.B_ModDown = new System.Windows.Forms.Button();
             this.B_OpenMod = new System.Windows.Forms.Button();
             this.B_InstallMod = new System.Windows.Forms.Button();
-            this.B_RemoveMod = new System.Windows.Forms.Button();
             this.RTB_ModDetails = new System.Windows.Forms.RichTextBox();
             this.PB_ModPreview = new System.Windows.Forms.PictureBox();
             this.GB_ModList = new System.Windows.Forms.GroupBox();
@@ -104,6 +104,8 @@
             this.B_DBPlus = new System.Windows.Forms.Button();
             this.B_DBOpen = new System.Windows.Forms.Button();
             this.DB_List = new System.Windows.Forms.ListBox();
+            this.MB_Disable = new Mega_Mix_Mod_Manager.IO.MenuButton();
+            this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -112,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).BeginInit();
             this.TP_Mods.SuspendLayout();
             this.GB_ModDetails.SuspendLayout();
+            this.CMS_RemoveDisable.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).BeginInit();
             this.GB_ModList.SuspendLayout();
@@ -623,13 +626,13 @@
             // 
             // GB_ModDetails
             // 
+            this.GB_ModDetails.Controls.Add(this.MB_Disable);
             this.GB_ModDetails.Controls.Add(this.MB_Export);
             this.GB_ModDetails.Controls.Add(this.B_ModUp);
             this.GB_ModDetails.Controls.Add(this.PB_InstallProgress);
             this.GB_ModDetails.Controls.Add(this.B_ModDown);
             this.GB_ModDetails.Controls.Add(this.B_OpenMod);
             this.GB_ModDetails.Controls.Add(this.B_InstallMod);
-            this.GB_ModDetails.Controls.Add(this.B_RemoveMod);
             this.GB_ModDetails.Controls.Add(this.RTB_ModDetails);
             this.GB_ModDetails.Controls.Add(this.PB_ModPreview);
             this.GB_ModDetails.Location = new System.Drawing.Point(220, 6);
@@ -639,16 +642,19 @@
             this.GB_ModDetails.TabStop = false;
             this.GB_ModDetails.Text = "Mod Details";
             // 
-            // MB_Export
+            // CMS_RemoveDisable
             // 
-            this.MB_Export.Location = new System.Drawing.Point(274, 364);
-            this.MB_Export.Menu = this.contextMenuStrip1;
-            this.MB_Export.Name = "MB_Export";
-            this.MB_Export.Size = new System.Drawing.Size(67, 23);
-            this.MB_Export.TabIndex = 6;
-            this.MB_Export.Text = "Export     ";
-            this.MB_Export.UseVisualStyleBackColor = true;
-            this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
+            this.CMS_RemoveDisable.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeToolStripMenuItem});
+            this.CMS_RemoveDisable.Name = "CMS_RemoveDisable";
+            this.CMS_RemoveDisable.Size = new System.Drawing.Size(118, 26);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.B_RemoveMod_Click);
             // 
             // contextMenuStrip1
             // 
@@ -705,9 +711,9 @@
             // 
             // B_OpenMod
             // 
-            this.B_OpenMod.Location = new System.Drawing.Point(192, 364);
+            this.B_OpenMod.Location = new System.Drawing.Point(191, 364);
             this.B_OpenMod.Name = "B_OpenMod";
-            this.B_OpenMod.Size = new System.Drawing.Size(80, 23);
+            this.B_OpenMod.Size = new System.Drawing.Size(82, 23);
             this.B_OpenMod.TabIndex = 4;
             this.B_OpenMod.Text = "Open Folder";
             this.B_OpenMod.UseVisualStyleBackColor = true;
@@ -715,23 +721,13 @@
             // 
             // B_InstallMod
             // 
-            this.B_InstallMod.Location = new System.Drawing.Point(67, 364);
+            this.B_InstallMod.Location = new System.Drawing.Point(64, 364);
             this.B_InstallMod.Name = "B_InstallMod";
-            this.B_InstallMod.Size = new System.Drawing.Size(63, 23);
+            this.B_InstallMod.Size = new System.Drawing.Size(59, 23);
             this.B_InstallMod.TabIndex = 2;
             this.B_InstallMod.Text = "Install";
             this.B_InstallMod.UseVisualStyleBackColor = true;
             this.B_InstallMod.Click += new System.EventHandler(this.B_InstallMod_Click);
-            // 
-            // B_RemoveMod
-            // 
-            this.B_RemoveMod.Location = new System.Drawing.Point(131, 364);
-            this.B_RemoveMod.Name = "B_RemoveMod";
-            this.B_RemoveMod.Size = new System.Drawing.Size(59, 23);
-            this.B_RemoveMod.TabIndex = 2;
-            this.B_RemoveMod.Text = "Remove";
-            this.B_RemoveMod.UseVisualStyleBackColor = true;
-            this.B_RemoveMod.Click += new System.EventHandler(this.B_RemoveMod_Click);
             // 
             // RTB_ModDetails
             // 
@@ -767,15 +763,20 @@
             // 
             // TV_ModList
             // 
+            this.TV_ModList.CheckBoxes = true;
             this.TV_ModList.Location = new System.Drawing.Point(6, 19);
             this.TV_ModList.Name = "TV_ModList";
             this.TV_ModList.Size = new System.Drawing.Size(196, 367);
             this.TV_ModList.TabIndex = 0;
+            this.TV_ModList.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TV_ToggleMod_Click);
             this.TV_ModList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_ModList_AfterSelect);
             this.TV_ModList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TV_ModList_MouseUp);
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.TP_Mods);
             this.tabControl1.Controls.Add(this.TP_ModCreator);
             this.tabControl1.Controls.Add(this.TP_DBExplorer);
@@ -903,6 +904,29 @@
             this.DB_List.TabIndex = 1;
             this.DB_List.SelectedIndexChanged += new System.EventHandler(this.DB_List_SelectedIndexChanged);
             // 
+            // MB_Disable
+            // 
+            this.MB_Disable.Location = new System.Drawing.Point(124, 364);
+            this.MB_Disable.Menu = this.CMS_RemoveDisable;
+            this.MB_Disable.Name = "MB_Disable";
+            this.MB_Disable.Size = new System.Drawing.Size(65, 23);
+            this.MB_Disable.TabIndex = 7;
+            this.MB_Disable.Text = "Disable";
+            this.MB_Disable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.MB_Disable.UseVisualStyleBackColor = true;
+            this.MB_Disable.Click += new System.EventHandler(this.B_ToggleMod_Click);
+            // 
+            // MB_Export
+            // 
+            this.MB_Export.Location = new System.Drawing.Point(274, 364);
+            this.MB_Export.Menu = this.contextMenuStrip1;
+            this.MB_Export.Name = "MB_Export";
+            this.MB_Export.Size = new System.Drawing.Size(67, 23);
+            this.MB_Export.TabIndex = 6;
+            this.MB_Export.Text = "Export     ";
+            this.MB_Export.UseVisualStyleBackColor = true;
+            this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -925,6 +949,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModCreateImg)).EndInit();
             this.TP_Mods.ResumeLayout(false);
             this.GB_ModDetails.ResumeLayout(false);
+            this.CMS_RemoveDisable.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).EndInit();
             this.GB_ModList.ResumeLayout(false);
@@ -982,7 +1007,6 @@
         private System.Windows.Forms.Button B_ModDown;
         private System.Windows.Forms.Button B_ModUp;
         private System.Windows.Forms.RichTextBox RTB_ModDetails;
-        private System.Windows.Forms.Button B_RemoveMod;
         private System.Windows.Forms.PictureBox PB_ModPreview;
         private System.Windows.Forms.Button B_InstallMod;
         private System.Windows.Forms.GroupBox GB_ModList;
@@ -1011,6 +1035,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox CB_MergeWhen;
         private System.Windows.Forms.TextBox TB_DumpPath;
+        private IO.MenuButton MB_Disable;
+        private System.Windows.Forms.ContextMenuStrip CMS_RemoveDisable;
+        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
     }
 }
 

@@ -17,8 +17,11 @@ using Mega_Mix_Mod_Manager.Lite_Merge;
 using Mega_Mix_Mod_Manager.Objects;
 using Mega_Mix_Mod_Manager.Editors;
 using Mega_Mix_Mod_Manager.Editors.ModCreator;
-
-
+using MikuMikuLibrary.IO;
+using MikuMikuLibrary.Archives;
+using MikuMikuLibrary.Textures;
+using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Mega_Mix_Mod_Manager
 {
@@ -78,6 +81,40 @@ namespace Mega_Mix_Mod_Manager
             TV_ModList.Focus();
         }
 
+        private void B_ToggleMod_Click(object sender, EventArgs e)
+        {
+            if (TV_ModList.SelectedNode == null)
+                return;
+
+            
+            if (TV_ModList.SelectedNode.Checked)
+            {
+                
+                TV_ModList.SelectedNode.Checked = false;
+                MB_Disable.Text = "Enable";
+            }
+            else
+            {
+                
+                TV_ModList.SelectedNode.Checked = true;
+                MB_Disable.Text = "Disable";
+            }
+        }
+        private void TV_ToggleMod_Click(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Checked)
+            {
+                installedmodList.mods.Where(x => x.hash == e.Node.Name).First().Enabled = true;
+                e.Node.ForeColor = Color.Black;
+            }
+            else
+            {
+                installedmodList.mods.Where(x => x.hash == e.Node.Name).First().Enabled = false;
+                e.Node.ForeColor = Color.Red;
+            }
+            WriteModList();
+        }
+
         private void B_ModUp_Click(object sender, EventArgs e)
         {
             if (TV_ModList.SelectedNode == null || TV_ModList.SelectedNode.Index <= 0)
@@ -126,15 +163,20 @@ namespace Mega_Mix_Mod_Manager
 
         private void TV_ModList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (File.Exists($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg"))
+            string ModPath = $"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}";
+            if (!TV_ModList.SelectedNode.Checked)
             {
-                Image img = new Bitmap($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}\\thumbnail.jpg");
+                MB_Disable.Text = "Enable";
+            }
+
+            if (File.Exists($"{ModPath}\\thumbnail.jpg"))
+            {
+                Image img = new Bitmap($"{ModPath}\\thumbnail.jpg");
                 PB_ModPreview.Image = img;
                 //img.Dispose();
             }
 
-
-            string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\{TV_ModList.SelectedNode.Name}\\modinfo.yaml");
+            string yaml = File.ReadAllText($"{ModPath}\\modinfo.yaml");
             var deserializer = new DeserializerBuilder().Build();
             ModInfo modinfo = deserializer.Deserialize<ModInfo>(yaml);
 
@@ -162,6 +204,7 @@ namespace Mega_Mix_Mod_Manager
                     PB_ModPreview.Image = Properties.Resources.Logo;
                 }
                 RTB_ModDetails.Clear();
+                MB_Disable.Text = "Disable";
             }
             else
             {
@@ -337,10 +380,12 @@ namespace Mega_Mix_Mod_Manager
             PB_InstallProgress.Value = 60;
             foreach (TreeNode node in TV_ModList.Nodes)
             {
+                if (!node.Checked)
+                    continue;
                 string[] files = Directory.GetFiles($"{TB_ModStagePath.Text}\\{node.Name}", "*", SearchOption.AllDirectories);
                 foreach (string file in files)
                 {
-                    if (Path.GetFileName(file) == "modinfo.yaml" || Path.GetFileName(file) == "thumbnail.jpg")
+                    if (Path.GetFileName(file) == "modinfo.yaml" || Path.GetFileName(file) == "thumbnail.jpg" || Path.GetDirectoryName(file).Contains("Log"))
                         continue;
 
                     string outfile = file.Replace($"{TB_ModStagePath.Text}\\{node.Name}", "");
@@ -380,6 +425,7 @@ namespace Mega_Mix_Mod_Manager
             MessageBox.Show("Mods Exported Successfully", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             PB_InstallProgress.Value = 0;
             PB_InstallProgress.Visible = false;
+            
         }
         
 
@@ -664,6 +710,10 @@ namespace Mega_Mix_Mod_Manager
                 foreach (ModList.ModList_Entry mod in modlist.mods)
                 {
                     TV_ModList.Nodes.Add(mod.hash, mod.Name);
+                    if (!mod.Enabled)
+                        TV_ModList.Nodes[mod.hash].ForeColor = Color.Red;
+                    else
+                        TV_ModList.Nodes[mod.hash].Checked = true;
                 }
             }
         }
@@ -753,10 +803,6 @@ namespace Mega_Mix_Mod_Manager
                 }
             }
         }
-
-
-
-
 
         #endregion
     }

@@ -15,6 +15,7 @@ namespace Mega_Mix_Mod_Manager.Objects
         {
             public string Name { get; set; }
             public string hash { get; set; }
+            public bool Enabled { get; set; } = true;
         }
 
         public enum Region
