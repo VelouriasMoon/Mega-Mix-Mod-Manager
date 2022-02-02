@@ -272,7 +272,7 @@ namespace Mega_Mix_Mod_Manager
                 if (CB_spr_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 35;
-                    string region = Enum.GetName(typeof(ModList.Region), installedmodList.region);
+                    string region = Enum.GetName(typeof(Enums.Region), installedmodList.region);
                     string[] files = Files.Where(x => x.Contains("spr_db")).ToArray();
                     if (files.Length > 0)
                         spr_db.Merge($"{TB_DumpPath.Text}\\{region}\\rom\\2d\\spr_db.bin", files, $"{TB_ModStagePath.Text}\\Merged\\{region}\\rom\\2d\\spr_db.bin");
@@ -487,7 +487,7 @@ namespace Mega_Mix_Mod_Manager
                 Path = TB_ModPath.Text,
                 Img = PB_ModCreateImg.Image == null ? null : PB_ModCreateImg.Image,
                 DumpPath = TB_DumpPath.Text,
-                Region = Enum.GetName(typeof(ModList.Region), installedmodList.region),
+                Region = Enum.GetName(typeof(Enums.Region), installedmodList.region),
             };
 
             Creator.MakeMod(creator);
@@ -594,9 +594,9 @@ namespace Mega_Mix_Mod_Manager
             if (File.Exists($"{basepath}\\pv_db.txt") && File.Exists($"{basepath}\\objset\\obj_db.bin") && File.Exists($"{basepath}\\objset\\tex_db.bin"))
             {
                 if (File.Exists($"{ TB_DumpPath.Text}\\rom_switch_en\\rom\\2d\\spr_db.bin"))
-                    CB_Region.SelectedIndex = (int)ModList.Region.rom_switch_en;
+                    CB_Region.SelectedIndex = (int)Enums.Region.rom_switch_en;
                 else
-                    CB_Region.SelectedIndex = (int)ModList.Region.rom_switch;
+                    CB_Region.SelectedIndex = (int)Enums.Region.rom_switch;
 
                 pv_db_Path = $"{basepath}\\pv_db.txt";
                 CB_PathVarify.Checked = true;

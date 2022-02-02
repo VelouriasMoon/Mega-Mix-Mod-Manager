@@ -9,12 +9,13 @@ using MikuMikuLibrary.IO;
 using MikuMikuLibrary.IO.Common;
 using Mega_Mix_Mod_Manager.Objects;
 using YamlDotNet.Serialization;
+using Mega_Mix_Mod_Manager.Enums;
 
 namespace Mega_Mix_Mod_Manager.Lite_Merge
 {
     internal class farc
     {
-        public static void Merge(string dumpPath, string[] modFiles, string outPath, ModList.Region region = ModList.Region.rom_switch_en)
+        public static void Merge(string dumpPath, string[] modFiles, string outPath, Region region = Region.rom_switch_en)
         {
             //string[] modFiles = Directory.GetFiles(ModPath, "*.farc", SearchOption.AllDirectories);
             string[] vanillaFiles = Directory.GetFiles(dumpPath, "*.farc", SearchOption.AllDirectories);
@@ -25,8 +26,8 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 //check if the game dump contains the modded file
                 string VanillaFile = vanillaFiles.LastOrDefault(x => x.Contains(file.Substring(file.LastIndexOf("rom"))));
                 string export = $"{outPath}\\rom_switch\\{file.Substring(file.LastIndexOf("rom"))}";
-                if (export.Contains("2d") && !export.Contains(Enum.GetName(typeof(ModList.Region), region)))
-                    export = export.Replace("rom_switch", Enum.GetName(typeof(ModList.Region), region));
+                if (export.Contains("2d") && !export.Contains(Enum.GetName(typeof(Region), region)))
+                    export = export.Replace("rom_switch", Enum.GetName(typeof(Region), region));
                 if (File.Exists(export))
                     VanillaFile = export;
                 Dictionary<string, byte[]> ModFarcFiles = new Dictionary<string, byte[]>();
@@ -60,8 +61,8 @@ namespace Mega_Mix_Mod_Manager.Lite_Merge
                 //If game dump contains an farc with the same name read that for merging
                 if (vanillaFiles.Contains(VanillaFile))
                 {
-                    if (VanillaFile.Contains("2d") && !export.Contains(Enum.GetName(typeof(ModList.Region), region)))
-                        export = export.Replace("rom_switch", Enum.GetName(typeof(ModList.Region), region));
+                    if (VanillaFile.Contains("2d") && !export.Contains(Enum.GetName(typeof(Region), region)))
+                        export = export.Replace("rom_switch", Enum.GetName(typeof(Region), region));
 
                     //Extract Vanilla Files from farc into memory
                     using (FileStream fs = File.OpenRead(VanillaFile))

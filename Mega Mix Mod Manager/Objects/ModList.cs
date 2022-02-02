@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mega_Mix_Mod_Manager.Enums;
 
 namespace Mega_Mix_Mod_Manager.Objects
 {
@@ -16,14 +17,6 @@ namespace Mega_Mix_Mod_Manager.Objects
             public string Name { get; set; }
             public string hash { get; set; }
             public bool Enabled { get; set; } = true;
-        }
-
-        public enum Region
-        {
-            rom_switch,
-            rom_switch_en,
-            rom_switch_cn,
-            rom_switch_tw
         }
 
         public void MoveDown(int selected_index)

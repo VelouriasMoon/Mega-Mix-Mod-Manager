@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mega_Mix_Mod_Manager.Enums;
 
 namespace Mega_Mix_Mod_Manager.Objects
 {
@@ -19,14 +20,6 @@ namespace Mega_Mix_Mod_Manager.Objects
         public string tex_Merge { get; set; }
         public string farc_Merge { get; set; }
         public MergeOptions Merge_Option { get; set; }
-
-        public enum MergeOptions
-        {
-            Both,
-            Install,
-            Export,
-            None
-        }
-
+        public Region region { get; set; }
     }
 }
