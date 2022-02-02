@@ -21,5 +21,6 @@ namespace Mega_Mix_Mod_Manager.Objects
         public string farc_Merge { get; set; }
         public MergeOptions Merge_Option { get; set; }
         public Region region { get; set; }
+        public int Version { get; set; }
     }
 }

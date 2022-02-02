@@ -17,11 +17,9 @@ using Mega_Mix_Mod_Manager.Lite_Merge;
 using Mega_Mix_Mod_Manager.Objects;
 using Mega_Mix_Mod_Manager.Editors;
 using Mega_Mix_Mod_Manager.Editors.ModCreator;
-using MikuMikuLibrary.IO;
-using MikuMikuLibrary.Archives;
 using MikuMikuLibrary.Textures;
-using System.Threading.Tasks;
-using System.ComponentModel;
+using MikuMikuLibrary.Textures.Processing;
+using MikuMikuLibrary.IO;
 
 namespace Mega_Mix_Mod_Manager
 {
@@ -34,6 +32,8 @@ namespace Mega_Mix_Mod_Manager
         }
         public string pv_db_Path;
         public ModList installedmodList;
+        public PatchList installedPatchList;
+        public VersionMap versionMap;
 
         public void MainLoad()
         {
@@ -51,6 +51,10 @@ namespace Mega_Mix_Mod_Manager
                 LoadModList();
             else
                 installedmodList = new ModList();
+            if (File.Exists($"{TB_ModStagePath.Text}\\Patchlist.yaml"))
+                LoadPatchList();
+            else
+                installedPatchList = new PatchList();
             if (TB_Default_Author.Text != null || TB_Default_Author.Text.Length != 0)
                 TB_ModAuthor.Text = TB_Default_Author.Text;
         }
@@ -366,8 +370,9 @@ namespace Mega_Mix_Mod_Manager
         {
             if (TB_Export == null || TB_Export.Text.Length == 0)
                 return;
-            Directory.Delete(TB_Export.Text, true);
-            Directory.CreateDirectory(TB_Export.Text);
+            if (Directory.Exists($"{TB_Export.Text}\\romfs"))
+                Directory.Delete($"{TB_Export.Text}\\romfs", true);
+            Directory.CreateDirectory($"{TB_Export.Text}\\romfs");
             PB_InstallProgress.Visible = true;
             PB_InstallProgress.Value = 0;
             if (CB_MergeWhen.SelectedIndex == 0 || CB_MergeWhen.SelectedIndex == 2)
@@ -386,15 +391,15 @@ namespace Mega_Mix_Mod_Manager
 
                     string outfile = file.Replace($"{TB_ModStagePath.Text}\\{node.Name}", "");
                     outfile = Regex.Replace(outfile, "romfs", "", RegexOptions.IgnoreCase).Replace("\\\\", "\\");
-                    if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}")))
-                        Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}"));
-                    File.Copy(file, $"{TB_Export.Text}\\{outfile}", true);
+                    if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\romfs\\{outfile}")))
+                        Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\romfs\\{outfile}"));
+                    File.Copy(file, $"{TB_Export.Text}\\romfs\\{outfile}", true);
                 }
             }
             
             if (Directory.Exists($"{TB_ModStagePath.Text}\\Merged"))
             {
-                PB_InstallProgress.Value = 80;
+                PB_InstallProgress.Value = 70;
                 string[] mergedFiles = Directory.GetFiles($"{TB_ModStagePath.Text}\\Merged", "*", SearchOption.AllDirectories);
                 foreach (string file in mergedFiles)
                 {
@@ -402,18 +407,25 @@ namespace Mega_Mix_Mod_Manager
                         continue;
 
                     string outfile = file.Replace($"{TB_ModStagePath.Text}\\Merged", "");
-                    if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}")))
-                        Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\{outfile}"));
-                    File.Copy(file, $"{TB_Export.Text}\\{outfile}", true);
+                    if (!Directory.Exists(Path.GetDirectoryName($"{TB_Export.Text}\\romfs\\{outfile}")))
+                        Directory.CreateDirectory(Path.GetDirectoryName($"{TB_Export.Text}\\romfs\\{outfile}"));
+                    File.Copy(file, $"{TB_Export.Text}\\romfs\\{outfile}", true);
                 }
-                PB_InstallProgress.Value = 85;
+                PB_InstallProgress.Value = 75;
 
-                PB_InstallProgress.Value = 90;
+                PB_InstallProgress.Value = 80;
                 mergedFiles = Directory.GetDirectories($"{TB_ModStagePath.Text}\\Merged", "*.farc", SearchOption.AllDirectories);
                 foreach (string file in mergedFiles)
                 {
-                    farc.PackFarc(file, $"{TB_ModStagePath.Text}\\Merged", $"{TB_Export.Text}");
+                    farc.PackFarc(file, $"{TB_ModStagePath.Text}\\Merged", $"{TB_Export.Text}\\romfs");
                 }
+                PB_InstallProgress.Value = 85;
+            }
+
+            if (installedPatchList.Patches.Count > 0)
+            {
+                PB_InstallProgress.Value = 90;
+                ExportPacthes();
                 PB_InstallProgress.Value = 95;
             }
 
@@ -530,6 +542,8 @@ namespace Mega_Mix_Mod_Manager
                 if (cofd.ShowDialog() == CommonFileDialogResult.Ok)
                 {
                     TB_Export.Text = cofd.FileName;
+                    if (TB_Export.Text.EndsWith("romfs"))
+                        TB_Export.Text = TB_Export.Text.Remove(TB_Export.Text.Length - 6, 6);
                 }
             }
         }
@@ -656,7 +670,9 @@ namespace Mega_Mix_Mod_Manager
             settings.spr_Merge = CB_spr_Merge.Text;
             settings.tex_Merge = CB_tex_Merge.Text;
             settings.farc_Merge = CB_farc_Merge.Text;
-            settings.Merge_Option = (Settings.MergeOptions)CB_MergeWhen.SelectedIndex;
+            settings.Merge_Option = (Enums.MergeOptions)CB_MergeWhen.SelectedIndex;
+            settings.region = (Enums.Region)CB_Region.SelectedIndex;
+            settings.Version = CB_Version.SelectedIndex;
 
             var serializer = new SerializerBuilder().Build();
             string yaml = serializer.Serialize(settings);
@@ -681,6 +697,10 @@ namespace Mega_Mix_Mod_Manager
                 CB_tex_Merge.Text = setting.tex_Merge;
                 CB_farc_Merge.Text = setting.farc_Merge;
                 CB_MergeWhen.SelectedIndex = (int)setting.Merge_Option;
+                CB_Region.SelectedIndex = (int)setting.region;
+                LoadVersions(setting.region, setting.Version);
+                if (TB_Export.Text.EndsWith("romfs"))
+                    TB_Export.Text = TB_Export.Text.Remove(TB_Export.Text.Length - 6, 6);
             }
         }
 
@@ -712,6 +732,19 @@ namespace Mega_Mix_Mod_Manager
                         TV_ModList.Nodes[mod.hash].Checked = true;
                 }
             }
+        }
+
+        public void LoadVersions(Enums.Region region, int SelectedVersion = 0)
+        {
+            versionMap = new VersionMap(VersionMap.GetRegion(CB_Region.Text));
+            foreach (var version in versionMap.Version)
+            {
+                CB_Version.Items.Add(version.Key);
+            }
+            if (SelectedVersion > CB_Version.Items.Count)
+                CB_Version.SelectedIndex = CB_Version.Items.Count - 1;
+            else
+                CB_Version.SelectedIndex = SelectedVersion;
         }
 
         #endregion
@@ -797,6 +830,159 @@ namespace Mega_Mix_Mod_Manager
                 {
                     Explorer.Export(this, sfd.FileName);
                 }
+            }
+        }
+
+        #endregion
+
+        #region Patches
+        public void ExportPacthes()
+        {
+            if (installedPatchList.Patches.Count == 0)
+                return;
+
+            List<string> pchtxt = new List<string>()
+            {
+                $"@nsobid-{versionMap.Version[CB_Version.Text]}",
+                $"# Hatsune Miku: Project DIVA Mega Mix v{CB_Version.Text}",
+                $"@flag offset_shift 0x100\r\n"
+            };
+
+            foreach (var patch in installedPatchList.Patches)
+            {
+                pchtxt.Add($"// {patch.Name}");
+                if (patch.Enabled)
+                    pchtxt.Add($"@enabled");
+                else
+                    pchtxt.Add($"@disabled");
+                pchtxt.Add($"{patch.Code}\r\n");
+            }
+
+            if (Directory.Exists($"{TB_Export.Text}\\exefs"))
+                Directory.Delete($"{TB_Export.Text}\\exefs", true);
+            Directory.CreateDirectory($"{TB_Export.Text}\\exefs");
+            File.WriteAllLines($"{TB_Export.Text}\\exefs\\MegaMixModManager.pchtxt", pchtxt.ToArray());
+        }
+
+        public void WritePatchList()
+        {
+            if (File.Exists($"{TB_ModStagePath.Text}\\PatchList.yaml"))
+                File.Delete($"{TB_ModStagePath.Text}\\PatchList.yaml");
+
+            var serializer = new SerializerBuilder().Build();
+            string yaml = serializer.Serialize(installedPatchList);
+            File.WriteAllText($"{TB_ModStagePath.Text}\\PatchList.yaml", yaml);
+        }
+
+        public void LoadPatchList()
+        {
+            if (File.Exists($"{TB_ModStagePath.Text}\\PatchList.yaml"))
+            {
+                string yaml = File.ReadAllText($"{TB_ModStagePath.Text}\\PatchList.yaml");
+                var deserializer = new DeserializerBuilder().Build();
+                PatchList patchlist = deserializer.Deserialize<PatchList>(yaml);
+                installedPatchList = patchlist;
+
+                foreach (PatchList.Patch patch in patchlist.Patches)
+                {
+                    if (TV_PatchList.Nodes.ContainsKey(patch.Name))
+                        continue;
+                    TV_PatchList.Nodes.Add(patch.hash, patch.Name);
+                    if (!patch.Enabled)
+                        TV_PatchList.Nodes[patch.hash].ForeColor = Color.Red;
+                    else
+                        TV_PatchList.Nodes[patch.hash].Checked = true;
+                }
+            }
+        }
+
+        private void B_PatchAdd_Click(object sender, EventArgs e)
+        {
+            if (TB_PatchName.Text.Length <= 0 && RTB_PatchCode.Text.Length <= 0)
+            {
+                MessageBox.Show("Patch is missing Name and Code", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
+            PatchList.Patch patch = new PatchList.Patch()
+            {
+                Name = TB_PatchName.Text,
+                hash = Hash.HashString(RTB_PatchCode.Text),
+                Enabled = true,
+                Code = RTB_PatchCode.Text
+            };
+
+            TV_PatchList.Nodes.Add(patch.hash, patch.Name);
+            installedPatchList.Patches.Add(patch);
+            WritePatchList();
+            TB_PatchName.Clear();
+            RTB_PatchCode.Clear();
+        }
+
+        private void B_PatchRemove_Click(object sender, EventArgs e)
+        {
+            if (TV_PatchList.SelectedNode == null)
+                return;
+
+            installedPatchList.Patches.Remove(installedPatchList.GetPatchByHash(TV_PatchList.SelectedNode.Name));
+            TV_PatchList.SelectedNode.Remove();
+        }
+
+        private void B_PatchSave_Click(object sender, EventArgs e)
+        {
+            if (TV_PatchList.SelectedNode == null)
+                return;
+
+            var patch = installedPatchList.GetPatchByHash(TV_PatchList.SelectedNode.Name);
+            patch.Name = TB_PatchName.Text;
+            patch.hash = Hash.HashString(RTB_PatchCode.Text);
+            patch.Code = RTB_PatchCode.Text;
+            TV_PatchList.SelectedNode.Name = patch.hash;
+            WritePatchList();
+            TB_PatchName.Clear();
+            RTB_PatchCode.Clear();
+            TV_PatchList.SelectedNode = null;
+        }
+
+        private void B_PatchClear_Click(object sender, EventArgs e)
+        {
+            TB_PatchName.Clear();
+            RTB_PatchCode.Clear();
+        }
+
+        private void TV_PatchList_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TB_PatchName.Text = installedPatchList.GetPatchByHash(TV_PatchList.SelectedNode.Name).Name;
+            RTB_PatchCode.Text = installedPatchList.GetPatchByHash(TV_PatchList.SelectedNode.Name).Code;
+        }
+
+        private void TV_PatchList_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Checked)
+            {
+                installedPatchList.GetPatchByHash(e.Node.Name).Enabled = true;
+                e.Node.ForeColor = Color.Black;
+            }
+            else
+            {
+                installedPatchList.GetPatchByHash(e.Node.Name).Enabled = false;
+                e.Node.ForeColor = Color.Red;
+            }
+            WritePatchList();
+        }
+
+        private void TV_PatchList_MouseUp(object sender, MouseEventArgs e)
+        {
+            var clickedNode = TV_ModList.GetNodeAt(e.X, e.Y);
+            if (clickedNode == null)
+            {
+                //clicked on background
+                TV_PatchList.SelectedNode = null;
+            }
+            else
+            {
+                //clicked on node
+                return;
             }
         }
 

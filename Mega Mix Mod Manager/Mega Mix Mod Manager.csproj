@@ -140,7 +140,9 @@
     <Compile Include="Objects\FarcLog.cs" />
     <Compile Include="Objects\ModInfo.cs" />
     <Compile Include="Objects\ModList.cs" />
+    <Compile Include="Objects\PatchList.cs" />
     <Compile Include="Objects\Settings.cs" />
+    <Compile Include="Objects\VersionMap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

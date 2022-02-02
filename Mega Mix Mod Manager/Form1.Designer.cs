@@ -45,6 +45,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.B_SaveSettings = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CB_Version = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.CB_Region = new System.Windows.Forms.ComboBox();
             this.TB_Default_Author = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -93,6 +95,19 @@
             this.GB_ModList = new System.Windows.Forms.GroupBox();
             this.TV_ModList = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TP_CodePatches = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.B_PatchClear = new System.Windows.Forms.Button();
+            this.B_PatchSave = new System.Windows.Forms.Button();
+            this.B_PatchRemove = new System.Windows.Forms.Button();
+            this.B_PatchAdd = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.RTB_PatchCode = new System.Windows.Forms.RichTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.TB_PatchName = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.TV_PatchList = new System.Windows.Forms.TreeView();
             this.TP_DBExplorer = new System.Windows.Forms.TabPage();
             this.DB_Save = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -119,6 +134,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).BeginInit();
             this.GB_ModList.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.TP_CodePatches.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.TP_DBExplorer.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -292,6 +310,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.CB_Version);
+            this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.CB_Region);
             this.groupBox2.Controls.Add(this.TB_Default_Author);
             this.groupBox2.Controls.Add(this.label10);
@@ -302,6 +322,25 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other Options";
+            // 
+            // CB_Version
+            // 
+            this.CB_Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_Version.FormattingEnabled = true;
+            this.CB_Version.Location = new System.Drawing.Point(6, 115);
+            this.CB_Version.Name = "CB_Version";
+            this.CB_Version.Size = new System.Drawing.Size(138, 21);
+            this.CB_Version.TabIndex = 17;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(6, 97);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(48, 15);
+            this.label15.TabIndex = 16;
+            this.label15.Text = "Version";
             // 
             // CB_Region
             // 
@@ -778,6 +817,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.TP_Mods);
+            this.tabControl1.Controls.Add(this.TP_CodePatches);
             this.tabControl1.Controls.Add(this.TP_ModCreator);
             this.tabControl1.Controls.Add(this.TP_DBExplorer);
             this.tabControl1.Controls.Add(this.TP_Settings);
@@ -786,6 +826,140 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(581, 430);
             this.tabControl1.TabIndex = 0;
+            // 
+            // TP_CodePatches
+            // 
+            this.TP_CodePatches.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_CodePatches.Controls.Add(this.groupBox6);
+            this.TP_CodePatches.Controls.Add(this.groupBox5);
+            this.TP_CodePatches.Location = new System.Drawing.Point(4, 22);
+            this.TP_CodePatches.Name = "TP_CodePatches";
+            this.TP_CodePatches.Size = new System.Drawing.Size(573, 404);
+            this.TP_CodePatches.TabIndex = 5;
+            this.TP_CodePatches.Text = "Code Patches";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label14);
+            this.groupBox6.Controls.Add(this.B_PatchClear);
+            this.groupBox6.Controls.Add(this.B_PatchSave);
+            this.groupBox6.Controls.Add(this.B_PatchRemove);
+            this.groupBox6.Controls.Add(this.B_PatchAdd);
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Controls.Add(this.RTB_PatchCode);
+            this.groupBox6.Controls.Add(this.label12);
+            this.groupBox6.Controls.Add(this.TB_PatchName);
+            this.groupBox6.Location = new System.Drawing.Point(220, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(350, 392);
+            this.groupBox6.TabIndex = 5;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Patch Details";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(173, 368);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(9, 13);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "|";
+            // 
+            // B_PatchClear
+            // 
+            this.B_PatchClear.Location = new System.Drawing.Point(188, 363);
+            this.B_PatchClear.Name = "B_PatchClear";
+            this.B_PatchClear.Size = new System.Drawing.Size(75, 23);
+            this.B_PatchClear.TabIndex = 10;
+            this.B_PatchClear.Text = "Clear";
+            this.B_PatchClear.UseVisualStyleBackColor = true;
+            this.B_PatchClear.Click += new System.EventHandler(this.B_PatchClear_Click);
+            // 
+            // B_PatchSave
+            // 
+            this.B_PatchSave.Location = new System.Drawing.Point(269, 363);
+            this.B_PatchSave.Name = "B_PatchSave";
+            this.B_PatchSave.Size = new System.Drawing.Size(75, 23);
+            this.B_PatchSave.TabIndex = 9;
+            this.B_PatchSave.Text = "Save";
+            this.B_PatchSave.UseVisualStyleBackColor = true;
+            this.B_PatchSave.Click += new System.EventHandler(this.B_PatchSave_Click);
+            // 
+            // B_PatchRemove
+            // 
+            this.B_PatchRemove.Location = new System.Drawing.Point(90, 363);
+            this.B_PatchRemove.Name = "B_PatchRemove";
+            this.B_PatchRemove.Size = new System.Drawing.Size(75, 23);
+            this.B_PatchRemove.TabIndex = 8;
+            this.B_PatchRemove.Text = "Remove";
+            this.B_PatchRemove.UseVisualStyleBackColor = true;
+            this.B_PatchRemove.Click += new System.EventHandler(this.B_PatchRemove_Click);
+            // 
+            // B_PatchAdd
+            // 
+            this.B_PatchAdd.Location = new System.Drawing.Point(9, 363);
+            this.B_PatchAdd.Name = "B_PatchAdd";
+            this.B_PatchAdd.Size = new System.Drawing.Size(75, 23);
+            this.B_PatchAdd.TabIndex = 7;
+            this.B_PatchAdd.Text = "Add";
+            this.B_PatchAdd.UseVisualStyleBackColor = true;
+            this.B_PatchAdd.Click += new System.EventHandler(this.B_PatchAdd_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(6, 51);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 16);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Code:";
+            // 
+            // RTB_PatchCode
+            // 
+            this.RTB_PatchCode.Location = new System.Drawing.Point(9, 70);
+            this.RTB_PatchCode.Name = "RTB_PatchCode";
+            this.RTB_PatchCode.Size = new System.Drawing.Size(335, 287);
+            this.RTB_PatchCode.TabIndex = 5;
+            this.RTB_PatchCode.Text = "";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(6, 20);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 16);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Name:";
+            // 
+            // TB_PatchName
+            // 
+            this.TB_PatchName.Location = new System.Drawing.Point(59, 19);
+            this.TB_PatchName.Name = "TB_PatchName";
+            this.TB_PatchName.Size = new System.Drawing.Size(285, 20);
+            this.TB_PatchName.TabIndex = 3;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.TV_PatchList);
+            this.groupBox5.Location = new System.Drawing.Point(6, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(208, 392);
+            this.groupBox5.TabIndex = 2;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Patch List";
+            // 
+            // TV_PatchList
+            // 
+            this.TV_PatchList.CheckBoxes = true;
+            this.TV_PatchList.Location = new System.Drawing.Point(6, 19);
+            this.TV_PatchList.Name = "TV_PatchList";
+            this.TV_PatchList.Size = new System.Drawing.Size(196, 367);
+            this.TV_PatchList.TabIndex = 0;
+            this.TV_PatchList.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TV_PatchList_AfterCheck);
+            this.TV_PatchList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_PatchList_AfterSelect);
+            this.TV_PatchList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TV_PatchList_MouseUp);
             // 
             // TP_DBExplorer
             // 
@@ -954,6 +1128,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.PB_ModPreview)).EndInit();
             this.GB_ModList.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.TP_CodePatches.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.TP_DBExplorer.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1009,7 +1187,6 @@
         private System.Windows.Forms.RichTextBox RTB_ModDetails;
         private System.Windows.Forms.PictureBox PB_ModPreview;
         private System.Windows.Forms.Button B_InstallMod;
-        private System.Windows.Forms.GroupBox GB_ModList;
         private System.Windows.Forms.TreeView TV_ModList;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.ProgressBar PB_InstallProgress;
@@ -1038,6 +1215,23 @@
         private IO.MenuButton MB_Disable;
         private System.Windows.Forms.ContextMenuStrip CMS_RemoveDisable;
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+        private System.Windows.Forms.GroupBox GB_ModList;
+        private System.Windows.Forms.TabPage TP_CodePatches;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TreeView TV_PatchList;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox TB_PatchName;
+        private System.Windows.Forms.Button B_PatchRemove;
+        private System.Windows.Forms.Button B_PatchAdd;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.RichTextBox RTB_PatchCode;
+        private System.Windows.Forms.Button B_PatchClear;
+        private System.Windows.Forms.Button B_PatchSave;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox CB_Version;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button2;
     }
 }
 
