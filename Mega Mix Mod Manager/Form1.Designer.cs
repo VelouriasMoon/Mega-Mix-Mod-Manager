@@ -121,6 +121,9 @@
             this.DB_List = new System.Windows.Forms.ListBox();
             this.MB_Disable = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
+            this.B_OpenDump = new System.Windows.Forms.Button();
+            this.B_OpenExport = new System.Windows.Forms.Button();
+            this.B_OpenStaging = new System.Windows.Forms.Button();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -384,6 +387,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.B_OpenStaging);
+            this.groupBox1.Controls.Add(this.B_OpenExport);
+            this.groupBox1.Controls.Add(this.B_OpenDump);
             this.groupBox1.Controls.Add(this.B_ModsPath);
             this.groupBox1.Controls.Add(this.TB_ModStagePath);
             this.groupBox1.Controls.Add(this.label11);
@@ -403,7 +409,7 @@
             // 
             // B_ModsPath
             // 
-            this.B_ModsPath.Location = new System.Drawing.Point(500, 109);
+            this.B_ModsPath.Location = new System.Drawing.Point(469, 110);
             this.B_ModsPath.Name = "B_ModsPath";
             this.B_ModsPath.Size = new System.Drawing.Size(36, 20);
             this.B_ModsPath.TabIndex = 9;
@@ -415,7 +421,7 @@
             // 
             this.TB_ModStagePath.Location = new System.Drawing.Point(6, 110);
             this.TB_ModStagePath.Name = "TB_ModStagePath";
-            this.TB_ModStagePath.Size = new System.Drawing.Size(488, 20);
+            this.TB_ModStagePath.Size = new System.Drawing.Size(457, 20);
             this.TB_ModStagePath.TabIndex = 8;
             this.TB_ModStagePath.Text = ".\\Mods";
             // 
@@ -430,7 +436,7 @@
             // 
             // B_ExportPath
             // 
-            this.B_ExportPath.Location = new System.Drawing.Point(500, 70);
+            this.B_ExportPath.Location = new System.Drawing.Point(469, 71);
             this.B_ExportPath.Name = "B_ExportPath";
             this.B_ExportPath.Size = new System.Drawing.Size(36, 20);
             this.B_ExportPath.TabIndex = 6;
@@ -442,7 +448,7 @@
             // 
             this.TB_Export.Location = new System.Drawing.Point(6, 71);
             this.TB_Export.Name = "TB_Export";
-            this.TB_Export.Size = new System.Drawing.Size(488, 20);
+            this.TB_Export.Size = new System.Drawing.Size(457, 20);
             this.TB_Export.TabIndex = 5;
             // 
             // L_Export
@@ -458,15 +464,17 @@
             // 
             this.CB_PathVarify.AutoCheck = false;
             this.CB_PathVarify.AutoSize = true;
-            this.CB_PathVarify.Location = new System.Drawing.Point(542, 33);
+            this.CB_PathVarify.BackColor = System.Drawing.SystemColors.Control;
+            this.CB_PathVarify.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CB_PathVarify.Location = new System.Drawing.Point(72, 16);
             this.CB_PathVarify.Name = "CB_PathVarify";
             this.CB_PathVarify.Size = new System.Drawing.Size(15, 14);
             this.CB_PathVarify.TabIndex = 3;
-            this.CB_PathVarify.UseVisualStyleBackColor = true;
+            this.CB_PathVarify.UseVisualStyleBackColor = false;
             // 
             // B_GamePath
             // 
-            this.B_GamePath.Location = new System.Drawing.Point(500, 31);
+            this.B_GamePath.Location = new System.Drawing.Point(469, 32);
             this.B_GamePath.Name = "B_GamePath";
             this.B_GamePath.Size = new System.Drawing.Size(36, 20);
             this.B_GamePath.TabIndex = 2;
@@ -478,7 +486,7 @@
             // 
             this.TB_DumpPath.Location = new System.Drawing.Point(6, 32);
             this.TB_DumpPath.Name = "TB_DumpPath";
-            this.TB_DumpPath.Size = new System.Drawing.Size(488, 20);
+            this.TB_DumpPath.Size = new System.Drawing.Size(457, 20);
             this.TB_DumpPath.TabIndex = 1;
             this.TB_DumpPath.TextChanged += new System.EventHandler(this.TB_DumpPath_TextChanged);
             // 
@@ -1101,6 +1109,36 @@
             this.MB_Export.UseVisualStyleBackColor = true;
             this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
             // 
+            // B_OpenDump
+            // 
+            this.B_OpenDump.Location = new System.Drawing.Point(511, 32);
+            this.B_OpenDump.Name = "B_OpenDump";
+            this.B_OpenDump.Size = new System.Drawing.Size(45, 20);
+            this.B_OpenDump.TabIndex = 10;
+            this.B_OpenDump.Text = "Open";
+            this.B_OpenDump.UseVisualStyleBackColor = true;
+            this.B_OpenDump.Click += new System.EventHandler(this.B_OpenDump_Click);
+            // 
+            // B_OpenExport
+            // 
+            this.B_OpenExport.Location = new System.Drawing.Point(511, 71);
+            this.B_OpenExport.Name = "B_OpenExport";
+            this.B_OpenExport.Size = new System.Drawing.Size(45, 20);
+            this.B_OpenExport.TabIndex = 11;
+            this.B_OpenExport.Text = "Open";
+            this.B_OpenExport.UseVisualStyleBackColor = true;
+            this.B_OpenExport.Click += new System.EventHandler(this.B_OpenExport_Click);
+            // 
+            // B_OpenStaging
+            // 
+            this.B_OpenStaging.Location = new System.Drawing.Point(511, 110);
+            this.B_OpenStaging.Name = "B_OpenStaging";
+            this.B_OpenStaging.Size = new System.Drawing.Size(45, 20);
+            this.B_OpenStaging.TabIndex = 12;
+            this.B_OpenStaging.Text = "Open";
+            this.B_OpenStaging.UseVisualStyleBackColor = true;
+            this.B_OpenStaging.Click += new System.EventHandler(this.B_OpenStaging_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1232,6 +1270,9 @@
         private System.Windows.Forms.ComboBox CB_Version;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button B_OpenStaging;
+        private System.Windows.Forms.Button B_OpenExport;
+        private System.Windows.Forms.Button B_OpenDump;
     }
 }
 

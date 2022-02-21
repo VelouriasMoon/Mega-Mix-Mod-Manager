@@ -216,6 +216,21 @@ namespace Mega_Mix_Mod_Manager
                 return;
             }
         }
+
+        private void B_OpenDump_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", $"{TB_DumpPath.Text}");
+        }
+
+        private void B_OpenExport_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", $"{TB_Export.Text}");
+        }
+
+        private void B_OpenStaging_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", $"{TB_ModStagePath.Text}");
+        }
         #endregion
 
         private void MergeMods()
@@ -361,6 +376,7 @@ namespace Mega_Mix_Mod_Manager
                     }
                         
                     TV_ModList.SelectedNode = TV_ModList.Nodes[TV_ModList.Nodes.Count - 1];
+                    TV_ModList.SelectedNode.Checked = true;
                     TV_ModList.Focus();
                 }
             }
@@ -914,6 +930,7 @@ namespace Mega_Mix_Mod_Manager
 
             TV_PatchList.Nodes.Add(patch.hash, patch.Name);
             installedPatchList.Patches.Add(patch);
+            TV_PatchList.Nodes[patch.hash].Checked = true;
             WritePatchList();
             TB_PatchName.Clear();
             RTB_PatchCode.Clear();
@@ -926,6 +943,7 @@ namespace Mega_Mix_Mod_Manager
 
             installedPatchList.Patches.Remove(installedPatchList.GetPatchByHash(TV_PatchList.SelectedNode.Name));
             TV_PatchList.SelectedNode.Remove();
+            WritePatchList();
         }
 
         private void B_PatchSave_Click(object sender, EventArgs e)
