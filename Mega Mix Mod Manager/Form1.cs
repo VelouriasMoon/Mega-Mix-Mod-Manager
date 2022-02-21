@@ -330,7 +330,19 @@ namespace Mega_Mix_Mod_Manager
                         byte[] data = File.ReadAllBytes(file);
                         string hash = Hash.HashFile(data);
                         if (Directory.Exists($"{TB_ModStagePath.Text}\\{hash}"))
-                            Directory.Delete($"{TB_ModStagePath.Text}\\{hash}", true);
+                        {
+                            //check to see if the mod is already installed
+                            string message = "Mod with the same hash ID is already installed, would you like to reinstall it?";
+                            if (MessageBox.Show(message, "Mod Already Installed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                continue;
+                            else
+                            {
+                                PB_ModPreview.Image.Dispose();
+                                PB_ModPreview.Image = Properties.Resources.Logo;
+                                RTB_ModDetails.Clear();
+                                Directory.Delete($"{TB_ModStagePath.Text}\\{hash}", true);
+                            }
+                        }
                         Directory.CreateDirectory($"{TB_ModStagePath.Text}\\{hash}");
                         
 
@@ -357,11 +369,11 @@ namespace Mega_Mix_Mod_Manager
                             modinfo = deserializer.Deserialize<ModInfo>(yaml);
                         }
 
-                        ModList.ModList_Entry newmod = new ModList.ModList_Entry();
+                        ModList.ModList_Entry newmod = new ModList.ModList_Entry() { Name = modinfo.Name, hash = hash };
 
-                        if (!installedmodList.mods.Contains(newmod))
+                        if (!installedmodList.mods.Contains(installedmodList.mods.Where(mod => mod.hash == newmod.hash).FirstOrDefault()))
                         {
-                            installedmodList.mods.Add(new ModList.ModList_Entry() { Name = modinfo.Name, hash = hash });
+                            installedmodList.mods.Add(newmod);
                             TV_ModList.Nodes.Add(hash, modinfo.Name);
                         }
                         WriteModList();
