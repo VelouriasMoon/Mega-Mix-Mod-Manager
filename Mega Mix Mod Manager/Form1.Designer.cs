@@ -119,6 +119,9 @@
             this.B_DBPlus = new System.Windows.Forms.Button();
             this.B_DBOpen = new System.Windows.Forms.Button();
             this.DB_List = new System.Windows.Forms.ListBox();
+            this.TB_args = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.B_SaveArgs = new System.Windows.Forms.Button();
             this.MB_Disable = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.B_OpenDump = new System.Windows.Forms.Button();
@@ -838,6 +841,9 @@
             // TP_CodePatches
             // 
             this.TP_CodePatches.BackColor = System.Drawing.SystemColors.Control;
+            this.TP_CodePatches.Controls.Add(this.B_SaveArgs);
+            this.TP_CodePatches.Controls.Add(this.label16);
+            this.TP_CodePatches.Controls.Add(this.TB_args);
             this.TP_CodePatches.Controls.Add(this.groupBox6);
             this.TP_CodePatches.Controls.Add(this.groupBox5);
             this.TP_CodePatches.Location = new System.Drawing.Point(4, 22);
@@ -859,7 +865,7 @@
             this.groupBox6.Controls.Add(this.TB_PatchName);
             this.groupBox6.Location = new System.Drawing.Point(220, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(350, 392);
+            this.groupBox6.Size = new System.Drawing.Size(350, 364);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Patch Details";
@@ -867,7 +873,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(173, 368);
+            this.label14.Location = new System.Drawing.Point(172, 339);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(9, 13);
             this.label14.TabIndex = 11;
@@ -875,7 +881,7 @@
             // 
             // B_PatchClear
             // 
-            this.B_PatchClear.Location = new System.Drawing.Point(188, 363);
+            this.B_PatchClear.Location = new System.Drawing.Point(187, 334);
             this.B_PatchClear.Name = "B_PatchClear";
             this.B_PatchClear.Size = new System.Drawing.Size(75, 23);
             this.B_PatchClear.TabIndex = 10;
@@ -885,7 +891,7 @@
             // 
             // B_PatchSave
             // 
-            this.B_PatchSave.Location = new System.Drawing.Point(269, 363);
+            this.B_PatchSave.Location = new System.Drawing.Point(268, 334);
             this.B_PatchSave.Name = "B_PatchSave";
             this.B_PatchSave.Size = new System.Drawing.Size(75, 23);
             this.B_PatchSave.TabIndex = 9;
@@ -895,7 +901,7 @@
             // 
             // B_PatchRemove
             // 
-            this.B_PatchRemove.Location = new System.Drawing.Point(90, 363);
+            this.B_PatchRemove.Location = new System.Drawing.Point(89, 334);
             this.B_PatchRemove.Name = "B_PatchRemove";
             this.B_PatchRemove.Size = new System.Drawing.Size(75, 23);
             this.B_PatchRemove.TabIndex = 8;
@@ -905,7 +911,7 @@
             // 
             // B_PatchAdd
             // 
-            this.B_PatchAdd.Location = new System.Drawing.Point(9, 363);
+            this.B_PatchAdd.Location = new System.Drawing.Point(8, 334);
             this.B_PatchAdd.Name = "B_PatchAdd";
             this.B_PatchAdd.Size = new System.Drawing.Size(75, 23);
             this.B_PatchAdd.TabIndex = 7;
@@ -927,7 +933,7 @@
             // 
             this.RTB_PatchCode.Location = new System.Drawing.Point(9, 70);
             this.RTB_PatchCode.Name = "RTB_PatchCode";
-            this.RTB_PatchCode.Size = new System.Drawing.Size(335, 287);
+            this.RTB_PatchCode.Size = new System.Drawing.Size(335, 258);
             this.RTB_PatchCode.TabIndex = 5;
             this.RTB_PatchCode.Text = "";
             // 
@@ -953,7 +959,7 @@
             this.groupBox5.Controls.Add(this.TV_PatchList);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(208, 392);
+            this.groupBox5.Size = new System.Drawing.Size(208, 364);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Patch List";
@@ -963,7 +969,7 @@
             this.TV_PatchList.CheckBoxes = true;
             this.TV_PatchList.Location = new System.Drawing.Point(6, 19);
             this.TV_PatchList.Name = "TV_PatchList";
-            this.TV_PatchList.Size = new System.Drawing.Size(196, 367);
+            this.TV_PatchList.Size = new System.Drawing.Size(196, 338);
             this.TV_PatchList.TabIndex = 0;
             this.TV_PatchList.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TV_PatchList_AfterCheck);
             this.TV_PatchList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_PatchList_AfterSelect);
@@ -1086,6 +1092,33 @@
             this.DB_List.TabIndex = 1;
             this.DB_List.SelectedIndexChanged += new System.EventHandler(this.DB_List_SelectedIndexChanged);
             // 
+            // TB_args
+            // 
+            this.TB_args.Location = new System.Drawing.Point(94, 376);
+            this.TB_args.Name = "TB_args";
+            this.TB_args.Size = new System.Drawing.Size(414, 20);
+            this.TB_args.TabIndex = 6;
+            this.TB_args.TextChanged += new System.EventHandler(this.TB_args_TextChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 379);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(91, 13);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Game Arguments:";
+            // 
+            // B_SaveArgs
+            // 
+            this.B_SaveArgs.Location = new System.Drawing.Point(510, 374);
+            this.B_SaveArgs.Name = "B_SaveArgs";
+            this.B_SaveArgs.Size = new System.Drawing.Size(58, 23);
+            this.B_SaveArgs.TabIndex = 12;
+            this.B_SaveArgs.Text = "Save";
+            this.B_SaveArgs.UseVisualStyleBackColor = true;
+            this.B_SaveArgs.Click += new System.EventHandler(this.B_SaveArgs_Click);
+            // 
             // MB_Disable
             // 
             this.MB_Disable.Location = new System.Drawing.Point(124, 364);
@@ -1167,6 +1200,7 @@
             this.GB_ModList.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.TP_CodePatches.ResumeLayout(false);
+            this.TP_CodePatches.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1270,6 +1304,9 @@
         private System.Windows.Forms.ComboBox CB_Version;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox TB_args;
+        private System.Windows.Forms.Button B_SaveArgs;
         private System.Windows.Forms.Button B_OpenStaging;
         private System.Windows.Forms.Button B_OpenExport;
         private System.Windows.Forms.Button B_OpenDump;

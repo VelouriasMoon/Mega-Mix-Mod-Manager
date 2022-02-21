@@ -9,6 +9,7 @@ namespace Mega_Mix_Mod_Manager.Objects
 {
     public class PatchList
     {
+        public string args { get; set; }
         public List<Patch> Patches {  get; set;} = new List<Patch>();
 
         public class Patch

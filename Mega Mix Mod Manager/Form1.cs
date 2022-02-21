@@ -878,6 +878,8 @@ namespace Mega_Mix_Mod_Manager
                 Directory.Delete($"{TB_Export.Text}\\exefs", true);
             Directory.CreateDirectory($"{TB_Export.Text}\\exefs");
             File.WriteAllLines($"{TB_Export.Text}\\exefs\\MegaMixModManager.pchtxt", pchtxt.ToArray());
+            if (installedPatchList.args != null && installedPatchList.args.Length > 0)
+                File.WriteAllText($"{TB_Export.Text}\\romfs\\args.txt", installedPatchList.args);
         }
 
         public void WritePatchList()
@@ -909,6 +911,7 @@ namespace Mega_Mix_Mod_Manager
                     else
                         TV_PatchList.Nodes[patch.hash].Checked = true;
                 }
+                TB_args.Text = patchlist.args == null? string.Empty : patchlist.args;
             }
         }
 
@@ -1002,6 +1005,16 @@ namespace Mega_Mix_Mod_Manager
                 //clicked on node
                 return;
             }
+        }
+
+        private void TB_args_TextChanged(object sender, EventArgs e)
+        {
+            installedPatchList.args = TB_args.Text;
+        }
+
+        private void B_SaveArgs_Click(object sender, EventArgs e)
+        {
+            WritePatchList();
         }
 
         #endregion
