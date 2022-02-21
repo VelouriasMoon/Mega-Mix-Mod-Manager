@@ -122,11 +122,11 @@
             this.TB_args = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.B_SaveArgs = new System.Windows.Forms.Button();
-            this.MB_Disable = new Mega_Mix_Mod_Manager.IO.MenuButton();
-            this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.B_OpenDump = new System.Windows.Forms.Button();
             this.B_OpenExport = new System.Windows.Forms.Button();
             this.B_OpenStaging = new System.Windows.Forms.Button();
+            this.MB_Disable = new Mega_Mix_Mod_Manager.IO.MenuButton();
+            this.MB_Export = new Mega_Mix_Mod_Manager.IO.MenuButton();
             this.TP_Settings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -816,6 +816,8 @@
             this.TV_ModList.CheckBoxes = true;
             this.TV_ModList.Location = new System.Drawing.Point(6, 19);
             this.TV_ModList.Name = "TV_ModList";
+            this.TV_ModList.ShowLines = false;
+            this.TV_ModList.ShowRootLines = false;
             this.TV_ModList.Size = new System.Drawing.Size(196, 367);
             this.TV_ModList.TabIndex = 0;
             this.TV_ModList.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TV_ToggleMod_Click);
@@ -969,6 +971,8 @@
             this.TV_PatchList.CheckBoxes = true;
             this.TV_PatchList.Location = new System.Drawing.Point(6, 19);
             this.TV_PatchList.Name = "TV_PatchList";
+            this.TV_PatchList.ShowLines = false;
+            this.TV_PatchList.ShowRootLines = false;
             this.TV_PatchList.Size = new System.Drawing.Size(196, 338);
             this.TV_PatchList.TabIndex = 0;
             this.TV_PatchList.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TV_PatchList_AfterCheck);
@@ -1119,29 +1123,6 @@
             this.B_SaveArgs.UseVisualStyleBackColor = true;
             this.B_SaveArgs.Click += new System.EventHandler(this.B_SaveArgs_Click);
             // 
-            // MB_Disable
-            // 
-            this.MB_Disable.Location = new System.Drawing.Point(124, 364);
-            this.MB_Disable.Menu = this.CMS_RemoveDisable;
-            this.MB_Disable.Name = "MB_Disable";
-            this.MB_Disable.Size = new System.Drawing.Size(65, 23);
-            this.MB_Disable.TabIndex = 7;
-            this.MB_Disable.Text = "Disable";
-            this.MB_Disable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.MB_Disable.UseVisualStyleBackColor = true;
-            this.MB_Disable.Click += new System.EventHandler(this.B_ToggleMod_Click);
-            // 
-            // MB_Export
-            // 
-            this.MB_Export.Location = new System.Drawing.Point(274, 364);
-            this.MB_Export.Menu = this.contextMenuStrip1;
-            this.MB_Export.Name = "MB_Export";
-            this.MB_Export.Size = new System.Drawing.Size(67, 23);
-            this.MB_Export.TabIndex = 6;
-            this.MB_Export.Text = "Export     ";
-            this.MB_Export.UseVisualStyleBackColor = true;
-            this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
-            // 
             // B_OpenDump
             // 
             this.B_OpenDump.Location = new System.Drawing.Point(511, 32);
@@ -1171,6 +1152,29 @@
             this.B_OpenStaging.Text = "Open";
             this.B_OpenStaging.UseVisualStyleBackColor = true;
             this.B_OpenStaging.Click += new System.EventHandler(this.B_OpenStaging_Click);
+            // 
+            // MB_Disable
+            // 
+            this.MB_Disable.Location = new System.Drawing.Point(124, 364);
+            this.MB_Disable.Menu = this.CMS_RemoveDisable;
+            this.MB_Disable.Name = "MB_Disable";
+            this.MB_Disable.Size = new System.Drawing.Size(65, 23);
+            this.MB_Disable.TabIndex = 7;
+            this.MB_Disable.Text = "Disable";
+            this.MB_Disable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.MB_Disable.UseVisualStyleBackColor = true;
+            this.MB_Disable.Click += new System.EventHandler(this.B_ToggleMod_Click);
+            // 
+            // MB_Export
+            // 
+            this.MB_Export.Location = new System.Drawing.Point(274, 364);
+            this.MB_Export.Menu = this.contextMenuStrip1;
+            this.MB_Export.Name = "MB_Export";
+            this.MB_Export.Size = new System.Drawing.Size(67, 23);
+            this.MB_Export.TabIndex = 6;
+            this.MB_Export.Text = "Export     ";
+            this.MB_Export.UseVisualStyleBackColor = true;
+            this.MB_Export.Click += new System.EventHandler(this.B_ExportMods_Click);
             // 
             // Form1
             // 
