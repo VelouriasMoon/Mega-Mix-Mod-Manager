@@ -5,9 +5,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mega_Mix_Mod_Manager.IO;
+using Mega_Mix_Mod_Manager.DeepMerge.objects.pv_db;
 
-namespace Mega_Mix_Mod_Manager.DeepMerge.objects.pv_db
+namespace Mega_Mix_Mod_Manager.DeepMerge
 {
+    public class pv_db
+    {
+        public static SortedDictionary<string, pvEntry> Entries { get; set; }
+
+        public static void Read(string infile)
+        {
+            using (StreamReader sr = new StreamReader(infile))
+            {
+                ReadPV(sr);
+            }
+        }
+        private static void ReadPV(StreamReader sr)
+        {
+            Entries = new SortedDictionary<string, pvEntry>();
+            while (sr.LookAheadLine() != null)
+            {
+                if (sr.LookAheadLine() == string.Empty || sr.LookAheadLine().StartsWith("#"))
+                    continue;
+
+                string pv = sr.LookAheadLine().Split('.')[0];
+                if (!Entries.ContainsKey(pv))
+                {
+                    pvEntry entry = new pvEntry();
+                    entry.Read(sr);
+                    Entries.Add(pv, entry);
+                }
+                else
+                    continue;
+            }
+        }
+    }
+
     public class pvEntry
     {
         public List<pvEntry_another_song> another_song {  get; set; }
@@ -86,17 +119,31 @@ namespace Mega_Mix_Mod_Manager.DeepMerge.objects.pv_db
 
         public void Read(StreamReader sr)
         {
-            Dictionary<string, Action> op = new Dictionary<string, Action>();
-            op["another_song"] = () =>              { another_song = new pvEntry_another_song().Read(sr); };
-            op["auth_replace_by_module"] = () =>    { auth_replace_by_module = new pvEntry_auth_replace_by_module().Read(sr); };
-            op["bmp"] = () =>                       { bpm = Convert.ToInt32(sr.ReadLine().Split('=')[1]); };
-            op["chainslide_failure_name"] = () =>   { chainslide_failure_name = sr.ReadLine().Split('=')[1]; };
-
-            string line;
-            while ((line = StreamReaderLookAhead.LookAheadLine(sr)) != null)
+            Dictionary<string, Action<StreamReader>> op = new Dictionary<string, Action<StreamReader>>()
             {
-                op[line.Split('.')[1]].Invoke();
+                {"another_song", op_another_song}
+            };
+
+            string pv = sr.LookAheadLine().Split('.')[0];
+            string line;
+            while ((line = sr.LookAheadLine()) != null || (line = sr.LookAheadLine()).Split('.')[0] != pv)
+            {
+                try
+                {
+                    op[line.Split('.')[1]](sr);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    continue;
+                }
             }
         }
+
+        #region Invokers 
+
+        private void op_another_song(StreamReader sr) { another_song = new pvEntry_another_song().Read(sr); }
+
+        #endregion
     }
 }

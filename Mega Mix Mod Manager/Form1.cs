@@ -272,6 +272,14 @@ namespace Mega_Mix_Mod_Manager
                         pv_db.MergeMods(files, pv_db_Path, $"{TB_ModStagePath.Text}\\Merged\\rom_switch\\rom\\pv_db.txt");
                     PB_InstallProgress.Value = 10;
                 }
+                else if (CB_pv_Merge.Text == "Deep Merge")
+                {
+                    PB_InstallProgress.Value = 5;
+                    string[] files = Files.Where(x => x.Contains("pv_db.txt")).ToArray();
+                    if (files.Length > 0)
+                        DeepMerge.pv_db.Read(Path.GetFullPath(files[0]));
+                    PB_InstallProgress.Value = 10;
+                }
                 if (CB_obj_Merge.SelectedIndex > 0)
                 {
                     PB_InstallProgress.Value = 15;
@@ -569,6 +577,12 @@ namespace Mega_Mix_Mod_Manager
 
                 if (cofd.ShowDialog() == CommonFileDialogResult.Ok)
                 {
+                    if (File.Exists($"{cofd.FileName}\\DivaMegaMix.exe"))
+                    {
+                        MessageBox.Show("Export Path cannont be root level of game", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        return;
+                    }
+
                     TB_Export.Text = cofd.FileName;
                     if (TB_Export.Text.EndsWith("romfs"))
                         TB_Export.Text = TB_Export.Text.Remove(TB_Export.Text.Length - 6, 6);
@@ -632,13 +646,13 @@ namespace Mega_Mix_Mod_Manager
 
         private void TB_DumpPath_TextChanged(object sender, EventArgs e)
         {
-            string basepath = $"{TB_DumpPath.Text}\\rom_switch\\rom";
-            if (File.Exists($"{basepath}\\pv_db.txt") && File.Exists($"{basepath}\\objset\\obj_db.bin") && File.Exists($"{basepath}\\objset\\tex_db.bin"))
+            string basepath = $"{TB_DumpPath.Text}\\rom_steam_region\\rom";
+            if (File.Exists($"{basepath}\\pv_db.txt"))
             {
-                if (File.Exists($"{ TB_DumpPath.Text}\\rom_switch_en\\rom\\2d\\spr_db.bin"))
-                    CB_Region.SelectedIndex = (int)Enums.Region.rom_switch_en;
-                else
-                    CB_Region.SelectedIndex = (int)Enums.Region.rom_switch;
+                //if (File.Exists($"{ TB_DumpPath.Text}\\rom_switch_en\\rom\\2d\\spr_db.bin"))
+                //    CB_Region.SelectedIndex = (int)Enums.Region.rom_switch_en;
+                //else
+                //    CB_Region.SelectedIndex = (int)Enums.Region.rom_switch;
 
                 pv_db_Path = $"{basepath}\\pv_db.txt";
                 CB_PathVarify.Checked = true;
@@ -714,6 +728,7 @@ namespace Mega_Mix_Mod_Manager
                 string yaml = File.ReadAllText($"settings.yaml");
                 var deserializer = new DeserializerBuilder().Build();
                 Settings setting = deserializer.Deserialize<Settings>(yaml);
+                Global.MainSettings = setting;
 
                 TB_DumpPath.Text = setting.Game_Dump;
                 TB_Export.Text = setting.Export_Path;
@@ -1030,5 +1045,32 @@ namespace Mega_Mix_Mod_Manager
         }
 
         #endregion
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Multiselect = true;
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string basefile = ofd.FileNames[0];
+                    string mod = ofd.FileNames[1];
+
+                    TextureSet texture1 = BinaryFile.Load<TextureSet>(basefile);
+                    TextureSet texture2 = BinaryFile.Load<TextureSet>(mod);
+
+                    for (int i = 0; i < texture1.Textures.Count; i++)
+                    {
+                        Bitmap bitmap1 = TextureDecoder.DecodeToBitmap(texture1.Textures[i]);
+                        Bitmap bitmap2 = TextureDecoder.DecodeToBitmap(texture2.Textures[i]);
+
+                        if (bitmap1.Equals(bitmap2))
+                            Console.WriteLine("true");
+                        else
+                            Console.WriteLine("false");
+                    }
+                }
+            }
+        }
     }
 }
