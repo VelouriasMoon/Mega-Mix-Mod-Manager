@@ -50,7 +50,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>MegaMixModManager.pfx</AssemblyOriginatorKeyFile>
@@ -67,6 +67,14 @@
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.4.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.4\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="MikuMikuLibrary, Version=2.1.8181.36363, Culture=neutral, PublicKeyToken=fab3eb3695488ead, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\MikuMikuLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="MikuMikuLibrary.Native.X64, Version=1.1.8181.34587, Culture=neutral, PublicKeyToken=fab3eb3695488ead, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\MikuMikuLibrary.Native.X64.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -167,6 +175,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Libraries\MikuMikuLibrary.dll.config" />
     <None Include="MegaMixModManager.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -184,6 +193,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Libraries\AssimpNet.dll" />
+    <None Include="Libraries\AssimpNet.xml" />
+    <None Include="Libraries\MikuMikuLibrary.dll" />
+    <None Include="Libraries\MikuMikuLibrary.Native.X64.dll" />
+    <None Include="Libraries\MikuMikuLibrary.Native.X64.pdb" />
+    <None Include="Libraries\MikuMikuLibrary.pdb" />
     <Content Include="Logo.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -197,16 +212,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Programs\MikuMikuLibrary-master\MikuMikuLibrary.Native\MikuMikuLibrary.Native.vcxproj">
-      <Project>{2c3b66bb-f1a9-4513-ab63-570d7687c6a7}</Project>
-      <Name>MikuMikuLibrary.Native</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\Programs\MikuMikuLibrary-master\MikuMikuLibrary\MikuMikuLibrary.csproj">
-      <Project>{9c7171ca-7379-458f-a9ca-293bbf2c74dc}</Project>
-      <Name>MikuMikuLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
